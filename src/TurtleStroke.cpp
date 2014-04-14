@@ -10,6 +10,7 @@
 
 TurtleStroke::TurtleStroke()
 {
+    privateSeed = ofRandom(1000);
 }
 
 TurtleStroke::~TurtleStroke()
@@ -42,7 +43,8 @@ void TurtleStroke::update()
 {
     for (int i=0; i<steps.size(); i++)
     {
-        steps[i]->angleOffset = Params::angleOffset + (Params::angleIndexOffset*i) + sin((Params::angleIndexOffset2*i));
+        steps[i]->angleOffset = Params::angleOffset + (Params::angleIndexOffset*i) + sin(privateSeed + Params::angleIndexOffset2*i);
+        steps[i]->lengthScale = Params::lengthScale * (pow(Params::lengthIndexScale,i));
     }
 }
 
@@ -63,7 +65,7 @@ ofVec3f TurtleStroke::getWorldSpace(int index)
     ofVec3f pos = anchor;
     
     for (int i=0; i<=index; i++) {
-        ofVec3f s(steps[i]->distance, 0, 0);
+        ofVec3f s(steps[i]->getLength(), 0, 0);
         s.rotate(steps[i]->getAngleDeg(), ofVec3f(0, 0, 1));
         pos += s;
     }

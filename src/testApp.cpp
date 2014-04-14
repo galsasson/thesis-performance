@@ -15,6 +15,8 @@ void testApp::setup(){
     control.addInput("angleOffset", &Params::angleOffset);
     control.addInput("angleIndexOffset", &Params::angleIndexOffset);
     control.addInput("angleIndexOffset2", &Params::angleIndexOffset2);
+    control.addInput("lengthScale", &Params::lengthScale);
+    control.addInput("lengthIndexScale", &Params::lengthIndexScale);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
 }

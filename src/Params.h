@@ -17,6 +17,9 @@ public:
     static float angleOffset;
     static float angleIndexOffset;
     static float angleIndexOffset2;
+    
+    static float lengthScale;
+    static float lengthIndexScale;
 };
 
 #endif /* defined(__performance__Params__) */

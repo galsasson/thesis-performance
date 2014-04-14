@@ -30,6 +30,8 @@ private:
     ofVec3f anchor;
     vector<TurtleStep*> steps;
     
+    float privateSeed;
+    
     ofVec3f getWorldSpace(int index);
 };
 

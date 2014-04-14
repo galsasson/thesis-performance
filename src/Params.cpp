@@ -11,3 +11,6 @@
 float Params::angleOffset = 0;
 float Params::angleIndexOffset = 0;
 float Params::angleIndexOffset2 = 0;
+
+float Params::lengthScale = 1;
+float Params::lengthIndexScale = 1;

@@ -8,10 +8,12 @@
 
 #include "TurtleStep.h"
 
-TurtleStep::TurtleStep(float ang, float dist)
+TurtleStep::TurtleStep(float ang, float len)
 {
     angle = ang;
-    distance = dist;
+    length = len;
     
     angleOffset = 0;
+    lengthScale = 1;
 }
+

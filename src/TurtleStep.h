@@ -15,13 +15,15 @@
 class TurtleStep
 {
 public:
-    TurtleStep(float ang, float dist);
+    TurtleStep(float ang, float length);
     
     float getAngleDeg() { return (angle + angleOffset)*180/PI; }
+    float getLength() { return length * lengthScale; };
     
     float angle;
-    float distance;
+    float length;
     
     float angleOffset;
+    float lengthScale;
 };
 #endif /* defined(__performance__TurtleStep__) */
