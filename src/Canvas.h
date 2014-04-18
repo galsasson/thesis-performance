@@ -14,6 +14,7 @@
 
 #include "Stroke.h"
 #include "TurtleStroke.h"
+#include "ParticleStroke.h"
 
 class Canvas
 {
@@ -30,6 +31,7 @@ public:
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
+    void keyPressed(int key);
     
     
     // parameters
@@ -45,12 +47,18 @@ public:
     
 private:
     ofVec2f size;
+    
     vector<Stroke*> strokes;
     vector<TurtleStroke*> turtleStrokes;
+    vector<ParticleStroke*> particleStrokes;
+    
     Stroke* currentStroke;
     TurtleStroke* currentTurtleStroke;
+    ParticleStroke* currentParticleStroke;
     ofVec3f noiseTime;
 
+    FlowField flowField;
+    
     int strokeType;
     
 

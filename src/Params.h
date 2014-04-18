@@ -15,8 +15,7 @@ class Params
 {
 public:
     static float angleOffset;
-    static float angleIndexOffset;
-    static float angleIndexOffset2;
+    static float angleOffsetPerIndex;
     
     static float lengthScale;
     static float lengthIndexScale;

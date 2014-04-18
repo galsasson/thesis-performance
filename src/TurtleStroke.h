@@ -33,6 +33,7 @@ private:
     float privateSeed;
     
     ofVec3f getWorldSpace(int index);
+    float getLastAngleRad();
 };
 
 #endif /* defined(__performance__TurtleStroke__) */

@@ -3,6 +3,10 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    ofSetFrameRate(60);
+    ofEnableSmoothing();
+    ofEnableAlphaBlending();
+    
     control.setup("Performance", 6000);
     
 //    control.addOutput("nStrokes", &canvas.nStrokes);
@@ -12,9 +16,8 @@ void testApp::setup(){
     control.addInput("Random Level", &canvas.randomLevel);
     control.addInput("X Frequency", &canvas.xFrequency);
     control.addInput("X Amplitude", &canvas.xAmplitude);
-    control.addInput("angleOffset", &Params::angleOffset);
-    control.addInput("angleIndexOffset", &Params::angleIndexOffset);
-    control.addInput("angleIndexOffset2", &Params::angleIndexOffset2);
+    control.addInput("Angle Offset", &Params::angleOffset);
+    control.addInput("Angle Offset Per Index", &Params::angleOffsetPerIndex);
     control.addInput("lengthScale", &Params::lengthScale);
     control.addInput("lengthIndexScale", &Params::lengthIndexScale);
     
@@ -33,7 +36,13 @@ void testApp::draw(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    cout << "key pressed: "<<key<<endl;
+    if (key == 'c') {
+        canvas.clear();
+    }
+    else {
+        canvas.keyPressed(key);
+    }
 }
 
 //--------------------------------------------------------------

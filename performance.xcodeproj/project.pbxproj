@@ -13,6 +13,9 @@
 		190CBDDBD13AE034BB27B581 /* ofxOscMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AE102ABF4CFDAE14B43562C8 /* ofxOscMessage.cpp */; };
 		24FB6A33237FFE9E1CD4628B /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B4A4AFB73A68AE3EB4A08207 /* ofxPanel.cpp */; };
 		25B82D545F5A0A46E64EB5FE /* ofxControleaseOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD347B9EB111FB4300BA14C /* ofxControleaseOutput.cpp */; };
+		2A1B6C281900D9E30043948A /* FlowField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C261900D9E30043948A /* FlowField.cpp */; };
+		2A1B6C2B1900E5190043948A /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C291900E5190043948A /* Particle.cpp */; };
+		2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */; };
 		2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */; };
 		2ACD87B218FA0CD8005E62E8 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */; };
 		2ACD87B518FADA57005E62E8 /* TurtleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B318FADA57005E62E8 /* TurtleStroke.cpp */; };
@@ -112,6 +115,12 @@
 		218A2AAFBDAEA55A7DA82277 /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSliderGroup.cpp; path = ../../../../../../tools/of/of_v0.8.0_osx_release/addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
 		232823681D8BD65F2E956F96 /* ofxTCPClient.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxTCPClient.cpp; path = ../../../../../../tools/of/of_v0.8.0_osx_release/addons/ofxNetwork/src/ofxTCPClient.cpp; sourceTree = SOURCE_ROOT; };
 		234C1E55EF888F11079C285D /* ofxOscSender.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxOscSender.h; path = ../../../../../../tools/of/of_v0.8.0_osx_release/addons/ofxOsc/src/ofxOscSender.h; sourceTree = SOURCE_ROOT; };
+		2A1B6C261900D9E30043948A /* FlowField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlowField.cpp; sourceTree = "<group>"; };
+		2A1B6C271900D9E30043948A /* FlowField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowField.h; sourceTree = "<group>"; };
+		2A1B6C291900E5190043948A /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
+		2A1B6C2A1900E5190043948A /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
+		2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleStroke.cpp; sourceTree = "<group>"; };
+		2A1B6C2E1900EA950043948A /* ParticleStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleStroke.h; sourceTree = "<group>"; };
 		2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stroke.cpp; sourceTree = "<group>"; };
 		2ACD87AE18FA0A38005E62E8 /* Stroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stroke.h; sourceTree = "<group>"; };
 		2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
@@ -513,6 +522,12 @@
 				2ACD87B718FADAB9005E62E8 /* TurtleStep.h */,
 				2ACD87B918FAE490005E62E8 /* Params.cpp */,
 				2ACD87BA18FAE490005E62E8 /* Params.h */,
+				2A1B6C261900D9E30043948A /* FlowField.cpp */,
+				2A1B6C271900D9E30043948A /* FlowField.h */,
+				2A1B6C291900E5190043948A /* Particle.cpp */,
+				2A1B6C2A1900E5190043948A /* Particle.h */,
+				2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */,
+				2A1B6C2E1900EA950043948A /* ParticleStroke.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -644,6 +659,7 @@
 				2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */,
 				3EA11A0C57A5A88F2719803E /* ofxButton.cpp in Sources */,
 				8C71A944389844F0FD2299B5 /* ofxGuiGroup.cpp in Sources */,
+				2A1B6C2B1900E5190043948A /* Particle.cpp in Sources */,
 				D128FC3EC38B26CCC8AF9E7F /* ofxLabel.cpp in Sources */,
 				24FB6A33237FFE9E1CD4628B /* ofxPanel.cpp in Sources */,
 				34D2AB0D0EB4C1885401B7AA /* ofxSlider.cpp in Sources */,
@@ -665,6 +681,7 @@
 				F5A7861860AA09A069B8A860 /* NetworkingUtilsWin.cpp in Sources */,
 				D478E3E6B7DFFBBD73231AED /* UdpSocketWin.cpp in Sources */,
 				01D94B5BFA0F748576EED744 /* OscOutboundPacketStream.cpp in Sources */,
+				2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */,
 				3D8B772914D8BDDB845B3283 /* OscPrintReceivedElements.cpp in Sources */,
 				F0EF50237A442FF6F65018B3 /* OscReceivedElements.cpp in Sources */,
 				2C4447C9E3DD08EB0A31EFDD /* OscTypes.cpp in Sources */,
@@ -673,6 +690,7 @@
 				D6E21E8A8C7AC346F43F9B37 /* tinyxml.cpp in Sources */,
 				619205CB77745DD1669E9E5A /* tinyxmlerror.cpp in Sources */,
 				A5F6D7A068C39544B3B5F921 /* tinyxmlparser.cpp in Sources */,
+				2A1B6C281900D9E30043948A /* FlowField.cpp in Sources */,
 				BCBF69A5C5EB61C1E270F272 /* ofxControlease.cpp in Sources */,
 				B18A039C7696C9EAD87D5741 /* ofxControleaseInput.cpp in Sources */,
 				25B82D545F5A0A46E64EB5FE /* ofxControleaseOutput.cpp in Sources */,

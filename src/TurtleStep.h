@@ -18,6 +18,7 @@ public:
     TurtleStep(float ang, float length);
     
     float getAngleDeg() { return (angle + angleOffset)*180/PI; }
+    float getAngleRad() { return (angle + angleOffset); }
     float getLength() { return length * lengthScale; };
     
     float angle;

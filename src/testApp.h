@@ -5,6 +5,7 @@
 
 #include "Params.h"
 #include "Canvas.h"
+#include "FlowField.h"
 
 class testApp : public ofBaseApp{
 
@@ -26,4 +27,5 @@ class testApp : public ofBaseApp{
     ofxControlease control;
     
     Canvas canvas;
+    FlowField flowField;
 };
