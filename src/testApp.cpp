@@ -23,8 +23,14 @@ void testApp::setup(){
     control.addInput("lengthScale", &Params::lengthScale);
     control.addInput("lengthIndexScale", &Params::lengthIndexScale);
     
-    canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
+    control.addInput("Repeat Times", &Params::repeatTimes);
+    control.addInput("Repeat rotation", &Params::repeatRotateCoeff);
+    control.addInput("Repeat trans X", &Params::repeatTransXCoeff);
+    control.addInput("Repeat trans Y", &Params::repeatTransYCoeff);
+    control.addInput("Repeat scale X", &Params::repeatScaleXCoeff);
+    control.addInput("Repeat scale Y", &Params::repeatScaleYCoeff);
     
+    canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
 }
 
 //--------------------------------------------------------------

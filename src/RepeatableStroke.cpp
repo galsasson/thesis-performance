@@ -8,6 +8,7 @@
 
 #include "RepeatableStroke.h"
 
+vector<float> RepeatableStroke::rotations;
 vector<ofVec2f> RepeatableStroke::translates;
 vector<ofVec2f> RepeatableStroke::scales;
 
@@ -26,10 +27,11 @@ RepeatableStroke::~RepeatableStroke()
 
 void RepeatableStroke::initTransformations()
 {
-    for (int i=0; i<50; i++)
+    for (int i=0; i<1000; i++)
     {
-        RepeatableStroke::translates.push_back(ofVec2f(ofRandom(-300, 300), ofRandom(-300, 300)));
-        RepeatableStroke::scales.push_back(ofVec2f(ofRandom(0.1, 2), ofRandom(0.1, 2)));
+        RepeatableStroke::rotations.push_back(ofRandom(360));
+        RepeatableStroke::translates.push_back(ofVec2f(ofRandom(-400, 400), ofRandom(-400, 400)));
+        RepeatableStroke::scales.push_back(ofVec2f(ofRandom(0.1, 0.6), ofRandom(0.1, 0.6)));
     }
 }
 
@@ -50,6 +52,7 @@ void RepeatableStroke::update()
 void RepeatableStroke::draw()
 {
     ofNoFill();
+    ofSetColor(50);
     ofPushMatrix();
     ofTranslate(anchor);
     
@@ -60,11 +63,12 @@ void RepeatableStroke::draw()
     }
     ofEndShape();
 
-    for (int i=0; i<50; i++)
+    for (int i=0; i<Params::repeatTimes; i++)
     {
         ofPushMatrix();
-        ofTranslate(RepeatableStroke::translates[i]);
-        ofScale(RepeatableStroke::scales[i].x, RepeatableStroke::scales[i].y);
+        ofRotate(RepeatableStroke::rotations[i] * Params::repeatRotateCoeff);
+        ofTranslate(RepeatableStroke::translates[i].x * Params::repeatTransXCoeff, RepeatableStroke::translates[i].y * Params::repeatTransYCoeff);
+        ofScale(RepeatableStroke::scales[i].x * Params::repeatScaleXCoeff, RepeatableStroke::scales[i].y * Params::repeatScaleYCoeff);
         ofBeginShape();
         for (int p=0; p<points.size(); p++)
         {

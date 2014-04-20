@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 
 class RepeatableStroke
 {
@@ -27,10 +28,9 @@ private:
     vector<ofVec2f*> points;
     static vector<ofVec2f> translates;
     static vector<ofVec2f> scales;
+    static vector<float> rotations;
     
     ofVec2f anchor;
-    
-    float transXT, transYT, rotateT;
 };
 
 

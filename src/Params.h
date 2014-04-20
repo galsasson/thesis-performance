@@ -19,6 +19,13 @@ public:
     
     static float lengthScale;
     static float lengthIndexScale;
+    
+    static float repeatTimes;
+    static float repeatRotateCoeff;
+    static float repeatScaleXCoeff;
+    static float repeatScaleYCoeff;
+    static float repeatTransXCoeff;
+    static float repeatTransYCoeff;
 };
 
 #endif /* defined(__performance__Params__) */
