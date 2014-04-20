@@ -14,6 +14,7 @@ Canvas::Canvas()
     currentStroke = NULL;
     currentTurtleStroke = NULL;
     currentParticleStroke = NULL;
+    currentRepeatableStroke = NULL;
     
     nStrokes = 0;
     strokeControlIndex = 0;
@@ -23,6 +24,9 @@ Canvas::Canvas()
     noiseRate = 0;
     randomLevel = 0;
     strokeType = 0;
+    bShowFlowfield = false;
+    
+    RepeatableStroke::initTransformations();
 }
 
 Canvas::~Canvas()
@@ -34,7 +38,7 @@ void Canvas::setup(float width, float height)
 {
     size = ofVec2f(width, height);
     
-    flowField.setup(width, height, 500, 500);
+    flowField.setup(width, height, 300, 300);
 }
 
 void Canvas::update()
@@ -54,12 +58,22 @@ void Canvas::update()
         particleStrokes[i]->update();
     }
     
+    if (currentParticleStroke) {
+        currentParticleStroke->applyFlowField(flowField);
+        currentParticleStroke->update();
+    }
+    
 //    flowField.update();
 }
 
 void Canvas::draw()
 {
-    ofClear(200);
+//    ofEnableAlphaBlending();
+    //ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(220, 220, 220, 20);
+    ofFill();
+    ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
+//    ofClear(200, 200, 200, 10);
 
     ofSetColor(50);
     ofNoFill();
@@ -78,12 +92,24 @@ void Canvas::draw()
         particleStrokes[i]->draw();
     }
     
+    for (int i=0; i<repeatableStrokes.size(); i++)
+    {
+        repeatableStrokes[i]->draw();
+    }
+    
     drawStroke(currentStroke);
     if (currentTurtleStroke) {
         currentTurtleStroke->draw();
     }
     if (currentParticleStroke) {
         currentParticleStroke->draw();
+    }
+    if (currentRepeatableStroke) {
+        currentRepeatableStroke->draw();
+    }
+    
+    if (bShowFlowfield) {
+        flowField.draw();
     }
 }
 
@@ -111,6 +137,12 @@ void Canvas::clear()
     }
     particleStrokes.clear();
     
+    for (int i=0; i<repeatableStrokes.size(); i++)
+    {
+        delete repeatableStrokes[i];
+    }
+    repeatableStrokes.clear();
+    
     if (currentTurtleStroke) {
         delete currentTurtleStroke;
         currentTurtleStroke = NULL;
@@ -119,6 +151,12 @@ void Canvas::clear()
         delete currentParticleStroke;
         currentParticleStroke = NULL;
     }
+    if (currentRepeatableStroke) {
+        delete currentRepeatableStroke;
+        currentRepeatableStroke = NULL;
+    }
+    
+    flowField.reset();
 }
 
 void Canvas::mousePressed(int x, int y, int button)
@@ -127,7 +165,7 @@ void Canvas::mousePressed(int x, int y, int button)
     {
         currentStroke = new Stroke();
         currentStroke->addPoint(ofVec3f(x, y, 0));
-        flowField.addAttractor(ofVec2f(x, y), 40, 15);
+        flowField.addAttractor(ofVec2f(x, y), 40, 1);
     }
     else if (strokeType == 1) {
         currentTurtleStroke = new TurtleStroke();
@@ -137,6 +175,10 @@ void Canvas::mousePressed(int x, int y, int button)
         currentParticleStroke = new ParticleStroke();
         currentParticleStroke->addPoint(ofVec2f(x, y));
     }
+    else if (strokeType == 3) {
+        currentRepeatableStroke = new RepeatableStroke();
+        currentRepeatableStroke->addPoint(ofVec2f(x, y));
+    }
 }
 
 void Canvas::mouseDragged(int x, int y, int button)
@@ -144,8 +186,9 @@ void Canvas::mouseDragged(int x, int y, int button)
     if (strokeType == 0)
     {
         if (currentStroke) {
+            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f(x, y) - *currentStroke->getPoints()[currentStroke->getPoints().size()-1])/5);
             currentStroke->addPoint(ofVec3f(x, y, 0));
-            flowField.addAttractor(ofVec2f(x, y), 40, 15);
+//            flowField.addAttractor(ofVec2f(x, y), 1000, 5);
         }
     }
     else if (strokeType == 1) {
@@ -156,6 +199,11 @@ void Canvas::mouseDragged(int x, int y, int button)
     else if (strokeType == 2) {
         if (currentParticleStroke) {
             currentParticleStroke->addPoint(ofVec2f(x, y));
+        }
+    }
+    else if (strokeType == 3) {
+        if (currentRepeatableStroke) {
+            currentRepeatableStroke->addPoint(ofVec2f(x, y));
         }
     }
 }
@@ -181,6 +229,12 @@ void Canvas::mouseReleased(int x, int y, int button)
             currentParticleStroke = NULL;
         }
     }
+    else if (strokeType == 3) {
+        if (currentRepeatableStroke) {
+            repeatableStrokes.push_back(currentRepeatableStroke);
+            currentRepeatableStroke = NULL;
+        }
+    }
     
 }
 
@@ -195,6 +249,16 @@ void Canvas::keyPressed(int key)
     else if (key == '3') {
         strokeType = 2;
     }
+    else if (key == '4') {
+        strokeType = 3;
+    }
+    else if (key == 'f') {
+        bShowFlowfield = !bShowFlowfield;
+    }
+    else if (key == 'c') {
+        ofClear(220);
+        clear();
+    }
 }
 
 void Canvas::drawStroke(Stroke *s)
@@ -206,12 +270,12 @@ void Canvas::drawStroke(Stroke *s)
     ofSetColor(50, 50, 50);
     ofSetLineWidth(1);
     ofNoFill();
-    vector<ofVec3f*> points = s->getPoints();
+    vector<ofVec2f*> points = s->getPoints();
     ofBeginShape();
     for (int i=0; i<points.size(); i++)
     {
-        ofVec3f p = getPointWithNoise(points[i], i);
-        ofVertex(p);
+        ofVec2f p = getPointWithNoise(points[i], i);
+        ofVertex(p.x, p.y);
     }
     ofEndShape();
 }
@@ -225,21 +289,20 @@ void Canvas::drawShape(Stroke *s)
     ofSetColor(50, 50, 50);
     ofSetLineWidth(1);
     ofFill();
-    vector<ofVec3f*> points = s->getPoints();
+    vector<ofVec2f*> points = s->getPoints();
     ofBeginShape();
     for (int i=0; i<points.size(); i++)
     {
-        ofVec3f p = getPointWithNoise(points[i]);
-        ofVertex(p);
+        ofVec2f p = getPointWithNoise(points[i]);
+        ofVertex(p.x, p.y);
     }
     ofEndShape();
 }
 
-ofVec3f Canvas::getPointWithNoise(ofVec3f *p, int index)
+ofVec2f Canvas::getPointWithNoise(ofVec2f *p, int index)
 {
     float time = noiseTime.x + index*noiseSpatialRate;
 
-    return ofVec3f(p->x + (ofNoise(time)-0.5f)*noiseLevel + ofRandom(-0.5, 0.5)*randomLevel + sin(xFrequency*index)*xAmplitude,
-                   p->y + (ofNoise(time + 1000)-0.5f)*noiseLevel + ofRandom(-0.5, 0.5)*randomLevel,
-                   p->z + (ofNoise(time + 10000)-0.5f)*noiseLevel + ofRandom(-0.5, 0.5)*randomLevel);
+    return ofVec2f(p->x + (ofNoise(time)-0.5f)*noiseLevel + ofRandom(-0.5, 0.5)*randomLevel + sin(xFrequency*index)*xAmplitude,
+                   p->y + (ofNoise(time + 1000)-0.5f)*noiseLevel + ofRandom(-0.5, 0.5)*randomLevel);
 }

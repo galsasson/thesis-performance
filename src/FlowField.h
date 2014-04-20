@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Stroke.h"
 
 class FlowField
 {
@@ -21,7 +22,12 @@ public:
     void update();
     void draw();
     
+    void reset();
+    
     void addAttractor(ofVec2f p, float rad, float force);
+    void addForce(ofVec2f p, float rad, ofVec2f force);
+    
+    void applyStrokeForces(Stroke* stroke);
     ofVec2f getForce(ofVec2f p) const;
     
 private:

@@ -3,8 +3,10 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    ofSeedRandom();
     ofSetFrameRate(60);
-    ofEnableSmoothing();
+//    ofEnableSmoothing();
+    ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
     
     control.setup("Performance", 6000);
@@ -22,6 +24,7 @@ void testApp::setup(){
     control.addInput("lengthIndexScale", &Params::lengthIndexScale);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
+    
 }
 
 //--------------------------------------------------------------
@@ -31,18 +34,14 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+//    ofClear(0);
     canvas.draw();
 }
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     cout << "key pressed: "<<key<<endl;
-    if (key == 'c') {
-        canvas.clear();
-    }
-    else {
-        canvas.keyPressed(key);
-    }
+    canvas.keyPressed(key);
 }
 
 //--------------------------------------------------------------

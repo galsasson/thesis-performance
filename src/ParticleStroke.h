@@ -28,6 +28,7 @@ public:
     
 private:
     vector<Particle*> points;
+    float t;
     
 };
 

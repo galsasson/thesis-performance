@@ -24,12 +24,12 @@ Stroke::~Stroke()
     points.clear();
 }
 
-void Stroke::addPoint(const ofVec3f& p)
+void Stroke::addPoint(const ofVec2f& p)
 {
-    points.push_back(new ofVec3f(p));
+    points.push_back(new ofVec2f(p));
 }
 
-vector<ofVec3f*>& Stroke::getPoints()
+vector<ofVec2f*>& Stroke::getPoints()
 {
     return points;
 }

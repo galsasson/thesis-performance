@@ -17,12 +17,12 @@ class Stroke
 public:
     Stroke();
     ~Stroke();
-    void addPoint(const ofVec3f& p);
+    void addPoint(const ofVec2f& p);
     
-    vector<ofVec3f*>& getPoints();
+    vector<ofVec2f*>& getPoints();
     
 private:
-    vector<ofVec3f*> points;
+    vector<ofVec2f*> points;
 };
 
 #endif /* defined(__performance__Stroke__) */

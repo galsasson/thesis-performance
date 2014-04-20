@@ -25,11 +25,15 @@ public:
     void update();
     void draw();
     
+    void setColor(ofColor c);
+    
 private:
     float maxSpeed;
     float mass;
     ofVec2f vel;
     ofVec2f acc;
+    
+    ofColor color;
 };
 
 #endif /* defined(__performance__Particle__) */

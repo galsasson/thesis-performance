@@ -26,7 +26,7 @@ Particle::Particle(const ofVec2f& p) : ofVec2f(p)
 void Particle::setup()
 {
     maxSpeed = 5;
-    mass = 2;
+    mass = ofRandom(1)+1;
     vel = ofVec2f();
     acc = ofVec2f();
 }
@@ -44,7 +44,7 @@ void Particle::update()
     x += vel.x;
     y += vel.y;
     
-    vel *= 0.9;
+    vel *= 0.99;
     
     acc *= 0;
 }
@@ -54,8 +54,14 @@ void Particle::draw()
     ofPushMatrix();
     ofTranslate(x, y);
     
-    ofEllipse(0, 0, 3, 3);
+    ofSetColor(color);
+    ofEllipse(0, 0, 15, 15);
     
     ofPopMatrix();
+}
+
+void Particle::setColor(ofColor c)
+{
+    color = c;
 }
 

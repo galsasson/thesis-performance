@@ -16,6 +16,7 @@
 		2A1B6C281900D9E30043948A /* FlowField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C261900D9E30043948A /* FlowField.cpp */; };
 		2A1B6C2B1900E5190043948A /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C291900E5190043948A /* Particle.cpp */; };
 		2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */; };
+		2A1B6C321903432C0043948A /* RepeatableStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C301903432C0043948A /* RepeatableStroke.cpp */; };
 		2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */; };
 		2ACD87B218FA0CD8005E62E8 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */; };
 		2ACD87B518FADA57005E62E8 /* TurtleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B318FADA57005E62E8 /* TurtleStroke.cpp */; };
@@ -121,6 +122,8 @@
 		2A1B6C2A1900E5190043948A /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParticleStroke.cpp; sourceTree = "<group>"; };
 		2A1B6C2E1900EA950043948A /* ParticleStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParticleStroke.h; sourceTree = "<group>"; };
+		2A1B6C301903432C0043948A /* RepeatableStroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatableStroke.cpp; sourceTree = "<group>"; };
+		2A1B6C311903432C0043948A /* RepeatableStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RepeatableStroke.h; sourceTree = "<group>"; };
 		2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stroke.cpp; sourceTree = "<group>"; };
 		2ACD87AE18FA0A38005E62E8 /* Stroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stroke.h; sourceTree = "<group>"; };
 		2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
@@ -528,6 +531,8 @@
 				2A1B6C2A1900E5190043948A /* Particle.h */,
 				2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */,
 				2A1B6C2E1900EA950043948A /* ParticleStroke.h */,
+				2A1B6C301903432C0043948A /* RepeatableStroke.cpp */,
+				2A1B6C311903432C0043948A /* RepeatableStroke.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -690,6 +695,7 @@
 				D6E21E8A8C7AC346F43F9B37 /* tinyxml.cpp in Sources */,
 				619205CB77745DD1669E9E5A /* tinyxmlerror.cpp in Sources */,
 				A5F6D7A068C39544B3B5F921 /* tinyxmlparser.cpp in Sources */,
+				2A1B6C321903432C0043948A /* RepeatableStroke.cpp in Sources */,
 				2A1B6C281900D9E30043948A /* FlowField.cpp in Sources */,
 				BCBF69A5C5EB61C1E270F272 /* ofxControlease.cpp in Sources */,
 				B18A039C7696C9EAD87D5741 /* ofxControleaseInput.cpp in Sources */,
