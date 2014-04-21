@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 #include "ofMain.h"
 #include "ofxControlease.h"
 

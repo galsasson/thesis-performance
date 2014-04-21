@@ -18,11 +18,6 @@ RepeatableStroke::RepeatableStroke()
 
 RepeatableStroke::~RepeatableStroke()
 {
-    for (int i=0; i<points.size(); i++)
-    {
-        delete points[i];
-    }
-    points.clear();
 }
 
 void RepeatableStroke::initTransformations()
@@ -37,11 +32,11 @@ void RepeatableStroke::initTransformations()
 
 void RepeatableStroke::addPoint(const ofVec2f& p)
 {
-    if (points.size() == 0) {
+    if (line.getPoints().size() == 0) {
         anchor = ofVec2f(p);
     }
     
-    points.push_back(new ofVec2f(p-anchor));
+    line.addPoint(p.x-anchor.x, p.y-anchor.y);
 }
 
 void RepeatableStroke::update()
@@ -56,12 +51,7 @@ void RepeatableStroke::draw()
     ofPushMatrix();
     ofTranslate(anchor);
     
-    ofBeginShape();
-    for (int i=0; i<points.size(); i++)
-    {
-        ofVertex(points[i]->x, points[i]->y);
-    }
-    ofEndShape();
+    line.draw();
 
     for (int i=0; i<Params::repeatTimes; i++)
     {
@@ -69,12 +59,7 @@ void RepeatableStroke::draw()
         ofRotate(RepeatableStroke::rotations[i] * Params::repeatRotateCoeff);
         ofTranslate(RepeatableStroke::translates[i].x * Params::repeatTransXCoeff, RepeatableStroke::translates[i].y * Params::repeatTransYCoeff);
         ofScale(RepeatableStroke::scales[i].x * Params::repeatScaleXCoeff, RepeatableStroke::scales[i].y * Params::repeatScaleYCoeff);
-        ofBeginShape();
-        for (int p=0; p<points.size(); p++)
-        {
-            ofVertex(points[p]->x, points[p]->y);
-        }
-        ofEndShape();
+        line.draw();
         ofPopMatrix();
     }
     ofPopMatrix();

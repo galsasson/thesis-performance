@@ -96,27 +96,28 @@ void Canvas::draw()
         particleStrokes[i]->draw();
     }
     
+    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     for (int i=0; i<repeatableStrokes.size(); i++)
     {
         repeatableStrokes[i]->draw();
     }
-    
+    if (currentRepeatableStroke) {
+        currentRepeatableStroke->draw();
+    }
     for (int i=0; i<smoothLines.size(); i++)
     {
         smoothLines[i]->draw();
     }
+    if (currentSmoothLine) {
+        currentSmoothLine->draw();
+    }
+    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
 
     ofSetColor(50);
     ofNoFill();
     drawStroke(currentStroke);
     if (currentParticleStroke) {
         currentParticleStroke->draw();
-    }
-    if (currentRepeatableStroke) {
-        currentRepeatableStroke->draw();
-    }
-    if (currentSmoothLine) {
-        currentSmoothLine->draw();
     }
     
     if (bShowFlowfield) {

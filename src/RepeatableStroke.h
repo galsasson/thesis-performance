@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "SmoothLine.h"
 #include "Params.h"
 
 class RepeatableStroke
@@ -25,7 +26,8 @@ public:
     static void initTransformations();
     
 private:
-    vector<ofVec2f*> points;
+//    vector<ofVec2f*> points;
+    SmoothLine line;
     static vector<ofVec2f> translates;
     static vector<ofVec2f> scales;
     static vector<float> rotations;

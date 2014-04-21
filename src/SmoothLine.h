@@ -23,6 +23,8 @@ public:
     
     void draw();
     
+    vector<ofVec3f>& getPoints() { return points; }
+    
 private:
     void makeMesh();
     

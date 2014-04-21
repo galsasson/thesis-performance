@@ -42,6 +42,10 @@ void testApp::update(){
 void testApp::draw(){
 //    ofClear(0);
     canvas.draw();
+    
+    stringstream ss;
+    ss << ofGetFrameRate();
+    ofDrawBitmapString(ss.str(), 0, ofGetWindowHeight());
 }
 
 //--------------------------------------------------------------

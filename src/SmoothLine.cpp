@@ -31,9 +31,9 @@ void SmoothLine::addPoint(float x, float y)
 
 void SmoothLine::draw()
 {
-    ResourceManager::getInstance().circleImg.getTextureReference().bind();
+//    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     mesh.draw();
-    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
+//    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
 }
 
 
