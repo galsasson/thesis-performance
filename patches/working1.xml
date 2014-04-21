@@ -148,31 +148,64 @@
 				<Node id="28-o0" index="0" lastVal="0.969999969" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
-		<CanvasComponent id="30" type="1" name="Repeat Times" position.x="2354" position.y="1362" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="125">
+		<CanvasComponent id="30" type="1" name="Repeat Times" position.x="2320" position.y="1354" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="860.440002">
 			<InputNodes>
-				<Node id="30-i0" index="0" lastVal="125" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="125"/>
+				<Node id="30-i0" index="0" lastVal="860.440002" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="860.440002"/>
 			</InputNodes>
 			<OutputNodes>
-				<Node id="30-o0" index="0" lastVal="125" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+				<Node id="30-o0" index="0" lastVal="860.440002" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
-		<CanvasComponent id="32" type="0" name="Performance" position.x="2514" position.y="1212" size.x="200" size.y="163" showInputPlus="0" showOutputPlus="0" listenPort="8357" bConnected="1" bEditing="0" programHost="localhost" programPort="6000">
+		<CanvasComponent id="33" type="1" name="Repeat scale X" position.x="2326" position.y="1526" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="0.620000005">
 			<InputNodes>
-				<Node id="32-i0" index="0" lastVal="0" pos.x="6" pos.y="28" name="Noise Level" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i1" index="1" lastVal="0" pos.x="6" pos.y="37" name="Noise Rate" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i2" index="2" lastVal="0" pos.x="6" pos.y="46" name="Noise Spatial Rate" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i3" index="3" lastVal="0" pos.x="6" pos.y="55" name="Random Level" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i4" index="4" lastVal="0" pos.x="6" pos.y="64" name="X Frequency" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i5" index="5" lastVal="0" pos.x="6" pos.y="73" name="X Amplitude" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i6" index="6" lastVal="0" pos.x="6" pos.y="82" name="Angle Offset" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i7" index="7" lastVal="0" pos.x="6" pos.y="91" name="Angle Offset Per Index" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i8" index="8" lastVal="1" pos.x="6" pos.y="100" name="lengthScale" bDisplayName="0" originalVal="1"/>
-				<Node id="32-i9" index="9" lastVal="1" pos.x="6" pos.y="109" name="lengthIndexScale" bDisplayName="0" originalVal="1"/>
-				<Node id="32-i10" index="10" lastVal="125" pos.x="6" pos.y="118" name="Repeat Times" bDisplayName="0" originalVal="0"/>
-				<Node id="32-i11" index="11" lastVal="1" pos.x="6" pos.y="127" name="Repeat rotation" bDisplayName="0" originalVal="1"/>
-				<Node id="32-i12" index="12" lastVal="1.68999994" pos.x="6" pos.y="136" name="Repeat move" bDisplayName="0" originalVal="1"/>
-				<Node id="32-i13" index="13" lastVal="1" pos.x="6" pos.y="145" name="Repeat scale X" bDisplayName="0" originalVal="1"/>
-				<Node id="32-i14" index="14" lastVal="1.74000001" pos.x="6" pos.y="154" name="Repeat scale Y" bDisplayName="0" originalVal="1"/>
+				<Node id="33-i0" index="0" lastVal="0.620000005" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1.5999999"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="33-o0" index="0" lastVal="0.620000005" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="34" type="1" name="Repeat rotation" position.x="2318" position.y="1395" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="2.45000005">
+			<InputNodes>
+				<Node id="34-i0" index="0" lastVal="2.45000005" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="2.45000005"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="34-o0" index="0" lastVal="2.45000005" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="35" type="1" name="Repeat trans X" position.x="2319" position.y="1435" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1.16999996">
+			<InputNodes>
+				<Node id="35-i0" index="0" lastVal="1.16999996" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1.16999996"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="35-o0" index="0" lastVal="1.16999996" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="36" type="1" name="Repeat trans Y" position.x="2320" position.y="1480" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="4.85999966">
+			<InputNodes>
+				<Node id="36-i0" index="0" lastVal="4.85999966" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="4.85999966"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="36-o0" index="0" lastVal="4.85999966" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="37" type="0" name="Performance" position.x="2529" position.y="1179" size.x="200" size.y="172" showInputPlus="0" showOutputPlus="0" listenPort="5129" bConnected="1" bEditing="0" programHost="localhost" programPort="6000">
+			<InputNodes>
+				<Node id="37-i0" index="0" lastVal="0" pos.x="6" pos.y="28" name="Noise Level" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i1" index="1" lastVal="0" pos.x="6" pos.y="37" name="Noise Rate" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i2" index="2" lastVal="0" pos.x="6" pos.y="46" name="Noise Spatial Rate" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i3" index="3" lastVal="0" pos.x="6" pos.y="55" name="Random Level" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i4" index="4" lastVal="0" pos.x="6" pos.y="64" name="X Frequency" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i5" index="5" lastVal="0" pos.x="6" pos.y="73" name="X Amplitude" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i6" index="6" lastVal="0" pos.x="6" pos.y="82" name="Angle Offset" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i7" index="7" lastVal="0" pos.x="6" pos.y="91" name="Angle Offset Per Index" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i8" index="8" lastVal="1" pos.x="6" pos.y="100" name="lengthScale" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i9" index="9" lastVal="1" pos.x="6" pos.y="109" name="lengthIndexScale" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i10" index="10" lastVal="860.440002" pos.x="6" pos.y="118" name="Repeat Times" bDisplayName="0" originalVal="0"/>
+				<Node id="37-i11" index="11" lastVal="2.45000005" pos.x="6" pos.y="127" name="Repeat rotation" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i12" index="12" lastVal="1.16999996" pos.x="6" pos.y="136" name="Repeat trans X" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i13" index="13" lastVal="4.85999966" pos.x="6" pos.y="145" name="Repeat trans Y" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i14" index="14" lastVal="0.620000005" pos.x="6" pos.y="154" name="Repeat scale X" bDisplayName="0" originalVal="1"/>
+				<Node id="37-i15" index="15" lastVal="1" pos.x="6" pos.y="163" name="Repeat scale Y" bDisplayName="0" originalVal="1"/>
 			</InputNodes>
 			<OutputNodes/>
 			<TextInput pos.x="4" pos.y="23" minSize.x="192" minSize.y="14" bMultiline="0" text="localhost:6000"/>
@@ -187,44 +220,71 @@
 				<ProgramInput name="Angle Offset Per Index" address="/ic" index="7" type="0" value="0"/>
 				<ProgramInput name="lengthScale" address="/ic" index="8" type="0" value="1"/>
 				<ProgramInput name="lengthIndexScale" address="/ic" index="9" type="0" value="1"/>
-				<ProgramInput name="Repeat Times" address="/ic" index="10" type="1" value="125"/>
-				<ProgramInput name="Repeat rotation" address="/ic" index="11" type="0" value="1"/>
-				<ProgramInput name="Repeat move" address="/ic" index="12" type="0" value="1.68999994"/>
-				<ProgramInput name="Repeat scale X" address="/ic" index="13" type="0" value="1"/>
-				<ProgramInput name="Repeat scale Y" address="/ic" index="14" type="0" value="1.74000001"/>
+				<ProgramInput name="Repeat Times" address="/ic" index="10" type="0" value="860.440002"/>
+				<ProgramInput name="Repeat rotation" address="/ic" index="11" type="0" value="2.45000005"/>
+				<ProgramInput name="Repeat trans X" address="/ic" index="12" type="0" value="1.16999996"/>
+				<ProgramInput name="Repeat trans Y" address="/ic" index="13" type="0" value="4.85999966"/>
+				<ProgramInput name="Repeat scale X" address="/ic" index="14" type="0" value="0.620000005"/>
+				<ProgramInput name="Repeat scale Y" address="/ic" index="15" type="0" value="1"/>
 			</ProgramInputs>
 			<ProgramOutputs/>
 		</CanvasComponent>
-		<CanvasComponent id="33" type="1" name="Repeat scale Y" position.x="2372" position.y="1546" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1.74000001">
+		<CanvasComponent id="38" type="1" name="Repeat scale Y" position.x="2391" position.y="1571" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1">
 			<InputNodes>
-				<Node id="33-i0" index="0" lastVal="1.74000001" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1.74000001"/>
+				<Node id="38-i0" index="0" lastVal="1" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1"/>
 			</InputNodes>
 			<OutputNodes>
-				<Node id="33-o0" index="0" lastVal="1.74000001" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+				<Node id="38-o0" index="0" lastVal="1" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
-		<CanvasComponent id="34" type="1" name="Repeat rotation" position.x="2356" position.y="1410" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1">
+		<CanvasComponent id="39" type="3" name="OSCILLATOR" position.x="2155" position.y="1473" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="0.337997049" time="-26356746.237300672">
 			<InputNodes>
-				<Node id="34-i0" index="0" lastVal="1" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1"/>
+				<Node id="39-i0" index="0" lastVal="0.0199999996" pos.x="6" pos.y="28" name="Frequency" bDisplayName="0" originalVal="0"/>
 			</InputNodes>
 			<OutputNodes>
-				<Node id="34-o0" index="0" lastVal="1" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+				<Node id="39-o0" index="0" lastVal="0.337997049" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
-		<CanvasComponent id="35" type="1" name="Repeat move" position.x="2349" position.y="1451" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1.68999994">
+		<CanvasComponent id="40" type="1" name="Frequency" position.x="1993" position.y="1457" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="0.0199999996">
 			<InputNodes>
-				<Node id="35-i0" index="0" lastVal="1.68999994" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1.68999994"/>
+				<Node id="40-i0" index="0" lastVal="0.0199999996" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="0.0199999996"/>
 			</InputNodes>
 			<OutputNodes>
-				<Node id="35-o0" index="0" lastVal="1.68999994" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+				<Node id="40-o0" index="0" lastVal="0.0199999996" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
-		<CanvasComponent id="36" type="1" name="Repeat scale X" position.x="2356" position.y="1499" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="1">
+		<CanvasComponent id="41" type="5" name="JAVASCRIPT" position.x="2082" position.y="1534" size.x="220" size.y="78" showInputPlus="0" showOutputPlus="0" jsScript="timeline.js" stateJson='{"values":[21,23,24,27,31,38,43,46,50,50,50,50,50,50,50,47,47,46,44,41,40,38,36,35,34,32,32,31,31,30,30,30,29,29,29,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,28,29,29,29,29,29,29,29,29,29,29,30,30,30,30,30,30,30,30,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,31,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,31,31,31,30,30,29,29,28,28,28,26,25,25,23,23,22,20,17,17,15,12,10,7,6,4,4,4,4,4,20,12,28,31,32,32,32,32,32,30,30,28,27,26,26,26,26,26,26,26,26,26,25,25,25,25,25,25,25,25,26,26]}'>
 			<InputNodes>
-				<Node id="36-i0" index="0" lastVal="1" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="1"/>
+				<Node id="41-i0" index="0" lastVal="114" pos.x="6" pos.y="28" name="Frame" bDisplayName="0" originalVal="0"/>
 			</InputNodes>
 			<OutputNodes>
-				<Node id="36-o0" index="0" lastVal="1" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+				<Node id="41-o0" index="0" lastVal="0.620000005" pos.x="214" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="42" type="5" name="JAVASCRIPT" position.x="2001" position.y="1530" size.x="70" size.y="78" showInputPlus="0" showOutputPlus="0" jsScript="clock.js" stateJson="{}">
+			<InputNodes>
+				<Node id="42-i0" index="0" lastVal="200" pos.x="6" pos.y="28" name="Period" bDisplayName="0" originalVal="0"/>
+				<Node id="42-i1" index="1" lastVal="3.79999995" pos.x="6" pos.y="37" name="Speed" bDisplayName="0" originalVal="0"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="42-o0" index="0" lastVal="114" pos.x="64" pos.y="28" name="Value" bDisplayName="0"/>
+				<Node id="42-o1" index="1" lastVal="0" pos.x="64" pos.y="37" name="Loop Start" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="43" type="1" name="Period" position.x="1881" position.y="1507" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="200">
+			<InputNodes>
+				<Node id="43-i0" index="0" lastVal="200" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="200"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="43-o0" index="0" lastVal="200" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
+			</OutputNodes>
+		</CanvasComponent>
+		<CanvasComponent id="44" type="1" name="Speed" position.x="1883" position.y="1552" size.x="100" size.y="40" showInputPlus="0" showOutputPlus="0" value="3.79999995">
+			<InputNodes>
+				<Node id="44-i0" index="0" lastVal="3.79999995" pos.x="6" pos.y="28" name="Input" bDisplayName="0" originalVal="3.79999995"/>
+			</InputNodes>
+			<OutputNodes>
+				<Node id="44-o0" index="0" lastVal="3.79999995" pos.x="94" pos.y="28" name="Output" bDisplayName="0"/>
 			</OutputNodes>
 		</CanvasComponent>
 	</Components>
@@ -241,11 +301,17 @@
 		<Wire inputID="25-i1" outputID="15-o0"/>
 		<Wire inputID="12-i0" outputID="11-o0"/>
 		<Wire inputID="25-i0" outputID="12-o0"/>
-		<Wire inputID="32-i10" outputID="30-o0"/>
-		<Wire inputID="32-i14" outputID="33-o0"/>
-		<Wire inputID="32-i11" outputID="34-o0"/>
-		<Wire inputID="32-i12" outputID="35-o0"/>
-		<Wire inputID="32-i13" outputID="36-o0"/>
+		<Wire inputID="37-i10" outputID="30-o0"/>
+		<Wire inputID="37-i11" outputID="34-o0"/>
+		<Wire inputID="37-i12" outputID="35-o0"/>
+		<Wire inputID="37-i13" outputID="36-o0"/>
+		<Wire inputID="37-i14" outputID="33-o0"/>
+		<Wire inputID="37-i15" outputID="38-o0"/>
+		<Wire inputID="33-i0" outputID="41-o0"/>
+		<Wire inputID="39-i0" outputID="40-o0"/>
+		<Wire inputID="42-i0" outputID="43-o0"/>
+		<Wire inputID="42-i1" outputID="44-o0"/>
+		<Wire inputID="41-i0" outputID="42-o0"/>
 	</Wires>
 </Canvas>
 

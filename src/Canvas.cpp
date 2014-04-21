@@ -15,6 +15,7 @@ Canvas::Canvas()
     currentTurtleStroke = NULL;
     currentParticleStroke = NULL;
     currentRepeatableStroke = NULL;
+    currentSmoothLine = NULL;
     
     nStrokes = 0;
     strokeControlIndex = 0;
@@ -26,7 +27,7 @@ Canvas::Canvas()
     strokeType = 0;
     bShowFlowfield = false;
     
-    RepeatableStroke::initTransformations();
+    RepeatableStroke::initTransformations();    
 }
 
 Canvas::~Canvas()
@@ -68,23 +69,26 @@ void Canvas::update()
 
 void Canvas::draw()
 {
-//    ofEnableAlphaBlending();
-    //ofEnableBlendMode(OF_BLENDMODE_ADD);
     ofSetColor(220, 220, 220, 20);
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-//    ofClear(200, 200, 200, 10);
+
+    // draw filled surfaces
+    ofSetColor(200, 0, 0);
+    ofFill();
+    for (int i=0; i<turtleStrokes.size(); i++)
+    {
+        turtleStrokes[i]->draw();
+    }
+    if (currentTurtleStroke) {
+        currentTurtleStroke->draw();
+    }
 
     ofSetColor(50);
     ofNoFill();
     for (int i=0; i<strokes.size(); i++)
     {
         drawStroke(strokes[i]);
-    }
-    
-    for (int i=0; i<turtleStrokes.size(); i++)
-    {
-        turtleStrokes[i]->draw();
     }
     
     for (int i=0; i<particleStrokes.size(); i++)
@@ -97,15 +101,22 @@ void Canvas::draw()
         repeatableStrokes[i]->draw();
     }
     
-    drawStroke(currentStroke);
-    if (currentTurtleStroke) {
-        currentTurtleStroke->draw();
+    for (int i=0; i<smoothLines.size(); i++)
+    {
+        smoothLines[i]->draw();
     }
+
+    ofSetColor(50);
+    ofNoFill();
+    drawStroke(currentStroke);
     if (currentParticleStroke) {
         currentParticleStroke->draw();
     }
     if (currentRepeatableStroke) {
         currentRepeatableStroke->draw();
+    }
+    if (currentSmoothLine) {
+        currentSmoothLine->draw();
     }
     
     if (bShowFlowfield) {
@@ -143,6 +154,12 @@ void Canvas::clear()
     }
     repeatableStrokes.clear();
     
+    for (int i=0; i<smoothLines.size(); i++)
+    {
+        delete smoothLines[i];
+    }
+    smoothLines.clear();
+    
     if (currentTurtleStroke) {
         delete currentTurtleStroke;
         currentTurtleStroke = NULL;
@@ -154,6 +171,10 @@ void Canvas::clear()
     if (currentRepeatableStroke) {
         delete currentRepeatableStroke;
         currentRepeatableStroke = NULL;
+    }
+    if (currentSmoothLine) {
+        delete currentSmoothLine;
+        currentSmoothLine = NULL;
     }
     
     flowField.reset();
@@ -178,6 +199,10 @@ void Canvas::mousePressed(int x, int y, int button)
     else if (strokeType == 3) {
         currentRepeatableStroke = new RepeatableStroke();
         currentRepeatableStroke->addPoint(ofVec2f(x, y));
+    }
+    else if (strokeType == 4) {
+        currentSmoothLine = new SmoothLine();
+        currentSmoothLine->addPoint(x, y);
     }
 }
 
@@ -204,6 +229,11 @@ void Canvas::mouseDragged(int x, int y, int button)
     else if (strokeType == 3) {
         if (currentRepeatableStroke) {
             currentRepeatableStroke->addPoint(ofVec2f(x, y));
+        }
+    }
+    else if (strokeType == 4) {
+        if (currentSmoothLine) {
+            currentSmoothLine->addPoint(x, y);
         }
     }
 }
@@ -235,6 +265,12 @@ void Canvas::mouseReleased(int x, int y, int button)
             currentRepeatableStroke = NULL;
         }
     }
+    else if (strokeType == 4) {
+        if (currentSmoothLine) {
+            smoothLines.push_back(currentSmoothLine);
+            currentSmoothLine = NULL;
+        }
+    }
     
 }
 
@@ -251,6 +287,9 @@ void Canvas::keyPressed(int key)
     }
     else if (key == '4') {
         strokeType = 3;
+    }
+    else if (key == '5') {
+        strokeType = 4;
     }
     else if (key == 'f') {
         bShowFlowfield = !bShowFlowfield;

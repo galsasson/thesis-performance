@@ -16,6 +16,7 @@
 #include "TurtleStroke.h"
 #include "ParticleStroke.h"
 #include "RepeatableStroke.h"
+#include "SmoothLine.h"
 
 class Canvas
 {
@@ -53,11 +54,13 @@ private:
     vector<TurtleStroke*> turtleStrokes;
     vector<ParticleStroke*> particleStrokes;
     vector<RepeatableStroke*> repeatableStrokes;
+    vector<SmoothLine*> smoothLines;
     
     Stroke* currentStroke;
     TurtleStroke* currentTurtleStroke;
     ParticleStroke* currentParticleStroke;
     RepeatableStroke* currentRepeatableStroke;
+    SmoothLine *currentSmoothLine;
     ofVec2f noiseTime;
 
     FlowField flowField;
