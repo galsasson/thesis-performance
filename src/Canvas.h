@@ -16,7 +16,7 @@
 #include "TurtleStroke.h"
 #include "ParticleStroke.h"
 #include "RepeatableStroke.h"
-#include "SmoothLine.h"
+#include "SpringStroke.h"
 
 class Canvas
 {
@@ -54,15 +54,17 @@ private:
     vector<TurtleStroke*> turtleStrokes;
     vector<ParticleStroke*> particleStrokes;
     vector<RepeatableStroke*> repeatableStrokes;
-    vector<SmoothLine*> smoothLines;
+    vector<SpringStroke*> springStrokes;
     
     Stroke* currentStroke;
     TurtleStroke* currentTurtleStroke;
     ParticleStroke* currentParticleStroke;
     RepeatableStroke* currentRepeatableStroke;
-    SmoothLine *currentSmoothLine;
+    SpringStroke* currentSpringStroke;
     ofVec2f noiseTime;
 
+    ofVec2f repeatableAnchor;
+    
     FlowField flowField;
     
     int strokeType;

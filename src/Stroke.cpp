@@ -15,22 +15,20 @@ Stroke::Stroke()
 
 Stroke::~Stroke()
 {
-    // delete all allocated points
-    for (int i=0; i<points.size(); i++)
-    {
-        delete points[i];
-    }
+}
+
+void Stroke::addPoint(float x, float y)
+{
+    line.addPoint(x, y);
+}
+
+void Stroke::update()
+{
     
-    points.clear();
 }
 
-void Stroke::addPoint(const ofVec2f& p)
+void Stroke::draw()
 {
-    points.push_back(new ofVec2f(p));
-}
-
-vector<ofVec2f*>& Stroke::getPoints()
-{
-    return points;
+    line.draw();
 }
 

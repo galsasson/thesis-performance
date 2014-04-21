@@ -8,17 +8,17 @@
 
 #include "Particle.h"
 
-Particle::Particle() : ofVec2f()
+Particle::Particle() : ofVec2f(), mass(1)
 {
     setup();
 }
 
-Particle::Particle(float x, float y) : ofVec2f(x, y)
+Particle::Particle(float x, float y, float m) : ofVec2f(x, y), mass(m)
 {
     setup();
 }
 
-Particle::Particle(const ofVec2f& p) : ofVec2f(p)
+Particle::Particle(const ofVec2f& p, float m) : ofVec2f(p), mass(m)
 {
     setup();
 }
@@ -26,7 +26,6 @@ Particle::Particle(const ofVec2f& p) : ofVec2f(p)
 void Particle::setup()
 {
     maxSpeed = 5;
-    mass = ofRandom(1)+1;
     vel = ofVec2f();
     acc = ofVec2f();
 }

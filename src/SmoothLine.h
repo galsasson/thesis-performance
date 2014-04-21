@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Particle.h"
 #include "ResourceManager.h"
 
 class SmoothLine
@@ -23,12 +24,12 @@ public:
     
     void draw();
     
-    vector<ofVec3f>& getPoints() { return points; }
+    vector<Particle>& getPoints() { return points; }
     
 private:
-    void makeMesh();
+    void rebuildMesh();
     
-    vector<ofVec3f> points;
+    vector<Particle> points;
     
     ofMesh mesh;
 };

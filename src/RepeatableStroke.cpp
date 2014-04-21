@@ -30,13 +30,14 @@ void RepeatableStroke::initTransformations()
     }
 }
 
-void RepeatableStroke::addPoint(const ofVec2f& p)
+void RepeatableStroke::setAnchor(float x, float y)
 {
-    if (line.getPoints().size() == 0) {
-        anchor = ofVec2f(p);
-    }
-    
-    line.addPoint(p.x-anchor.x, p.y-anchor.y);
+    anchor = ofVec2f(x, y);
+}
+
+void RepeatableStroke::addPoint(float x, float y)
+{
+    line.addPoint(x-anchor.x, y-anchor.y);
 }
 
 void RepeatableStroke::update()

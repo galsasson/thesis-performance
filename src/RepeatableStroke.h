@@ -19,7 +19,8 @@ class RepeatableStroke
 public:
     RepeatableStroke();
     ~RepeatableStroke();
-    void addPoint(const ofVec2f& p);
+    void setAnchor(float x, float y);
+    void addPoint(float x, float y);
     void update();
     void draw();
     

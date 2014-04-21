@@ -11,18 +11,21 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "SmoothLine.h"
 
 class Stroke
 {
 public:
     Stroke();
     ~Stroke();
-    void addPoint(const ofVec2f& p);
+    void addPoint(float x, float y);
+    vector<Particle>& getPoints() { return line.getPoints(); }
     
-    vector<ofVec2f*>& getPoints();
+    void update();
+    void draw();
     
 private:
-    vector<ofVec2f*> points;
+    SmoothLine line;
 };
 
 #endif /* defined(__performance__Stroke__) */

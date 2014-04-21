@@ -24,8 +24,9 @@ void SmoothLine::addPoint(float x, float y)
         ofVec2f lp = points.back();
         w = 0.2f+(ofVec2f(x, y) - lp).length() / 5;
     }
-    points.push_back(ofVec3f(x, y, w));
-    makeMesh();
+    
+    points.push_back(Particle(x, y, w));
+    rebuildMesh();
 }
 
 
@@ -38,7 +39,7 @@ void SmoothLine::draw()
 
 
 // based on https://github.com/apitaru/ofxSmoothLines/blob/master/src/ofxSmoothLines.mm
-void SmoothLine::makeMesh()
+void SmoothLine::rebuildMesh()
 {
     if (points.size() < 2) {
         return;
@@ -48,7 +49,7 @@ void SmoothLine::makeMesh()
     
     mesh.setMode(OF_PRIMITIVE_TRIANGLES);
     
-    float w = points[0].z;
+    float w = points[0].mass;
     float w2;
     
     for (int i=0; i<points.size()-1; i++)
@@ -56,7 +57,7 @@ void SmoothLine::makeMesh()
         ofVec2f a = ofVec2f(points[i].x, points[i].y);
 		ofVec2f b = ofVec2f(points[i+1].x, points[i+1].y);
         
-        w2 = w + (points[i+1].z-w)*0.2f;
+        w2 = w + (points[i+1].mass-w)*0.2f;
 		ofVec2f ea = (ofVec2f)(b - a).normalize() * w;
         ofVec2f eb = (ofVec2f)(b - a).normalize() * w2;
         

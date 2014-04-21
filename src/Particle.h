@@ -16,8 +16,8 @@ class Particle : public ofVec2f
 {
 public:
     Particle();
-    Particle(float x, float y);
-    Particle(const ofVec2f& p);
+    Particle(float x, float y, float mass=1);
+    Particle(const ofVec2f& p, float mass=1);
     
     void setup();
     
@@ -26,10 +26,11 @@ public:
     void draw();
     
     void setColor(ofColor c);
-    
+
+    float mass;
+
 private:
     float maxSpeed;
-    float mass;
     ofVec2f vel;
     ofVec2f acc;
     

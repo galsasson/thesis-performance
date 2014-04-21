@@ -15,7 +15,7 @@ Canvas::Canvas()
     currentTurtleStroke = NULL;
     currentParticleStroke = NULL;
     currentRepeatableStroke = NULL;
-    currentSmoothLine = NULL;
+    currentSpringStroke = NULL;
     
     nStrokes = 0;
     strokeControlIndex = 0;
@@ -86,17 +86,14 @@ void Canvas::draw()
 
     ofSetColor(50);
     ofNoFill();
+    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     for (int i=0; i<strokes.size(); i++)
     {
-        drawStroke(strokes[i]);
+        strokes[i]->draw();
     }
-    
-    for (int i=0; i<particleStrokes.size(); i++)
-    {
-        particleStrokes[i]->draw();
+    if (currentStroke) {
+        currentStroke->draw();
     }
-    
-    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     for (int i=0; i<repeatableStrokes.size(); i++)
     {
         repeatableStrokes[i]->draw();
@@ -104,18 +101,24 @@ void Canvas::draw()
     if (currentRepeatableStroke) {
         currentRepeatableStroke->draw();
     }
-    for (int i=0; i<smoothLines.size(); i++)
+    for (int i=0; i<springStrokes.size(); i++)
     {
-        smoothLines[i]->draw();
+        springStrokes[i]->draw();
     }
-    if (currentSmoothLine) {
-        currentSmoothLine->draw();
+    if (currentSpringStroke) {
+        currentSpringStroke->draw();
     }
     ResourceManager::getInstance().circleImg.getTextureReference().unbind();
 
+    for (int i=0; i<particleStrokes.size(); i++)
+    {
+        particleStrokes[i]->draw();
+    }
+    
+
     ofSetColor(50);
     ofNoFill();
-    drawStroke(currentStroke);
+
     if (currentParticleStroke) {
         currentParticleStroke->draw();
     }
@@ -154,12 +157,11 @@ void Canvas::clear()
         delete repeatableStrokes[i];
     }
     repeatableStrokes.clear();
-    
-    for (int i=0; i<smoothLines.size(); i++)
+    for (int i=0; i<springStrokes.size(); i++)
     {
-        delete smoothLines[i];
+        delete springStrokes[i];
     }
-    smoothLines.clear();
+    springStrokes.clear();
     
     if (currentTurtleStroke) {
         delete currentTurtleStroke;
@@ -173,9 +175,9 @@ void Canvas::clear()
         delete currentRepeatableStroke;
         currentRepeatableStroke = NULL;
     }
-    if (currentSmoothLine) {
-        delete currentSmoothLine;
-        currentSmoothLine = NULL;
+    if (currentSpringStroke) {
+        delete currentSpringStroke;
+        currentSpringStroke = NULL;
     }
     
     flowField.reset();
@@ -186,7 +188,7 @@ void Canvas::mousePressed(int x, int y, int button)
     if (strokeType == 0)
     {
         currentStroke = new Stroke();
-        currentStroke->addPoint(ofVec3f(x, y, 0));
+        currentStroke->addPoint(x, y);
         flowField.addAttractor(ofVec2f(x, y), 40, 1);
     }
     else if (strokeType == 1) {
@@ -198,12 +200,17 @@ void Canvas::mousePressed(int x, int y, int button)
         currentParticleStroke->addPoint(ofVec2f(x, y));
     }
     else if (strokeType == 3) {
+        if (repeatableStrokes.size() == 0) {
+            repeatableAnchor = ofVec2f(x, y);
+        }
+        
         currentRepeatableStroke = new RepeatableStroke();
-        currentRepeatableStroke->addPoint(ofVec2f(x, y));
+        currentRepeatableStroke->setAnchor(repeatableAnchor.x, repeatableAnchor.y);
+        currentRepeatableStroke->addPoint(x, y);
     }
     else if (strokeType == 4) {
-        currentSmoothLine = new SmoothLine();
-        currentSmoothLine->addPoint(x, y);
+        currentSpringStroke = new SpringStroke();
+        currentSpringStroke->addPoint(x, y);
     }
 }
 
@@ -212,9 +219,8 @@ void Canvas::mouseDragged(int x, int y, int button)
     if (strokeType == 0)
     {
         if (currentStroke) {
-            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f(x, y) - *currentStroke->getPoints()[currentStroke->getPoints().size()-1])/5);
-            currentStroke->addPoint(ofVec3f(x, y, 0));
-//            flowField.addAttractor(ofVec2f(x, y), 1000, 5);
+            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f)(ofVec3f(x, y, 0) - currentStroke->getPoints()[currentStroke->getPoints().size()-1])/5);
+            currentStroke->addPoint(x, y);
         }
     }
     else if (strokeType == 1) {
@@ -229,12 +235,12 @@ void Canvas::mouseDragged(int x, int y, int button)
     }
     else if (strokeType == 3) {
         if (currentRepeatableStroke) {
-            currentRepeatableStroke->addPoint(ofVec2f(x, y));
+            currentRepeatableStroke->addPoint(x, y);
         }
     }
     else if (strokeType == 4) {
-        if (currentSmoothLine) {
-            currentSmoothLine->addPoint(x, y);
+        if (currentSpringStroke) {
+            currentSpringStroke->addPoint(x, y);
         }
     }
 }
@@ -267,9 +273,9 @@ void Canvas::mouseReleased(int x, int y, int button)
         }
     }
     else if (strokeType == 4) {
-        if (currentSmoothLine) {
-            smoothLines.push_back(currentSmoothLine);
-            currentSmoothLine = NULL;
+        if (currentSpringStroke) {
+            springStrokes.push_back(currentSpringStroke);
+            currentSpringStroke = NULL;
         }
     }
     
@@ -296,47 +302,47 @@ void Canvas::keyPressed(int key)
         bShowFlowfield = !bShowFlowfield;
     }
     else if (key == 'c') {
-        ofClear(220);
+//        ofClear(220);
         clear();
     }
 }
 
 void Canvas::drawStroke(Stroke *s)
 {
-    if (s == NULL) {
-        return;
-    }
-    
-    ofSetColor(50, 50, 50);
-    ofSetLineWidth(1);
-    ofNoFill();
-    vector<ofVec2f*> points = s->getPoints();
-    ofBeginShape();
-    for (int i=0; i<points.size(); i++)
-    {
-        ofVec2f p = getPointWithNoise(points[i], i);
-        ofVertex(p.x, p.y);
-    }
-    ofEndShape();
+//    if (s == NULL) {
+//        return;
+//    }
+//    
+//    ofSetColor(50, 50, 50);
+//    ofSetLineWidth(1);
+//    ofNoFill();
+//    vector<ofVec2f*> points = s->getPoints();
+//    ofBeginShape();
+//    for (int i=0; i<points.size(); i++)
+//    {
+//        ofVec2f p = getPointWithNoise(points[i], i);
+//        ofVertex(p.x, p.y);
+//    }
+//    ofEndShape();
 }
 
 void Canvas::drawShape(Stroke *s)
 {
-    if (s == NULL) {
-        return;
-    }
-    
-    ofSetColor(50, 50, 50);
-    ofSetLineWidth(1);
-    ofFill();
-    vector<ofVec2f*> points = s->getPoints();
-    ofBeginShape();
-    for (int i=0; i<points.size(); i++)
-    {
-        ofVec2f p = getPointWithNoise(points[i]);
-        ofVertex(p.x, p.y);
-    }
-    ofEndShape();
+//    if (s == NULL) {
+//        return;
+//    }
+//    
+//    ofSetColor(50, 50, 50);
+//    ofSetLineWidth(1);
+//    ofFill();
+//    vector<ofVec2f*> points = s->getPoints();
+//    ofBeginShape();
+//    for (int i=0; i<points.size(); i++)
+//    {
+//        ofVec2f p = getPointWithNoise(points[i]);
+//        ofVertex(p.x, p.y);
+//    }
+//    ofEndShape();
 }
 
 ofVec2f Canvas::getPointWithNoise(ofVec2f *p, int index)
