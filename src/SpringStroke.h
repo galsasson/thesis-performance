@@ -12,6 +12,7 @@
 #include <iostream>
 #include "ofMain.h"
 #include "SmoothLine.h"
+#include "Spring.h"
 
 class SpringStroke
 {
@@ -26,7 +27,9 @@ public:
     void draw();
     
 private:
+//    Particle* center;
     SmoothLine line;
+    vector<Spring*> springs;
 };
 
 

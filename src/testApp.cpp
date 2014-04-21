@@ -5,6 +5,9 @@ void testApp::setup(){
     
     ofSeedRandom();
     ofSetFrameRate(60);
+    ofHideCursor();
+    CGDisplayHideCursor(NULL);
+    
 //    ofEnableSmoothing();
     ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
@@ -42,6 +45,9 @@ void testApp::update(){
 void testApp::draw(){
 //    ofClear(0);
     canvas.draw();
+    
+    ofSetColor(50, 50, 50, 130);
+    ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
     
     stringstream ss;
     ss << ofGetFrameRate();

@@ -20,6 +20,7 @@
 		2A1B6C361904D7E10043948A /* SmoothLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C341904D7E10043948A /* SmoothLine.cpp */; };
 		2A1B6C391904EE630043948A /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C371904EE630043948A /* ResourceManager.cpp */; };
 		2A1B6C3C1905A2220043948A /* SpringStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C3A1905A2220043948A /* SpringStroke.cpp */; };
+		2A1B6C401905C0EA0043948A /* Spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C3E1905C0EA0043948A /* Spring.cpp */; };
 		2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */; };
 		2ACD87B218FA0CD8005E62E8 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */; };
 		2ACD87B518FADA57005E62E8 /* TurtleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B318FADA57005E62E8 /* TurtleStroke.cpp */; };
@@ -133,6 +134,8 @@
 		2A1B6C381904EE630043948A /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
 		2A1B6C3A1905A2220043948A /* SpringStroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpringStroke.cpp; sourceTree = "<group>"; };
 		2A1B6C3B1905A2220043948A /* SpringStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpringStroke.h; sourceTree = "<group>"; };
+		2A1B6C3E1905C0EA0043948A /* Spring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spring.cpp; sourceTree = "<group>"; };
+		2A1B6C3F1905C0EA0043948A /* Spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spring.h; sourceTree = "<group>"; };
 		2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stroke.cpp; sourceTree = "<group>"; };
 		2ACD87AE18FA0A38005E62E8 /* Stroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stroke.h; sourceTree = "<group>"; };
 		2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
@@ -556,6 +559,8 @@
 				2A1B6C2A1900E5190043948A /* Particle.h */,
 				2A1B6C341904D7E10043948A /* SmoothLine.cpp */,
 				2A1B6C351904D7E10043948A /* SmoothLine.h */,
+				2A1B6C3E1905C0EA0043948A /* Spring.cpp */,
+				2A1B6C3F1905C0EA0043948A /* Spring.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -710,6 +715,7 @@
 				F5A7861860AA09A069B8A860 /* NetworkingUtilsWin.cpp in Sources */,
 				D478E3E6B7DFFBBD73231AED /* UdpSocketWin.cpp in Sources */,
 				01D94B5BFA0F748576EED744 /* OscOutboundPacketStream.cpp in Sources */,
+				2A1B6C401905C0EA0043948A /* Spring.cpp in Sources */,
 				2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */,
 				2A1B6C3C1905A2220043948A /* SpringStroke.cpp in Sources */,
 				3D8B772914D8BDDB845B3283 /* OscPrintReceivedElements.cpp in Sources */,

@@ -26,7 +26,7 @@ void SmoothLine::addPoint(float x, float y)
     float w = 1;
     if (points.size() > 0) {
         ofVec2f lp = *points.back();
-        w = 0.2f+(ofVec2f(x, y) - lp).length() / 5;
+        w = 0.5f+(ofVec2f(x, y) - lp).length() / 5;
     }
     
     points.push_back(new Particle(x, y, w));

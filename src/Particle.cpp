@@ -25,9 +25,10 @@ Particle::Particle(const ofVec2f& p, float m) : ofVec2f(p), mass(m)
 
 void Particle::setup()
 {
-    maxSpeed = 5;
+    maxSpeed = 15;
     vel = ofVec2f();
     acc = ofVec2f();
+    locked = false;
 }
 
 void Particle::applyForce(ofVec2f force)
@@ -37,6 +38,10 @@ void Particle::applyForce(ofVec2f force)
 
 void Particle::update()
 {
+    if (locked) {
+        return;
+    }
+    
     vel += acc;
     vel.limit(maxSpeed);
     
@@ -57,6 +62,14 @@ void Particle::draw()
     ofEllipse(0, 0, 15, 15);
     
     ofPopMatrix();
+}
+
+void Particle::checkBounds()
+{
+    if (y > ofGetWindowHeight()) {
+        vel.y *= -1;
+        y = ofGetWindowHeight();
+    }
 }
 
 void Particle::setColor(ofColor c)

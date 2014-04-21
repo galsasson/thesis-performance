@@ -25,9 +25,12 @@ public:
     void update();
     void draw();
     
+    void checkBounds();
+    
     void setColor(ofColor c);
 
     float mass;
+    bool locked;
 
 private:
     float maxSpeed;
