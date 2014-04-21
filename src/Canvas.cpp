@@ -58,10 +58,14 @@ void Canvas::update()
         particleStrokes[i]->applyFlowField(flowField);
         particleStrokes[i]->update();
     }
-    
     if (currentParticleStroke) {
         currentParticleStroke->applyFlowField(flowField);
         currentParticleStroke->update();
+    }
+    
+    for (int i=0; i<springStrokes.size(); i++)
+    {
+        springStrokes[i]->update();
     }
     
 //    flowField.update();
@@ -219,7 +223,8 @@ void Canvas::mouseDragged(int x, int y, int button)
     if (strokeType == 0)
     {
         if (currentStroke) {
-            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f)(ofVec3f(x, y, 0) - currentStroke->getPoints()[currentStroke->getPoints().size()-1])/5);
+            ofVec2f lastPoint = *(currentStroke->getPoints()[currentStroke->getPoints().size()-1]);
+            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f)(ofVec3f(x, y, 0) - lastPoint)/5);
             currentStroke->addPoint(x, y);
         }
     }

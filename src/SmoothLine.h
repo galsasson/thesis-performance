@@ -24,12 +24,12 @@ public:
     
     void draw();
     
-    vector<Particle>& getPoints() { return points; }
-    
-private:
+    vector<Particle*>& getPoints() { return points; }
     void rebuildMesh();
     
-    vector<Particle> points;
+private:
+    
+    vector<Particle*> points;
     
     ofMesh mesh;
 };

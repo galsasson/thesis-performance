@@ -108,12 +108,12 @@ void FlowField::addForce(ofVec2f p, float rad, ofVec2f force)
 
 void FlowField::applyStrokeForces(Stroke* stroke)
 {
-    vector<Particle> points = stroke->getPoints();
-    addAttractor(points[0], 40, 1);
+    vector<Particle*> points = stroke->getPoints();
+    addAttractor(*points[0], 40, 1);
     
     for (int i=1; i<points.size(); i++)
     {
-        addForce(points[i], 40, (points[i] - points[i-1])/5);
+        addForce(*points[i], 40, (*points[i] - *points[i-1])/5);
     }
 }
 

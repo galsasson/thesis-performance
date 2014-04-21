@@ -19,7 +19,7 @@ public:
     Stroke();
     ~Stroke();
     void addPoint(float x, float y);
-    vector<Particle>& getPoints() { return line.getPoints(); }
+    vector<Particle*>& getPoints() { return line.getPoints(); }
     
     void update();
     void draw();

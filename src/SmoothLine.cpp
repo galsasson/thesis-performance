@@ -14,21 +14,24 @@ SmoothLine::SmoothLine()
 
 SmoothLine::~SmoothLine()
 {
-    
+    for (int i=0; i<points.size(); i++)
+    {
+        delete points[i];
+    }
+    points.clear();
 }
 
 void SmoothLine::addPoint(float x, float y)
 {
     float w = 1;
     if (points.size() > 0) {
-        ofVec2f lp = points.back();
+        ofVec2f lp = *points.back();
         w = 0.2f+(ofVec2f(x, y) - lp).length() / 5;
     }
     
-    points.push_back(Particle(x, y, w));
+    points.push_back(new Particle(x, y, w));
     rebuildMesh();
 }
-
 
 void SmoothLine::draw()
 {
@@ -49,15 +52,15 @@ void SmoothLine::rebuildMesh()
     
     mesh.setMode(OF_PRIMITIVE_TRIANGLES);
     
-    float w = points[0].mass;
+    float w = points[0]->mass;
     float w2;
     
     for (int i=0; i<points.size()-1; i++)
     {
-        ofVec2f a = ofVec2f(points[i].x, points[i].y);
-		ofVec2f b = ofVec2f(points[i+1].x, points[i+1].y);
+        ofVec2f a = ofVec2f(points[i]->x, points[i]->y);
+		ofVec2f b = ofVec2f(points[i+1]->x, points[i+1]->y);
         
-        w2 = w + (points[i+1].mass-w)*0.2f;
+        w2 = w + (points[i+1]->mass - w)*0.2f;
 		ofVec2f ea = (ofVec2f)(b - a).normalize() * w;
         ofVec2f eb = (ofVec2f)(b - a).normalize() * w2;
         
