@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 
 class Particle : public ofVec2f
 {

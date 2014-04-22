@@ -10,7 +10,7 @@
 
 SpringStroke::SpringStroke()
 {
-    
+    color = Params::springStrokeColor;
 }
 
 SpringStroke::~SpringStroke()
@@ -31,7 +31,7 @@ void SpringStroke::addPoint(float x, float y)
     if (lastIndex > 0) {
         Spring *s = new Spring();
         s->setup(particles[lastIndex-1], particles[lastIndex]);
-        s->restLength*=0.5;
+//        s->restLength*=Params::springRestLengthFactor;
         springs.push_back(s);
     }
     else {
@@ -43,10 +43,17 @@ void SpringStroke::addPoint(float x, float y)
         for (int i=0; i<particles.size()-2; i++)
         {
             if ((*particles[i] - *particles[lastIndex]).length() < 3) {
+                // TODO: create connectTo(...)
                 Spring *s = new Spring();
                 s->setup(particles[i], particles[lastIndex]);
-//                s->restLength*=0.8;
+//                s->restLength*=Params::springRestLengthFactor;
                 springs.push_back(s);
+
+                // set the same position
+                particles[i]->x = particles[lastIndex]->x;
+                particles[i]->y = particles[lastIndex]->y;
+                particles[i]->locked = true;
+                particles[lastIndex]->locked = true;
                 break;
             }
         }
@@ -63,16 +70,22 @@ void SpringStroke::update()
     vector<Particle*> particles = line.getPoints();
     for (int i=0; i<particles.size(); i++)
     {
-        particles[i]->applyForce(ofVec2f(0, 0.4));
+        particles[i]->applyForce(Params::springGravity);
+        if (i==particles.size()-1) {
+            // applly outside forces to last particle
+            particles[i]->applyForce(Params::springTemporalForce);
+        }
         particles[i]->update();
         particles[i]->checkBounds();
     }
+    
     
     line.rebuildMesh();
 }
 
 void SpringStroke::draw()
 {
+    ofSetColor(color);
     line.draw();
 }
 

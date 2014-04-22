@@ -49,6 +49,7 @@ public:
     
 private:
     ofVec2f size;
+    void setStroke(int key) { strokeType = key-'1'; }
     
     vector<Stroke*> strokes;
     vector<TurtleStroke*> turtleStrokes;

@@ -25,7 +25,7 @@ Particle::Particle(const ofVec2f& p, float m) : ofVec2f(p), mass(m)
 
 void Particle::setup()
 {
-    maxSpeed = 15;
+//    maxSpeed = Params::particleMaxSpeed;
     vel = ofVec2f();
     acc = ofVec2f();
     locked = false;
@@ -43,12 +43,12 @@ void Particle::update()
     }
     
     vel += acc;
-    vel.limit(maxSpeed);
+    vel.limit(Params::particleMaxSpeed);
     
     x += vel.x;
     y += vel.y;
     
-    vel *= 0.99;
+    vel *= Params::particleFrictionCoeff;
     
     acc *= 0;
 }

@@ -10,6 +10,7 @@
 #define __performance__Params__
 
 #include <iostream>
+#include "ofMain.h"
 
 class Params
 {
@@ -26,6 +27,17 @@ public:
     static float repeatScaleYCoeff;
     static float repeatTransXCoeff;
     static float repeatTransYCoeff;
+    
+    static ofVec2f springGravity;
+    static ofVec2f springTemporalForce;
+    static float springForceFactor;
+    static float springRestLengthFactor;
+    static float springCoeff;
+    
+    static float particleMaxSpeed;
+    static float particleFrictionCoeff;
+    
+    static ofColor springStrokeColor;
 };
 
 #endif /* defined(__performance__Params__) */

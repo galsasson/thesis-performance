@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 #include "Particle.h"
 
 class Spring
@@ -23,7 +24,6 @@ public:
     void update();
 
     float restLength;
-    float k;
     
 private:
     Particle* p1;

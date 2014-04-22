@@ -73,12 +73,12 @@ void Canvas::update()
 
 void Canvas::draw()
 {
-    ofSetColor(220, 220, 220, 100);
+    ofSetColor(230, 230, 230, 100);
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
 
     // draw filled surfaces
-    ofSetColor(200, 0, 0);
+    ofSetColor(150, 20, 20, 50);
     ofFill();
     for (int i=0; i<turtleStrokes.size(); i++)
     {
@@ -288,20 +288,24 @@ void Canvas::mouseReleased(int x, int y, int button)
 
 void Canvas::keyPressed(int key)
 {
-    if (key == '1') {
-        strokeType = 0;
+    if (key >= '1' &&
+        key <= '5') {
+        setStroke(key);
     }
-    else if (key == '2') {
-        strokeType = 1;
+    else if (key == 'q') {
+        Params::springStrokeColor = ofColor(89, 183, 195);
     }
-    else if (key == '3') {
-        strokeType = 2;
+    else if (key == 'w') {
+        Params::springStrokeColor = ofColor(89, 131, 116);
     }
-    else if (key == '4') {
-        strokeType = 3;
+    else if (key == 'e') {
+        Params::springStrokeColor = ofColor(251, 203, 111);
     }
-    else if (key == '5') {
-        strokeType = 4;
+    else if (key == 'r') {
+        Params::springStrokeColor = ofColor(196, 124, 66);
+    }
+    else if (key == 't') {
+        Params::springStrokeColor = ofColor(213, 71, 53);
     }
     else if (key == 'f') {
         bShowFlowfield = !bShowFlowfield;

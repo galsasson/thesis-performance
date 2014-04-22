@@ -20,3 +20,14 @@ float Params::repeatScaleXCoeff = 1;
 float Params::repeatScaleYCoeff = 1;
 float Params::repeatTransXCoeff = 1;
 float Params::repeatTransYCoeff = 1;
+
+ofVec2f Params::springGravity(0, 1);
+float Params::springForceFactor = 1;
+float Params::springRestLengthFactor = 0.005;
+ofVec2f Params::springTemporalForce(0, 0);
+float Params::springCoeff = 0.61;
+
+float Params::particleMaxSpeed = 45;
+float Params::particleFrictionCoeff = 0.96f;
+
+ofColor Params::springStrokeColor(50);//, 20, 38);

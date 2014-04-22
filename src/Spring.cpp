@@ -10,7 +10,6 @@
 
 Spring::Spring()
 {
-    k = 0.3;
 }
 
 Spring::~Spring()
@@ -30,12 +29,12 @@ void Spring::update()
 {
     ofVec2f force = (*p2-*p1);
     float currentLength = force.length();
-    float x = currentLength - restLength;
+    float x = currentLength - restLength * Params::springRestLengthFactor;
     
     force.normalize();
     
-    force *= k * x;
+    force *= Params::springCoeff * x;
     
-    p1->applyForce(force*2);
-    p2->applyForce(force*-2);
+    p1->applyForce(force*Params::springForceFactor);
+    p2->applyForce(force*-Params::springForceFactor);
 }

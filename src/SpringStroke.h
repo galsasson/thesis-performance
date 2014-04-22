@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 #include "SmoothLine.h"
 #include "Spring.h"
 
@@ -30,6 +31,8 @@ private:
 //    Particle* center;
     SmoothLine line;
     vector<Spring*> springs;
+    
+    ofColor color;
 };
 
 

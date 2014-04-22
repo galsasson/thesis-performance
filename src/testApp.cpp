@@ -5,8 +5,7 @@ void testApp::setup(){
     
     ofSeedRandom();
     ofSetFrameRate(60);
-    ofHideCursor();
-    CGDisplayHideCursor(NULL);
+//    CGDisplayHideCursor(NULL);
     
 //    ofEnableSmoothing();
     ofSetBackgroundAuto(false);
@@ -33,6 +32,16 @@ void testApp::setup(){
     control.addInput("Repeat scale X", &Params::repeatScaleXCoeff);
     control.addInput("Repeat scale Y", &Params::repeatScaleYCoeff);
     
+    control.addInput("Spring gravity.x", &Params::springGravity.x);
+    control.addInput("Spring gravity.y", &Params::springGravity.y);
+    control.addInput("Spring temporal force.x", &Params::springTemporalForce.x);
+    control.addInput("Spring temporal force.y", &Params::springTemporalForce.y);
+    control.addInput("Sprint rest length factor", &Params::springRestLengthFactor);
+    control.addInput("Spring force factor", &Params::springForceFactor);
+    control.addInput("Spring coeff", &Params::springCoeff);
+    control.addInput("Particle max speed", &Params::particleMaxSpeed);
+    control.addInput("Particle friction coeff", &Params::particleFrictionCoeff);
+    
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
 }
 
@@ -46,7 +55,7 @@ void testApp::draw(){
 //    ofClear(0);
     canvas.draw();
     
-    ofSetColor(50, 50, 50, 130);
+    ofSetColor(50, 50, 50, 200);
     ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
     
     stringstream ss;
