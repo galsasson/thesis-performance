@@ -42,6 +42,10 @@ void Particle::update()
         return;
     }
     
+    // apply temporal velocity
+    vel += Params::particleTemporalVelocity;
+    
+    
     vel += acc;
     vel.limit(Params::particleMaxSpeed);
     

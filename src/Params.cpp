@@ -29,5 +29,6 @@ float Params::springCoeff = 0.61;
 
 float Params::particleMaxSpeed = 45;
 float Params::particleFrictionCoeff = 0.96f;
+ofVec2f Params::particleTemporalVelocity(0, 0);
 
 ofColor Params::springStrokeColor(50);//, 20, 38);

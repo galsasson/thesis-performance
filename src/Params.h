@@ -36,6 +36,7 @@ public:
     
     static float particleMaxSpeed;
     static float particleFrictionCoeff;
+    static ofVec2f particleTemporalVelocity;
     
     static ofColor springStrokeColor;
 };

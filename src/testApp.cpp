@@ -41,6 +41,7 @@ void testApp::setup(){
     control.addInput("Spring coeff", &Params::springCoeff);
     control.addInput("Particle max speed", &Params::particleMaxSpeed);
     control.addInput("Particle friction coeff", &Params::particleFrictionCoeff);
+    control.addInput("Particle temporal velocity", &Params::particleTemporalVelocity);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
 }
