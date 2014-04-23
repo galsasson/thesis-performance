@@ -10,6 +10,7 @@
 
 SpringStroke::SpringStroke()
 {
+    lockDistance = 2;
     color = Params::springStrokeColor;
     line = new SmoothLine();
 }
@@ -31,6 +32,11 @@ SpringStroke::~SpringStroke()
     delete line;
 }
 
+void SpringStroke::setLockDistance(float distance)
+{
+    lockDistance = distance;
+}
+
 void SpringStroke::addPoint(float x, float y)
 {
     line->addPoint(x, y);
@@ -45,7 +51,7 @@ void SpringStroke::addPoint(float x, float y)
         springs.push_back(s);
         
         // lock particle if close to previous one
-        if ((*prevPar - *newPar).length() < 2) {
+        if ((*prevPar - *newPar).length() < lockDistance) {
             newPar->locked = true;
         }
         
@@ -115,7 +121,6 @@ int SpringStroke::getIntersection(const ofVec2f &p1, const ofVec2f &p2)
     for (int i=2; i<particles.size(); i++)
     {
         if (isIntersects(p1, p2, *particles[i-1], *particles[i])) {
-            cout<<"Intersects with "<<i<<endl;
             return i;
         }
     }

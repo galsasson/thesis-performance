@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 #include "FlowField.h"
 #include "Particle.h"
 

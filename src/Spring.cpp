@@ -34,7 +34,7 @@ void Spring::update()
     force.normalize();
     
     force *= Params::springCoeff * x;
-    
+
     p1->applyForce(force*Params::springForceFactor);
     p2->applyForce(force*-Params::springForceFactor);
 }

@@ -54,13 +54,13 @@ private:
     ofVec2f size;
     void setStroke(int key) { strokeType = key-'1'; }
     
-    vector<Stroke*> strokes;
+    vector<SpringStroke*> strokes;
     vector<TurtleStroke*> turtleStrokes;
     vector<ParticleStroke*> particleStrokes;
     vector<RepeatableStroke*> repeatableStrokes;
     vector<SpringStroke*> springStrokes;
     
-    Stroke* currentStroke;
+    SpringStroke* currentStroke;
     TurtleStroke* currentTurtleStroke;
     ParticleStroke* currentParticleStroke;
     RepeatableStroke* currentRepeatableStroke;

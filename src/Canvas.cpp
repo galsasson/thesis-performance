@@ -223,8 +223,9 @@ void Canvas::mousePressed(int x, int y, int button)
 {
     if (strokeType == 0)
     {
-        currentStroke = new Stroke();
-        currentStroke->addPoint(x, y);
+        currentSpringStroke = new SpringStroke();
+        currentSpringStroke->setLockDistance(50);
+        currentSpringStroke->addPoint(x, y);
         flowField.addAttractor(ofVec2f(x, y), 40, 1);
     }
     else if (strokeType == 1) {
@@ -258,10 +259,10 @@ void Canvas::mouseDragged(int x, int y, int button)
 {
     if (strokeType == 0)
     {
-        if (currentStroke) {
-            ofVec2f lastPoint = *(currentStroke->getPoints()[currentStroke->getPoints().size()-1]);
+        if (currentSpringStroke) {
+            ofVec2f lastPoint = *(currentSpringStroke->getPoints()[currentSpringStroke->getPoints().size()-1]);
+            currentSpringStroke->addPoint(x, y);
             flowField.addForce(ofVec2f(x, y), 40, (ofVec2f)(ofVec3f(x, y, 0) - lastPoint)/5);
-            currentStroke->addPoint(x, y);
         }
     }
     else if (strokeType == 1) {
@@ -296,9 +297,9 @@ void Canvas::mouseReleased(int x, int y, int button)
 {
     if (strokeType == 0)
     {
-        if (currentStroke) {
-            strokes.push_back(currentStroke);
-            currentStroke = NULL;
+        if (currentSpringStroke) {
+            springStrokes.push_back(currentSpringStroke);
+            currentSpringStroke = NULL;
         }
     }
     else if (strokeType == 1) {
@@ -368,6 +369,7 @@ void Canvas::keyPressed(int key)
         {
             springStrokes[i]->releaseAnchors();
         }
+        flowField.reset();
     }
     else if (key == 'z') {
         for (int i=0; i<springStrokes.size(); i++)

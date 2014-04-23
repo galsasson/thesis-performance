@@ -23,11 +23,14 @@ public:
     
     SpringStroke();
     ~SpringStroke();
+    void setLockDistance(float distance);
     void addPoint(float x, float y);
     void update();
     void draw();
     void dropColor(const ofColor& c);
     void releaseAnchors();
+    
+    vector<Particle*>& getPoints() { return line->getPoints(); }
     
     int getIntersection(const ofVec2f& p, const ofVec2f& q);
     SpringStroke* cutStroke(int index);
@@ -37,7 +40,7 @@ private:
                      const ofVec2f& q, const ofVec2f& q2);
     float crossProduct(const ofVec2f& p, const ofVec2f& q);
     
-//    Particle* center;
+    float lockDistance;
     SmoothLine* line;
     vector<Spring*> springs;
     

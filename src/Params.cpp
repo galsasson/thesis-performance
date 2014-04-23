@@ -27,7 +27,7 @@ float Params::springRestLengthFactor = 0.05;
 ofVec2f Params::springTemporalForce(0, 0);
 float Params::springCoeff = 0.61;
 
-float Params::particleMaxSpeed = 45;
+float Params::particleMaxSpeed = 10;
 float Params::particleFrictionCoeff = 0.96f;
 ofVec2f Params::particleTemporalVelocity(0, 0);
 

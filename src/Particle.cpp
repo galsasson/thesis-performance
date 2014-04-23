@@ -80,7 +80,7 @@ void Particle::draw()
     ofTranslate(x, y);
     
     ofSetColor(getColor());
-    ofEllipse(0, 0, 15, 15);
+    ofEllipse(0, 0, mass+3, mass+3);
     
     ofPopMatrix();
 }

@@ -24,8 +24,8 @@ ParticleStroke::~ParticleStroke()
 
 void ParticleStroke::addPoint(const ofVec2f &p)
 {
-    Particle *newP = new Particle(p);
-    newP->setColor(ofColor::fromHsb(ofNoise(t)*100, 150, 255));
+    Particle *newP = new Particle(p, ofNoise(t)*4+2);
+    newP->setColor(Params::springStrokeColor);
     points.push_back(newP);
 }
 
@@ -34,6 +34,7 @@ void ParticleStroke::update()
     for (int i=0; i<points.size(); i++)
     {
         points[i]->update();
+        points[i]->checkBounds();
     }
     
     t+=0.1;

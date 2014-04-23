@@ -32,7 +32,7 @@ public:
     void setColor(const ofColor& c) { materialColor = c; }
     ofColor& getColor() { return materialColor.lerp(tempColor, tempColorIntensity); }
     ofColor& getMaterialColor() { return materialColor; }
-
+    
     void setTempColor(const ofColor& c) { tempColor = c; tempColorIntensity = 1; }
     float mass;
     bool locked;
