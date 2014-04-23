@@ -29,15 +29,32 @@ void Particle::setup()
     vel = ofVec2f();
     acc = ofVec2f();
     locked = false;
+    materialColor = ofColor(50);
+    tempColor = ofColor(50);
+    tempColorIntensity = 0;
+    t = ofRandom(1000);
 }
 
-void Particle::applyForce(ofVec2f force)
+void Particle::applyForce(const ofVec2f& force)
 {
     acc += force/mass;
 }
 
+void Particle::applyGravity(const ofVec2f& gravity)
+{
+    acc += gravity;
+}
+
 void Particle::update()
 {
+    t += 0.1;
+    
+    // color
+    if (tempColorIntensity>0) {
+        tempColorIntensity -= ofNoise(t)*0.1;
+    }
+    
+    // movement
     if (locked) {
         return;
     }
@@ -62,7 +79,7 @@ void Particle::draw()
     ofPushMatrix();
     ofTranslate(x, y);
     
-    ofSetColor(color);
+    ofSetColor(getColor());
     ofEllipse(0, 0, 15, 15);
     
     ofPopMatrix();
@@ -71,13 +88,8 @@ void Particle::draw()
 void Particle::checkBounds()
 {
     if (y > ofGetWindowHeight()) {
-        vel.y *= -1;
+        vel.y *= -0.8;
         y = ofGetWindowHeight();
     }
-}
-
-void Particle::setColor(ofColor c)
-{
-    color = c;
 }
 

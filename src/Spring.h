@@ -22,6 +22,8 @@ public:
     
     void setup(Particle *source, Particle *target);
     void update();
+    
+    bool isConnecting(Particle *p, Particle *q) { return (p==p1 && q==p2) || (p==p2 && q==p1); }
 
     float restLength;
     

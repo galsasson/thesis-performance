@@ -22,23 +22,32 @@ public:
     
     void setup();
     
-    void applyForce(ofVec2f force);
+    void applyForce(const ofVec2f& force);
+    void applyGravity(const ofVec2f& gravity);
     void update();
     void draw();
     
     void checkBounds();
     
-    void setColor(ofColor c);
+    void setColor(const ofColor& c) { materialColor = c; }
+    ofColor& getColor() { return materialColor.lerp(tempColor, tempColorIntensity); }
+    ofColor& getMaterialColor() { return materialColor; }
 
+    void setTempColor(const ofColor& c) { tempColor = c; tempColorIntensity = 1; }
     float mass;
     bool locked;
 
 private:
+    float t;
     float maxSpeed;
     ofVec2f vel;
     ofVec2f acc;
     
-    ofColor color;
+    ofColor materialColor;
+    
+    // temporal color
+    ofColor tempColor;
+    float tempColorIntensity;
 };
 
 #endif /* defined(__performance__Particle__) */

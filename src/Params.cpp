@@ -21,9 +21,9 @@ float Params::repeatScaleYCoeff = 1;
 float Params::repeatTransXCoeff = 1;
 float Params::repeatTransYCoeff = 1;
 
-ofVec2f Params::springGravity(0, 1);
+ofVec2f Params::springGravity(0, 0.1);
 float Params::springForceFactor = 1;
-float Params::springRestLengthFactor = 0.005;
+float Params::springRestLengthFactor = 0.05;
 ofVec2f Params::springTemporalForce(0, 0);
 float Params::springCoeff = 0.61;
 

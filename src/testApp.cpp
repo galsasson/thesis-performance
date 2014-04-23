@@ -44,6 +44,8 @@ void testApp::setup(){
     control.addInput("Particle temporal velocity", &Params::particleTemporalVelocity);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
+    
+    cout<<"Window size = "<<ofGetWindowWidth()<<"x"<<ofGetWindowHeight()<<endl;
 }
 
 //--------------------------------------------------------------
@@ -55,9 +57,6 @@ void testApp::update(){
 void testApp::draw(){
 //    ofClear(0);
     canvas.draw();
-    
-    ofSetColor(50, 50, 50, 200);
-    ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
     
     stringstream ss;
     ss << ofGetFrameRate();
@@ -77,7 +76,7 @@ void testApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
-
+    canvas.mouseMoved(x, y);
 }
 
 //--------------------------------------------------------------

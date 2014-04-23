@@ -11,6 +11,7 @@
 SpringStroke::SpringStroke()
 {
     color = Params::springStrokeColor;
+    line = new SmoothLine();
 }
 
 SpringStroke::~SpringStroke()
@@ -20,57 +21,56 @@ SpringStroke::~SpringStroke()
         delete springs[i];
     }
     springs.clear();
+    
+    for (int i=0; i<paintDrops.size(); i++)
+    {
+        delete paintDrops[i];
+    }
+    paintDrops.clear();
+    
+    delete line;
 }
 
 void SpringStroke::addPoint(float x, float y)
 {
-    line.addPoint(x, y);
+    line->addPoint(x, y);
     
-    vector<Particle*> particles = line.getPoints();
-    int lastIndex = particles.size()-1;
-    if (lastIndex > 0) {
+    vector<Particle*> particles = line->getPoints();
+    int newIndex = particles.size()-1;
+    Particle* newPar = particles[newIndex];
+    if (newIndex > 0) {
         Spring *s = new Spring();
-        s->setup(particles[lastIndex-1], particles[lastIndex]);
-//        s->restLength*=Params::springRestLengthFactor;
+        Particle *prevPar = particles[newIndex-1];
+        s->setup(prevPar, newPar);
         springs.push_back(s);
+        
+        // lock particle if close to previous one
+        if ((*prevPar - *newPar).length() < 2) {
+            newPar->locked = true;
+        }
+        
     }
     else {
-        particles[lastIndex]->locked = true;
-    }
-    
-    // check if another point overlaps with this point, add another spring
-    if (lastIndex > 2) {
-        for (int i=0; i<particles.size()-2; i++)
-        {
-            if ((*particles[i] - *particles[lastIndex]).length() < 3) {
-                // TODO: create connectTo(...)
-                Spring *s = new Spring();
-                s->setup(particles[i], particles[lastIndex]);
-//                s->restLength*=Params::springRestLengthFactor;
-                springs.push_back(s);
-
-                // set the same position
-                particles[i]->x = particles[lastIndex]->x;
-                particles[i]->y = particles[lastIndex]->y;
-                particles[i]->locked = true;
-                particles[lastIndex]->locked = true;
-                break;
-            }
-        }
+        newPar->locked = true;
     }
 }
 
 void SpringStroke::update()
 {
+    for (int i=0; i<paintDrops.size(); i++)
+    {
+        paintDrops[i]->update();
+    }
+    
     for (int i=0; i<springs.size(); i++)
     {
         springs[i]->update();
     }
     
-    vector<Particle*> particles = line.getPoints();
+    vector<Particle*> particles = line->getPoints();
     for (int i=0; i<particles.size(); i++)
     {
-        particles[i]->applyForce(Params::springGravity);
+        particles[i]->applyGravity(Params::springGravity);
         if (i==particles.size()-1) {
             // applly outside forces to last particle
             particles[i]->applyForce(Params::springTemporalForce);
@@ -79,13 +79,94 @@ void SpringStroke::update()
         particles[i]->checkBounds();
     }
     
-    
-    line.rebuildMesh();
+    line->update();
+    line->rebuildMesh();
 }
 
 void SpringStroke::draw()
 {
-    ofSetColor(color);
-    line.draw();
+//    ofSetColor(color);
+    line->draw();
+
+    for (int i=0; i<paintDrops.size(); i++)
+    {
+        paintDrops[i]->draw();
+    }
 }
+
+void SpringStroke::dropColor(const ofColor &c)
+{
+    paintDrops.push_back(new PaintDrop(line, c));
+}
+
+int SpringStroke::getIntersection(const ofVec2f &p1, const ofVec2f &p2)
+{
+    // check if the line intersects with any line we have
+    vector<Particle*> particles = line->getPoints();
+    for (int i=1; i<particles.size(); i++)
+    {
+        if (isIntersects(p1, p2, *particles[i-1], *particles[i])) {
+            return i;
+        }
+    }
+    
+    return -1;
+}
+
+SpringStroke* SpringStroke::cutStroke(int index)
+{
+    vector<Particle*> pars = line->getPoints();
+    if (index >= pars.size()) {
+        cout<<"error: index out of bounds is cutStroke"<<endl;
+        return NULL;
+    }
+    
+    Particle *p = pars[index-1];
+    Particle *q = pars[index];
+    SpringStroke* newStroke = new SpringStroke();
+    newStroke->line = line->cutLine(index);
+
+    // move all springs starting from index to the new stroke
+    for (int i=index; i<springs.size(); i++)
+    {
+        newStroke->springs.push_back(springs[i]);
+    }
+    // delete the spring that connected the two strokes
+    delete springs[index-1];
+    springs.erase(springs.begin()+(index-1), springs.end());
+    
+    return newStroke;
+}
+
+bool SpringStroke::isIntersects(const ofVec2f& p, const ofVec2f& p2,
+                  const ofVec2f& q, const ofVec2f& q2)
+{
+	ofVec2f r = p2 - p;
+	ofVec2f s = q2 - q;
+    
+	float uNumerator = crossProduct((q-p), r);
+	float denominator = crossProduct(r, s);
+    
+	if (uNumerator == 0 && denominator == 0) {
+		// colinear, so do they overlap?
+		return ((q.x - p.x < 0) != (q.x - p2.x < 0) != (q2.x - p.x < 0) != (q2.x - p2.x < 0)) ||
+        ((q.y - p.y < 0) != (q.y - p2.y < 0) != (q2.y - p.y < 0) != (q2.y - p2.y < 0));
+	}
+    
+	if (denominator == 0) {
+		// lines are paralell
+		return false;
+	}
+    
+	float u = uNumerator / denominator;
+	float t = crossProduct((q - p), s) / denominator;
+    
+	return (t >= 0) && (t <= 1) && (u >= 0) && (u <= 1);
+}
+
+float SpringStroke::crossProduct(const ofVec2f &p, const ofVec2f &q)
+{
+    return p.x * q.y - p.y * q.x;
+}
+
 

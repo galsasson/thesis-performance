@@ -22,13 +22,15 @@ public:
     
     void addPoint(float x, float y);
     
+    void update();
     void draw();
+    
+    SmoothLine* cutLine(int index);
     
     vector<Particle*>& getPoints() { return points; }
     void rebuildMesh();
     
 private:
-    
     vector<Particle*> points;
     
     ofMesh mesh;

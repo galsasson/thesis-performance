@@ -28,11 +28,14 @@ public:
     void update();
     void draw();
     
+    void doCut(const ofVec2f& p, const ofVec2f& q);
+
     void clear();
     
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
     void mouseReleased(int x, int y, int button);
+    void mouseMoved(int x, int y);
     void keyPressed(int key);
     
     
@@ -63,6 +66,9 @@ private:
     RepeatableStroke* currentRepeatableStroke;
     SpringStroke* currentSpringStroke;
     ofVec2f noiseTime;
+    
+    ofVec2f blade;
+    ofVec2f bladePrev;
 
     ofVec2f repeatableAnchor;
     

@@ -90,7 +90,7 @@ void Canvas::draw()
 
     ofSetColor(50);
     ofNoFill();
-    ResourceManager::getInstance().circleImg.getTextureReference().bind();
+//    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     for (int i=0; i<strokes.size(); i++)
     {
         strokes[i]->draw();
@@ -112,7 +112,7 @@ void Canvas::draw()
     if (currentSpringStroke) {
         currentSpringStroke->draw();
     }
-    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
+//    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
 
     for (int i=0; i<particleStrokes.size(); i++)
     {
@@ -129,6 +129,35 @@ void Canvas::draw()
     
     if (bShowFlowfield) {
         flowField.draw();
+    }
+    
+
+    // draw cursor
+    ofSetColor(50, 50, 50, 200);
+    if (strokeType < 5) {
+        ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
+    }
+    else {
+        ofLine(ofGetMouseX()-7, ofGetMouseY()-7, ofGetMouseX()+7, ofGetMouseY()+7);
+        ofLine(ofGetMouseX()+7, ofGetMouseY()-7, ofGetMouseX()-7, ofGetMouseY()+7);
+        ofLine(bladePrev, blade);
+    }
+    
+
+}
+
+void Canvas::doCut(const ofVec2f &p, const ofVec2f &q)
+{
+    for (int i=0; i<springStrokes.size(); i++)
+    {
+        int index = springStrokes[i]->getIntersection(p, q);
+        if (index < 0) {
+            continue;
+        }
+        
+        // do the cut
+        SpringStroke *newStroke = springStrokes[i]->cutStroke(index);
+        springStrokes.push_back(newStroke);
     }
 }
 
@@ -216,6 +245,10 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke = new SpringStroke();
         currentSpringStroke->addPoint(x, y);
     }
+    else if (strokeType == 5) {
+        // this is the blade that cuts
+        blade = bladePrev = ofVec2f(x, y);
+    }
 }
 
 void Canvas::mouseDragged(int x, int y, int button)
@@ -247,6 +280,12 @@ void Canvas::mouseDragged(int x, int y, int button)
         if (currentSpringStroke) {
             currentSpringStroke->addPoint(x, y);
         }
+    }
+    else if (strokeType == 5) {
+        // blade
+        bladePrev = blade;
+        blade = ofVec2f(x, y);
+        doCut(bladePrev, blade);
     }
 }
 
@@ -283,13 +322,20 @@ void Canvas::mouseReleased(int x, int y, int button)
             currentSpringStroke = NULL;
         }
     }
-    
+}
+
+void Canvas::mouseMoved(int x, int y)
+{
+    if (strokeType == 5) {
+        // blade
+        bladePrev = blade;
+    }
 }
 
 void Canvas::keyPressed(int key)
 {
     if (key >= '1' &&
-        key <= '5') {
+        key <= '6') {
         setStroke(key);
     }
     else if (key == 'q') {
@@ -313,6 +359,12 @@ void Canvas::keyPressed(int key)
     else if (key == 'c') {
 //        ofClear(220);
         clear();
+    }
+    else if (key == 'z') {
+        for (int i=0; i<springStrokes.size(); i++)
+        {
+            springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
+        }
     }
 }
 
