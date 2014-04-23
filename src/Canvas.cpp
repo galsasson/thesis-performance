@@ -76,7 +76,7 @@ void Canvas::update()
 
 void Canvas::draw()
 {
-    ofSetColor(230, 230, 230, 100);
+    ofSetColor(230, 230, 230, 180);
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
 
