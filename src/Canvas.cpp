@@ -67,6 +67,9 @@ void Canvas::update()
     {
         springStrokes[i]->update();
     }
+//    if (currentSpringStroke) {
+//        currentSpringStroke->update();
+//    }
     
 //    flowField.update();
 }
@@ -359,6 +362,12 @@ void Canvas::keyPressed(int key)
     else if (key == 'c') {
 //        ofClear(220);
         clear();
+    }
+    else if (key == 'd') {
+        for (int i=0; i<springStrokes.size(); i++)
+        {
+            springStrokes[i]->releaseAnchors();
+        }
     }
     else if (key == 'z') {
         for (int i=0; i<springStrokes.size(); i++)

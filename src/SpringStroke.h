@@ -27,6 +27,7 @@ public:
     void update();
     void draw();
     void dropColor(const ofColor& c);
+    void releaseAnchors();
     
     int getIntersection(const ofVec2f& p, const ofVec2f& q);
     SpringStroke* cutStroke(int index);

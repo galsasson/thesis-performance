@@ -99,6 +99,15 @@ void SpringStroke::dropColor(const ofColor &c)
     paintDrops.push_back(new PaintDrop(line, c));
 }
 
+void SpringStroke::releaseAnchors()
+{
+    vector<Particle*> pars = line->getPoints();
+    for (int i=0; i<pars.size(); i++)
+    {
+        pars[i]->locked = false;
+    }
+}
+
 int SpringStroke::getIntersection(const ofVec2f &p1, const ofVec2f &p2)
 {
     // check if the line intersects with any line we have
