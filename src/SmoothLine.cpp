@@ -25,12 +25,12 @@ void SmoothLine::addPoint(float x, float y)
 {
     float w;
     if (points.empty()) {
-        w = 1;
+        w = 3;
     }
     else {
         Particle *lp = points.back();
         float prevMass = lp->mass;
-        w = prevMass + ((0.5f+(ofVec2f(x, y) - *lp).length() / 5) - prevMass)*0.2;
+        w = prevMass + ((2.5f+(ofVec2f(x, y) - *lp).length() / 5) - prevMass)*0.5;
     }
     
     Particle* newPar = new Particle(x, y, w);

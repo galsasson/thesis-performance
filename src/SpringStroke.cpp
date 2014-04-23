@@ -103,9 +103,10 @@ int SpringStroke::getIntersection(const ofVec2f &p1, const ofVec2f &p2)
 {
     // check if the line intersects with any line we have
     vector<Particle*> particles = line->getPoints();
-    for (int i=1; i<particles.size(); i++)
+    for (int i=2; i<particles.size(); i++)
     {
         if (isIntersects(p1, p2, *particles[i-1], *particles[i])) {
+            cout<<"Intersects with "<<i<<endl;
             return i;
         }
     }
