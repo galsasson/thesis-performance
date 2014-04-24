@@ -47,7 +47,19 @@ void Canvas::update()
     nStrokes = strokes.size();
     noiseTime.x += noiseRate/10;
     noiseTime.y += noiseRate/10;
+
+    // update spring strokes and flow field
+    flowField.reset();
+    for (int i=0; i<springStrokes.size(); i++)
+    {
+        springStrokes[i]->update();
+        flowField.applyStrokeForces(springStrokes[i]);
+    }
+    if (currentSpringStroke) {
+        flowField.applyStrokeForces(currentSpringStroke);
+    }
     
+    // update turtle stroke
     for (int i=0; i<turtleStrokes.size(); i++)
     {
         turtleStrokes[i]->update();
@@ -62,14 +74,6 @@ void Canvas::update()
         currentParticleStroke->applyFlowField(flowField);
         currentParticleStroke->update();
     }
-    
-    for (int i=0; i<springStrokes.size(); i++)
-    {
-        springStrokes[i]->update();
-    }
-//    if (currentSpringStroke) {
-//        currentSpringStroke->update();
-//    }
     
 //    flowField.update();
 }
@@ -226,7 +230,6 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke = new SpringStroke();
         currentSpringStroke->setLockDistance(50);
         currentSpringStroke->addPoint(x, y);
-        flowField.addAttractor(ofVec2f(x, y), 40, 1);
     }
     else if (strokeType == 1) {
         currentTurtleStroke = new TurtleStroke();
@@ -260,9 +263,7 @@ void Canvas::mouseDragged(int x, int y, int button)
     if (strokeType == 0)
     {
         if (currentSpringStroke) {
-            ofVec2f lastPoint = *(currentSpringStroke->getPoints()[currentSpringStroke->getPoints().size()-1]);
             currentSpringStroke->addPoint(x, y);
-            flowField.addForce(ofVec2f(x, y), 40, (ofVec2f)(ofVec3f(x, y, 0) - lastPoint)/5);
         }
     }
     else if (strokeType == 1) {

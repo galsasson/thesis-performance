@@ -31,6 +31,7 @@ public:
     void releaseAnchors();
     
     vector<Particle*>& getPoints() { return line->getPoints(); }
+    ofVec2f getLastPoint();
     
     int getIntersection(const ofVec2f& p, const ofVec2f& q);
     SpringStroke* cutStroke(int index);

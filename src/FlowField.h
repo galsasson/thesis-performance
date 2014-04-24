@@ -11,7 +11,9 @@
 
 #include <iostream>
 #include "ofMain.h"
-#include "Stroke.h"
+#include "Utilities.h"
+#include "SpringStroke.h"
+#include "FlowFieldForce.h"
 
 class FlowField
 {
@@ -26,15 +28,18 @@ public:
     
     void addAttractor(ofVec2f p, float rad, float force);
     void addForce(ofVec2f p, float rad, ofVec2f force);
+    void addRepulsion(const ofVec2f& p, float rad, float strength=1);
+    void addLineRepulsion(const ofVec2f& p, const ofVec2f& q, float strength);
     
-    void applyStrokeForces(Stroke* stroke);
-    ofVec2f getForce(ofVec2f p) const;
+    void applyStrokeForces(SpringStroke* stroke);
+    ofVec2f getForce(const ofVec2f& p) const;
     
 private:
     int nWidth, nHeight;
     ofVec2f size;
     ofVec2f squareSize;
-    ofVec2f **field;
+    float squareLength;
+    FlowFieldForce **field;
     
     void drawArrow(ofVec2f s, ofVec2f t);
 };

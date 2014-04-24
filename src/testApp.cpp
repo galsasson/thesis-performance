@@ -5,6 +5,7 @@ void testApp::setup(){
     
     ofSeedRandom();
     ofSetFrameRate(60);
+//    ofSetVerticalSync(false);
 //    CGDisplayHideCursor(NULL);
     
 //    ofEnableSmoothing();
@@ -60,7 +61,7 @@ void testApp::draw(){
     
     stringstream ss;
     ss << ofGetFrameRate();
-    ofDrawBitmapString(ss.str(), 0, ofGetWindowHeight());
+    ofDrawBitmapString(ss.str(), 0, ofGetWindowHeight()-200);
 }
 
 //--------------------------------------------------------------

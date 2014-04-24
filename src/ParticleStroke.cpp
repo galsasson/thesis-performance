@@ -24,7 +24,7 @@ ParticleStroke::~ParticleStroke()
 
 void ParticleStroke::addPoint(const ofVec2f &p)
 {
-    Particle *newP = new Particle(p, ofNoise(t)*4+2);
+    Particle *newP = new Particle(p, ofNoise(t)+1);
     newP->setColor(Params::springStrokeColor);
     points.push_back(newP);
 }
@@ -33,6 +33,7 @@ void ParticleStroke::update()
 {
     for (int i=0; i<points.size(); i++)
     {
+        points[i]->applyGravity(Params::particleGravity);
         points[i]->update();
         points[i]->checkBounds();
     }
@@ -43,13 +44,10 @@ void ParticleStroke::update()
 void ParticleStroke::draw()
 {
     ofFill();
-//    ofBeginShape();
     for (int i=0; i<points.size(); i++)
     {
         points[i]->draw();
-//        ofVertex(points[i]->x, points[i]->y);
     }
-//    ofEndShape();
 }
 
 void ParticleStroke::applyFlowField(const FlowField &flowField)

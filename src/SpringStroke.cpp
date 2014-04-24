@@ -114,6 +114,15 @@ void SpringStroke::releaseAnchors()
     }
 }
 
+ofVec2f SpringStroke::getLastPoint()
+{
+    if (line->getPoints().empty()) {
+        return ofVec2f();
+    }
+    
+    return *line->getPoints()[line->getPoints().size()-1];
+}
+
 int SpringStroke::getIntersection(const ofVec2f &p1, const ofVec2f &p2)
 {
     // check if the line intersects with any line we have
