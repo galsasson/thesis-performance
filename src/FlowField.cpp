@@ -166,7 +166,6 @@ void FlowField::applyStrokeForces(SpringStroke* stroke)
 
 ofVec2f FlowField::getForce(const ofVec2f& p) const
 {
-//    ofVec2f minPos = ofVec2f((int)p.x / squareSize)
     int minX = (int)(p.x / squareSize.x);
     int minY = (int)(p.y / squareSize.y);
     int maxX = min(minX+1, nWidth-1);
@@ -181,7 +180,7 @@ ofVec2f FlowField::getForce(const ofVec2f& p) const
     float trf = 1-(p-trPos).length() / squareLength;
     float blf = 1-(p-blPos).length() / squareLength;
     float brf = 1-(p-brPos).length() / squareLength;
-    // TODO: interpolate between four corners
+
     return field[minX][minY].force * tlf +
             field[maxX][minY].force * trf +
             field[minX][maxY].force * blf +

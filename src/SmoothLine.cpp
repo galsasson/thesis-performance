@@ -84,8 +84,6 @@ void SmoothLine::rebuildMesh()
     {
         Particle a = *points[i];
         Particle b = *points[i+1];
-//        ofVec2f a = ofVec2f(points[i]->x, points[i]->y);
-//		ofVec2f b = ofVec2f(points[i+1]->x, points[i+1]->y);
         
 		ofVec2f ea = (ofVec2f)(b - a).normalize() * a.mass;
         ofVec2f eb = (ofVec2f)(b - a).normalize() * b.mass;

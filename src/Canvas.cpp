@@ -97,7 +97,6 @@ void Canvas::draw()
 
     ofSetColor(50);
     ofNoFill();
-//    ResourceManager::getInstance().circleImg.getTextureReference().bind();
     for (int i=0; i<strokes.size(); i++)
     {
         strokes[i]->draw();
@@ -119,8 +118,8 @@ void Canvas::draw()
     if (currentSpringStroke) {
         currentSpringStroke->draw();
     }
-//    ResourceManager::getInstance().circleImg.getTextureReference().unbind();
 
+    
     for (int i=0; i<particleStrokes.size(); i++)
     {
         particleStrokes[i]->draw();
@@ -378,44 +377,6 @@ void Canvas::keyPressed(int key)
             springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
         }
     }
-}
-
-void Canvas::drawStroke(Stroke *s)
-{
-//    if (s == NULL) {
-//        return;
-//    }
-//    
-//    ofSetColor(50, 50, 50);
-//    ofSetLineWidth(1);
-//    ofNoFill();
-//    vector<ofVec2f*> points = s->getPoints();
-//    ofBeginShape();
-//    for (int i=0; i<points.size(); i++)
-//    {
-//        ofVec2f p = getPointWithNoise(points[i], i);
-//        ofVertex(p.x, p.y);
-//    }
-//    ofEndShape();
-}
-
-void Canvas::drawShape(Stroke *s)
-{
-//    if (s == NULL) {
-//        return;
-//    }
-//    
-//    ofSetColor(50, 50, 50);
-//    ofSetLineWidth(1);
-//    ofFill();
-//    vector<ofVec2f*> points = s->getPoints();
-//    ofBeginShape();
-//    for (int i=0; i<points.size(); i++)
-//    {
-//        ofVec2f p = getPointWithNoise(points[i]);
-//        ofVertex(p.x, p.y);
-//    }
-//    ofEndShape();
 }
 
 ofVec2f Canvas::getPointWithNoise(ofVec2f *p, int index)

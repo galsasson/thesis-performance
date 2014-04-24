@@ -76,10 +76,6 @@ private:
     int strokeType;
     bool bShowFlowfield;
     
-
-    void drawShape(Stroke *s);
-    void drawStroke(Stroke *s);
-    
     ofVec2f getPointWithNoise(ofVec2f *p, int index = 0);
 };
 

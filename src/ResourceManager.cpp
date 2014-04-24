@@ -10,7 +10,7 @@
 
 ResourceManager::ResourceManager()
 {
-//    circleImg.loadImage("BlurryCircle.png");
-    circleImg.loadImage("circle.png");
+    circleImg.loadImage("BlurryCircle.png");
+//    circleImg.loadImage("circle.png");
     circleImg.setImageType(OF_IMAGE_COLOR_ALPHA);
 }
