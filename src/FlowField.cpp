@@ -80,15 +80,20 @@ void FlowField::reset()
 
 void FlowField::addAttractor(ofVec2f p, float rad, float force)
 {
-    for (int x=0; x<nWidth; x++)
+    int minX = max((int)((p.x-rad) / squareSize.x), 0);
+    int minY = max((int)((p.y-rad) / squareSize.y), 0);
+    int maxX = min((int)((p.x+rad) / squareSize.x), nWidth-1);
+    int maxY = min((int)((p.y+rad) / squareSize.y), nHeight-1);
+
+    for (int x=minX; x<maxX; x++)
     {
-        for (int y=0; y<nHeight; y++)
+        for (int y=minY; y<maxY; y++)
         {
             ofVec2f pos = ofVec2f(x, y)*squareSize;
             ofVec2f offset = p-pos;
             float distance = offset.length();
             if (distance < rad) {
-                float f = (rad - distance) / rad * force;
+                float f = ((rad - distance) / rad) * force;
                 offset.normalize();
                 field[x][y].force += offset * f;
                 field[x][y].force.limit(10);
@@ -166,8 +171,8 @@ void FlowField::applyStrokeForces(SpringStroke* stroke)
 
 ofVec2f FlowField::getForce(const ofVec2f& p) const
 {
-    int minX = (int)(p.x / squareSize.x);
-    int minY = (int)(p.y / squareSize.y);
+    int minX = max((int)(p.x / squareSize.x), 0);
+    int minY = max((int)(p.y / squareSize.y), 0);
     int maxX = min(minX+1, nWidth-1);
     int maxY = min(minY+1, nHeight-1);
     

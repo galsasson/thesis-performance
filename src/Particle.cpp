@@ -87,8 +87,21 @@ void Particle::draw()
 void Particle::checkBounds()
 {
     if (y > ofGetWindowHeight()) {
-        vel.y *= -0.8;
+        vel.y *= -1;
         y = ofGetWindowHeight();
+    }
+    else if (y < 0) {
+        vel.y *= -1;
+        y = 0;
+    }
+    
+    if (x > ofGetWindowWidth()) {
+        vel.x *= -1;
+        x = ofGetWindowWidth();
+    }
+    else if (x < 0) {
+        vel.x *= -1;
+        x = 0;
     }
 }
 
