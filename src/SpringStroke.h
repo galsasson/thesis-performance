@@ -28,6 +28,7 @@ public:
     void addPoint(float x, float y);
     void update();
     void draw();
+    void drawSurface();
     void dropColor(const ofColor& c);
     void releaseAnchors();
     

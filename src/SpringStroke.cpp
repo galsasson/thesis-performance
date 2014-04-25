@@ -100,6 +100,17 @@ void SpringStroke::draw()
     }
 }
 
+void SpringStroke::drawSurface()
+{
+    vector<Particle*> pars = line->getPoints();
+    ofBeginShape();
+    for (int i=0; i<pars.size(); i++)
+    {
+        ofVertex(pars[i]->x, pars[i]->y);
+    }
+    ofEndShape();
+}
+
 void SpringStroke::dropColor(const ofColor &c)
 {
     paintDrops.push_back(new PaintDrop(line, c));

@@ -11,8 +11,6 @@
 Canvas::Canvas()
 {
     size = ofVec2f(0, 0);
-    currentStroke = NULL;
-    currentTurtleStroke = NULL;
     currentParticleStroke = NULL;
     currentRepeatableStroke = NULL;
     currentSpringStroke = NULL;
@@ -44,9 +42,10 @@ void Canvas::setup(float width, float height)
 
 void Canvas::update()
 {
-    nStrokes = strokes.size();
     noiseTime.x += noiseRate/10;
     noiseTime.y += noiseRate/10;
+    
+//    handleControlMessages();
 
     // update spring strokes and flow field
     flowField.reset();
@@ -59,10 +58,10 @@ void Canvas::update()
         flowField.applyStrokeForces(currentSpringStroke->getPoints());
     }
     
-    // update turtle stroke
-    for (int i=0; i<turtleStrokes.size(); i++)
+    // update surfaces
+    for (int i=0; i<surfaceStrokes.size(); i++)
     {
-        turtleStrokes[i]->update();
+        surfaceStrokes[i]->update();
     }
     
     // update PARTICLE stroke
@@ -87,20 +86,20 @@ void Canvas::draw()
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
 //    ofDisableBlendMode();
     
-//    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     // draw filled surfaces
     ofSetColor(150, 20, 20, 50);
     ofFill();
-    for (int i=0; i<turtleStrokes.size(); i++)
+    for (int i=0; i<surfaceStrokes.size(); i++)
     {
-        turtleStrokes[i]->draw();
+        surfaceStrokes[i]->drawSurface();
     }
-    if (currentTurtleStroke) {
-        currentTurtleStroke->draw();
+    if (currentSurfaceStroke) {
+        currentSurfaceStroke->drawSurface();
     }
 //    ofDisableBlendMode();
 
-//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(255);
     ofNoFill();
     for (int i=0; i<strokes.size(); i++)
@@ -184,11 +183,11 @@ void Canvas::clear()
         currentStroke = NULL;
     }
     
-    for (int i=0; i<turtleStrokes.size(); i++)
+    for (int i=0; i<surfaceStrokes.size(); i++)
     {
-        delete turtleStrokes[i];
+        delete surfaceStrokes[i];
     }
-    turtleStrokes.clear();
+    surfaceStrokes.clear();
     
     for (int i=0; i<particleStrokes.size(); i++)
     {
@@ -207,9 +206,9 @@ void Canvas::clear()
     }
     springStrokes.clear();
     
-    if (currentTurtleStroke) {
-        delete currentTurtleStroke;
-        currentTurtleStroke = NULL;
+    if (currentSurfaceStroke) {
+        delete currentSurfaceStroke;
+        currentSurfaceStroke = NULL;
     }
     if (currentParticleStroke) {
         delete currentParticleStroke;
@@ -236,8 +235,9 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke->addPoint(x, y);
     }
     else if (strokeType == 1) {
-        currentTurtleStroke = new TurtleStroke();
-        currentTurtleStroke->setup(ofVec3f(x, y, 0));
+        currentSurfaceStroke = new SpringStroke();
+        currentSurfaceStroke->setLockDistance(50);
+        currentSurfaceStroke->addPoint(x, y);
     }
     else if (strokeType == 2) {
         currentParticleStroke = new ParticleStroke();
@@ -271,8 +271,8 @@ void Canvas::mouseDragged(int x, int y, int button)
         }
     }
     else if (strokeType == 1) {
-        if (currentTurtleStroke) {
-            currentTurtleStroke->addPoint(ofVec3f(x, y, 0));
+        if (currentSurfaceStroke) {
+            currentSurfaceStroke->addPoint(x, y);
         }
     }
     else if (strokeType == 2) {
@@ -310,9 +310,9 @@ void Canvas::mouseReleased(int x, int y, int button)
         }
     }
     else if (strokeType == 1) {
-        if (currentTurtleStroke) {
-            turtleStrokes.push_back(currentTurtleStroke);
-            currentTurtleStroke = NULL;
+        if (currentSurfaceStroke) {
+            surfaceStrokes.push_back(currentSurfaceStroke);
+            currentSurfaceStroke = NULL;
         }
     }
     else if (strokeType == 2) {
@@ -376,7 +376,10 @@ void Canvas::keyPressed(int key)
         {
             springStrokes[i]->releaseAnchors();
         }
-        flowField.reset();
+        for (int i=0; i<surfaceStrokes.size(); i++)
+        {
+            surfaceStrokes[i]->releaseAnchors();
+        }
     }
     else if (key == 'z') {
         for (int i=0; i<springStrokes.size(); i++)

@@ -50,20 +50,32 @@ public:
     float xAmplitude;
     
 private:
+    
+    void handleControlMessages();
+    float prevRandomRelease = 0;
+    
+    
+    
     ofVec2f size;
     void setStroke(int key) { strokeType = key-'1'; }
     
     vector<SpringStroke*> strokes;
-    vector<TurtleStroke*> turtleStrokes;
-    vector<ParticleStroke*> particleStrokes;
-    vector<RepeatableStroke*> repeatableStrokes;
-    vector<SpringStroke*> springStrokes;
-    
     SpringStroke* currentStroke;
-    TurtleStroke* currentTurtleStroke;
+//    vector<TurtleStroke*> turtleStrokes;
+    vector<ParticleStroke*> particleStrokes;
     ParticleStroke* currentParticleStroke;
+
+    vector<RepeatableStroke*> repeatableStrokes;
     RepeatableStroke* currentRepeatableStroke;
+
+    vector<SpringStroke*> springStrokes;
     SpringStroke* currentSpringStroke;
+    
+    vector<SpringStroke*> surfaceStrokes;
+    SpringStroke* currentSurfaceStroke;
+    
+//    SpringStroke* currentStroke;
+//    TurtleStroke* currentTurtleStroke;
     ofVec2f noiseTime;
     
     ofVec2f blade;
