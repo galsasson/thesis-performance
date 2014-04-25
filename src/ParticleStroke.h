@@ -27,6 +27,11 @@ public:
     
     void applyFlowField(FlowField& flowField);
     
+    void releaseAllParticles();
+    void releaseRandomParticles();
+    
+    vector<Particle*>& getParticles() { return points; }
+    
 private:
     float getDistanceToClosestParticle(const ofVec2f& p);
     

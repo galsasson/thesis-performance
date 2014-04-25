@@ -349,20 +349,8 @@ void Canvas::keyPressed(int key)
         key <= '6') {
         setStroke(key);
     }
-    else if (key == 'q') {
-        Params::springStrokeColor = ofColor(89, 183, 195);
-    }
-    else if (key == 'w') {
-        Params::springStrokeColor = ofColor(89, 131, 116);
-    }
-    else if (key == 'e') {
-        Params::springStrokeColor = ofColor(251, 203, 111);
-    }
     else if (key == 'r') {
-        Params::springStrokeColor = ofColor(196, 124, 66);
-    }
-    else if (key == 't') {
-        Params::springStrokeColor = ofColor(213, 71, 53);
+        releaseAllParticles(1);
     }
     else if (key == 'f') {
         bShowFlowfield = !bShowFlowfield;
@@ -380,6 +368,10 @@ void Canvas::keyPressed(int key)
         {
             surfaceStrokes[i]->releaseAnchors();
         }
+        for (int i=0; i<particleStrokes.size(); i++)
+        {
+            particleStrokes[i]->releaseAllParticles();
+        }
     }
     else if (key == 'z') {
         for (int i=0; i<springStrokes.size(); i++)
@@ -389,6 +381,18 @@ void Canvas::keyPressed(int key)
     }
     else if (key == 'a') {
         Params::colorMode = (Params::colorMode)?0:1;
+    }
+}
+
+void Canvas::releaseAllParticles(float val)
+{
+    if (val == 0) {
+        return;
+    }
+    
+    for (int i=0; i<particleStrokes.size(); i++)
+    {
+        particleStrokes[i]->releaseAllParticles();
     }
 }
 

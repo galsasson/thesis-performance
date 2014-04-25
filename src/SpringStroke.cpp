@@ -52,12 +52,14 @@ void SpringStroke::addPoint(float x, float y)
         
         // lock particle if close to previous one
         if ((*prevPar - *newPar).length() < lockDistance) {
-            newPar->locked = true;
+            newPar->stickiness = 100;
+//            newPar->locked = true;
         }
         
     }
     else {
-        newPar->locked = true;
+        newPar->stickiness = 100;
+//        newPar->locked = true;
     }
 }
 
@@ -121,7 +123,7 @@ void SpringStroke::releaseAnchors()
     vector<Particle*> pars = line->getPoints();
     for (int i=0; i<pars.size(); i++)
     {
-        pars[i]->locked = false;
+        pars[i]->stickiness = 0;
     }
 }
 

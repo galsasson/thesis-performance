@@ -33,6 +33,8 @@ ofVec2f Params::particleTemporalVelocity(0, 0);
 ofVec2f Params::particleGravity(0, 0.4f);
 float Params::particleFlowfieldForce = 0.2f;
 
+float Params::globalReleaseAmount = 0;
+
 ofColor Params::springStrokeColor(50);
 
 float Params::colorMode = 0;

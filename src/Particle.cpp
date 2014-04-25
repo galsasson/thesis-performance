@@ -27,7 +27,7 @@ void Particle::setup()
 {
     vel = ofVec2f();
     acc = ofVec2f();
-    locked = false;
+    stickiness = 0;
     materialColor = ofColor(50);
     tempColor = ofColor(50);
     tempColorIntensity = 0;
@@ -57,7 +57,7 @@ void Particle::update()
     }
     
     // movement
-    if (locked) {
+    if (stickiness > 0) {
         return;
     }
     

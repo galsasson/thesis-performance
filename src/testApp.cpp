@@ -1,5 +1,6 @@
 #include "testApp.h"
 
+
 //--------------------------------------------------------------
 void testApp::setup(){
     
@@ -46,6 +47,10 @@ void testApp::setup(){
     control.addInput("Particle friction coeff", &Params::particleFrictionCoeff);
     control.addInput("Particle temporal velocity", &Params::particleTemporalVelocity);
     control.addInput("Particle gravity", &Params::particleGravity);
+    control.addInput("Particle flowfield force", &Params::particleFlowfieldForce);
+    
+    control.addInput("Global release", &Params::globalReleaseAmount);
+    
     control.addInput("Color mode", &Params::colorMode);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());

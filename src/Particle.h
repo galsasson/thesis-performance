@@ -42,7 +42,7 @@ public:
     static inline float getMassFromRadius(float rad) { return (rad/15)+1; }
     
     float mass;
-    bool locked;
+    float stickiness;
 
 private:
     float t;

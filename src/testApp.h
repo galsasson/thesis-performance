@@ -26,6 +26,7 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
+    
     ofxControlease control;
     
     Canvas canvas;

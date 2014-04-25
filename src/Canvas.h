@@ -38,6 +38,9 @@ public:
     void mouseMoved(int x, int y);
     void keyPressed(int key);
     
+    void releaseAllParticles(float val);
+    void releaseOneParticle(float val);
+    
     // parameters
     int nStrokes;
     int strokeControlIndex;

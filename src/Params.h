@@ -40,11 +40,7 @@ public:
     static ofVec2f particleGravity;
     static float particleFlowfieldForce;
     
-    static float releaseWeakParticles;
-    static float releaseRandomStrokes;
-    static float releaseRandomSurfaces;
-    static float releaseAllStrokes;
-//    static float
+    static float globalReleaseAmount;
     
     static ofColor springStrokeColor;
     
