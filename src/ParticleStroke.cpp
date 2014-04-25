@@ -24,7 +24,19 @@ ParticleStroke::~ParticleStroke()
 
 void ParticleStroke::addPoint(const ofVec2f &p)
 {
-    Particle *newP = new Particle(p, ofNoise(t)+1);
+    float mass = 1;
+    if (!points.empty()) {
+        float radFromLast = getDistanceToClosestParticle(p) * 0.8;
+        mass = Particle::getMassFromRadius(radFromLast);
+        if (mass > 2) {
+            mass = 2;
+        }
+    }
+    else {
+        mass = ofRandom(1)+1;
+    }
+    
+    Particle *newP = new Particle(p, mass);
     newP->setColor(Params::springStrokeColor);
     points.push_back(newP);
 }
@@ -56,4 +68,19 @@ void ParticleStroke::applyFlowField(const FlowField &flowField)
     {
         points[i]->applyForce(flowField.getForce(*points[i]));
     }
+}
+
+float ParticleStroke::getDistanceToClosestParticle(const ofVec2f &p)
+{
+    float minLength = 10000;
+    
+    for (int i=0; i<points.size(); i++)
+    {
+        float l = (p-*points[i]).length() - points[i]->getRadius();
+        if (l < minLength) {
+            minLength = l;
+        }
+    }
+    
+    return minLength;
 }

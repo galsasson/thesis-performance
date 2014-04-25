@@ -65,25 +65,29 @@ void Canvas::update()
         turtleStrokes[i]->update();
     }
     
+    // update PARTICLE stroke
     for (int i=0; i<particleStrokes.size(); i++)
     {
         particleStrokes[i]->applyFlowField(flowField);
         particleStrokes[i]->update();
     }
-    if (currentParticleStroke) {
-        currentParticleStroke->applyFlowField(flowField);
-        currentParticleStroke->update();
-    }
+//    if (currentParticleStroke) {
+//        currentParticleStroke->applyFlowField(flowField);
+//        currentParticleStroke->update();
+//    }
     
 //    flowField.update();
 }
 
 void Canvas::draw()
 {
-    ofSetColor(230, 230, 230, 180);
+//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(ResourceManager::getInstance().getBackgroundColor());
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-
+//    ofDisableBlendMode();
+    
+//    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     // draw filled surfaces
     ofSetColor(150, 20, 20, 50);
     ofFill();
@@ -94,8 +98,10 @@ void Canvas::draw()
     if (currentTurtleStroke) {
         currentTurtleStroke->draw();
     }
+//    ofDisableBlendMode();
 
-    ofSetColor(50);
+//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    ofSetColor(255);
     ofNoFill();
     for (int i=0; i<strokes.size(); i++)
     {
@@ -118,28 +124,27 @@ void Canvas::draw()
     if (currentSpringStroke) {
         currentSpringStroke->draw();
     }
+//    ofDisableBlendMode();
 
-    
+//    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+    // draw PARTICLE strokes
     for (int i=0; i<particleStrokes.size(); i++)
     {
         particleStrokes[i]->draw();
     }
-    
-
-    ofSetColor(50);
-    ofNoFill();
-
     if (currentParticleStroke) {
         currentParticleStroke->draw();
     }
+//    ofDisableBlendMode();
     
+//    ofEnableBlendMode(OF_BLENDMODE_ADD);
     if (bShowFlowfield) {
         flowField.draw();
     }
     
-
     // draw cursor
-    ofSetColor(50, 50, 50, 200);
+    ofSetColor(ResourceManager::getInstance().getStrokeColor());
+    ofNoFill();
     if (strokeType < 5) {
         ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
     }
@@ -148,7 +153,7 @@ void Canvas::draw()
         ofLine(ofGetMouseX()+7, ofGetMouseY()-7, ofGetMouseX()-7, ofGetMouseY()+7);
         ofLine(bladePrev, blade);
     }
-    
+//    ofDisableBlendMode();
 
 }
 
@@ -272,7 +277,7 @@ void Canvas::mouseDragged(int x, int y, int button)
     }
     else if (strokeType == 2) {
         if (currentParticleStroke) {
-            currentParticleStroke->addPoint(ofVec2f(x, y));
+            currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
         }
     }
     else if (strokeType == 3) {
@@ -376,6 +381,9 @@ void Canvas::keyPressed(int key)
         {
             springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
         }
+    }
+    else if (key == 'a') {
+        Params::colorMode = (Params::colorMode)?0:1;
     }
 }
 

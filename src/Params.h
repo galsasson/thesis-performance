@@ -40,6 +40,8 @@ public:
     static ofVec2f particleGravity;
     
     static ofColor springStrokeColor;
+    
+    static float colorMode;
 };
 
 #endif /* defined(__performance__Params__) */

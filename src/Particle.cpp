@@ -32,6 +32,9 @@ void Particle::setup()
     tempColor = ofColor(50);
     tempColorIntensity = 0;
     t = ofRandom(1000);
+    
+    mSize = (mass-1)*30;
+    mRadius = mSize/2;
 }
 
 void Particle::applyForce(const ofVec2f& force)
@@ -78,8 +81,9 @@ void Particle::draw()
     ofPushMatrix();
     ofTranslate(x, y);
     
-    ofSetColor(getColor());
-    ofEllipse(0, 0, mass+10 + ofNoise(t)*10, mass+10 + ofNoise(t)*10);
+//    ofSetColor(getColor());
+    ofSetColor(ResourceManager::getInstance().getStrokeColor());
+    ofEllipse(0, 0, getSize(), getSize());
     
     ofPopMatrix();
 }
@@ -87,20 +91,20 @@ void Particle::draw()
 void Particle::checkBounds()
 {
     if (y > ofGetWindowHeight()) {
-        vel.y *= -1;
+        vel.y *= -0.8 + ofRandom(0.2);
         y = ofGetWindowHeight();
     }
     else if (y < 0) {
-        vel.y *= -1;
+        vel.y *= -0.8 + ofRandom(0.2);
         y = 0;
     }
     
     if (x > ofGetWindowWidth()) {
-        vel.x *= -1;
+        vel.x *= -0.8 + ofRandom(0.2);
         x = ofGetWindowWidth();
     }
     else if (x < 0) {
-        vel.x *= -1;
+        vel.x *= -0.8 + ofRandom(0.2);
         x = 0;
     }
 }

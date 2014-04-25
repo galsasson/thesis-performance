@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 
 class ResourceManager
 {
@@ -23,6 +24,9 @@ public:
     }
 
     ofImage circleImg;
+    ofImage scatImg;
+    ofColor getBackgroundColor();
+    ofColor getStrokeColor();
 
 private:
     ResourceManager();

@@ -165,7 +165,7 @@ void FlowField::applyStrokeForces(SpringStroke* stroke)
     vector<Particle*> points = stroke->getPoints();
     for (int i=0; i<points.size()-1; i++)
     {
-        addLineRepulsion(*points[i], *points[i+1], 20);
+        addLineRepulsion(*points[i], *points[i+1], 10);
     }
 }
 

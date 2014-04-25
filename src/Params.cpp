@@ -33,3 +33,5 @@ ofVec2f Params::particleTemporalVelocity(0, 0);
 ofVec2f Params::particleGravity(0, 0.4f);
 
 ofColor Params::springStrokeColor(50);
+
+float Params::colorMode = 0;

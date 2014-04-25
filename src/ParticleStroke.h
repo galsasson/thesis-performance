@@ -28,6 +28,8 @@ public:
     void applyFlowField(const FlowField& flowField);
     
 private:
+    float getDistanceToClosestParticle(const ofVec2f& p);
+    
     vector<Particle*> points;
     float t;
     

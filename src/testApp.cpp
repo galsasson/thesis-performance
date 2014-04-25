@@ -12,6 +12,8 @@ void testApp::setup(){
     ofSetBackgroundAuto(false);
     ofEnableAlphaBlending();
     
+//    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+    
     control.setup("Performance", 6000);
     
 //    control.addOutput("nStrokes", &canvas.nStrokes);
@@ -43,6 +45,8 @@ void testApp::setup(){
     control.addInput("Particle max speed", &Params::particleMaxSpeed);
     control.addInput("Particle friction coeff", &Params::particleFrictionCoeff);
     control.addInput("Particle temporal velocity", &Params::particleTemporalVelocity);
+    control.addInput("Particle gravity", &Params::particleGravity);
+    control.addInput("Color mode", &Params::colorMode);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
     
@@ -61,7 +65,7 @@ void testApp::draw(){
     
     stringstream ss;
     ss << ofGetFrameRate();
-    ofDrawBitmapString(ss.str(), 0, ofGetWindowHeight()-200);
+    ofDrawBitmapString(ss.str(), 0, 10);
 }
 
 //--------------------------------------------------------------

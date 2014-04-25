@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "ResourceManager.h"
 #include "Params.h"
 
 class Particle : public ofVec2f
@@ -34,12 +35,21 @@ public:
     ofColor& getMaterialColor() { return materialColor; }
     
     void setTempColor(const ofColor& c) { tempColor = c; tempColorIntensity = 1; }
+    
+    float getSize() { return mSize; }
+    float getRadius() { return mRadius; }
+    
+    static inline float getMassFromRadius(float rad) { return (rad/15)+1; }
+    
     float mass;
     bool locked;
 
 private:
     float t;
     float maxSpeed;
+    float mRadius;
+    float mSize;
+    
     ofVec2f vel;
     ofVec2f acc;
     

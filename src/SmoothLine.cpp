@@ -45,6 +45,7 @@ void SmoothLine::update()
 
 void SmoothLine::draw()
 {
+    ofSetColor(ResourceManager::getInstance().getStrokeColor());
     ResourceManager::getInstance().circleImg.getTextureReference().bind();
     mesh.draw();
     ResourceManager::getInstance().circleImg.getTextureReference().unbind();
@@ -106,14 +107,14 @@ void SmoothLine::rebuildMesh()
 		mesh.addVertex(b + SE);
 		mesh.addVertex(b + NE);
         
-        mesh.addColor(a.getColor());
-        mesh.addColor(a.getColor());
-        mesh.addColor(a.getColor());
-        mesh.addColor(a.getColor());
-        mesh.addColor(b.getColor());
-        mesh.addColor(b.getColor());
-        mesh.addColor(b.getColor());
-        mesh.addColor(b.getColor());
+//        mesh.addColor(a.getColor());
+//        mesh.addColor(a.getColor());
+//        mesh.addColor(a.getColor());
+//        mesh.addColor(a.getColor());
+//        mesh.addColor(b.getColor());
+//        mesh.addColor(b.getColor());
+//        mesh.addColor(b.getColor());
+//        mesh.addColor(b.getColor());
         
 		int vertOffest = i * 8;
 		mesh.addIndex(vertOffest + 0); 	mesh.addIndex(vertOffest +1); 	mesh.addIndex(vertOffest +2);
