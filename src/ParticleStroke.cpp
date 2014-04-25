@@ -62,11 +62,12 @@ void ParticleStroke::draw()
     }
 }
 
-void ParticleStroke::applyFlowField(const FlowField &flowField)
+void ParticleStroke::applyFlowField(FlowField &flowField)
 {
     for (int i=0; i<points.size(); i++)
     {
         points[i]->applyForce(flowField.getForce(*points[i]));
+        flowField.addRepulsion(*points[i], 8, Params::particleFlowfieldForce);
     }
 }
 

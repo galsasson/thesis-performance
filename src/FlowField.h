@@ -12,7 +12,7 @@
 #include <iostream>
 #include "ofMain.h"
 #include "Utilities.h"
-#include "SpringStroke.h"
+#include "Particle.h"
 #include "FlowFieldForce.h"
 
 class FlowField
@@ -31,7 +31,7 @@ public:
     void addRepulsion(const ofVec2f& p, float rad, float strength=1);
     void addLineRepulsion(const ofVec2f& p, const ofVec2f& q, float strength);
     
-    void applyStrokeForces(SpringStroke* stroke);
+    void applyStrokeForces(const vector<Particle*>& points);
     ofVec2f getForce(const ofVec2f& p) const;
     
 private:

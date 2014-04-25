@@ -38,6 +38,7 @@ public:
     static float particleFrictionCoeff;
     static ofVec2f particleTemporalVelocity;
     static ofVec2f particleGravity;
+    static float particleFlowfieldForce;
     
     static ofColor springStrokeColor;
     

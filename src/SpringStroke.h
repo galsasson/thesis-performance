@@ -14,6 +14,7 @@
 #include "Params.h"
 #include "SmoothLine.h"
 #include "Spring.h"
+#include "FlowField.h"
 #include "PaintDrop.h"
 
 class SpringStroke

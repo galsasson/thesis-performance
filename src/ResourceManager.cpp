@@ -29,7 +29,7 @@ ofColor ResourceManager::getStrokeColor()
 ofColor ResourceManager::getBackgroundColor()
 {
     if (Params::colorMode == 0) {
-        return ofColor(230, 230, 230, 180);
+        return ofColor(230, 230, 230, 100);
     }
     else {
         return ofColor(0, 0, 0, 255);

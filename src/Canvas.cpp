@@ -53,10 +53,10 @@ void Canvas::update()
     for (int i=0; i<springStrokes.size(); i++)
     {
         springStrokes[i]->update();
-        flowField.applyStrokeForces(springStrokes[i]);
+        flowField.applyStrokeForces(springStrokes[i]->getPoints());
     }
     if (currentSpringStroke) {
-        flowField.applyStrokeForces(currentSpringStroke);
+        flowField.applyStrokeForces(currentSpringStroke->getPoints());
     }
     
     // update turtle stroke
@@ -277,7 +277,9 @@ void Canvas::mouseDragged(int x, int y, int button)
     }
     else if (strokeType == 2) {
         if (currentParticleStroke) {
-            currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
+            for (int i=0; i<3; i++) {
+                currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
+            }
         }
     }
     else if (strokeType == 3) {

@@ -130,8 +130,8 @@ void FlowField::addRepulsion(const ofVec2f &p, float rad, float strength)
 {
     int minX = max((int)((p.x-rad) / squareSize.x), 0);
     int minY = max((int)((p.y-rad) / squareSize.y), 0);
-    int maxX = min((int)((p.x+rad) / squareSize.x), nWidth-1);
-    int maxY = min((int)((p.y+rad) / squareSize.y), nHeight-1);
+    int maxX = min((int)((p.x+rad+1) / squareSize.x), nWidth-1);
+    int maxY = min((int)((p.y+rad+1) / squareSize.y), nHeight-1);
     
     for (int x=minX; x<maxX; x++)
     {
@@ -141,7 +141,10 @@ void FlowField::addRepulsion(const ofVec2f &p, float rad, float strength)
             float distance = offset.length();
             if (distance < rad) {
                 ofVec2f f = offset.normalize() * ((rad - distance) / rad * strength);
-                field[x][y].force += (f-field[x][y].force)*0.8;
+                if (field[x][y].force.length() < f.length())
+                {
+                    field[x][y].force = f;
+                }
             }
         }
     }
@@ -160,9 +163,8 @@ void FlowField::addLineRepulsion(const ofVec2f &p, const ofVec2f &q, float stren
     }
 }
 
-void FlowField::applyStrokeForces(SpringStroke* stroke)
+void FlowField::applyStrokeForces(const vector<Particle*>& points)
 {
-    vector<Particle*> points = stroke->getPoints();
     for (int i=0; i<points.size()-1; i++)
     {
         addLineRepulsion(*points[i], *points[i+1], 10);
@@ -171,8 +173,8 @@ void FlowField::applyStrokeForces(SpringStroke* stroke)
 
 ofVec2f FlowField::getForce(const ofVec2f& p) const
 {
-    int minX = max((int)(p.x / squareSize.x), 0);
-    int minY = max((int)(p.y / squareSize.y), 0);
+    int minX = min(max((int)(p.x / squareSize.x), 0), nWidth-2);
+    int minY = min(max((int)(p.y / squareSize.y), 0), nHeight-2);
     int maxX = min(minX+1, nWidth-1);
     int maxY = min(minY+1, nHeight-1);
     

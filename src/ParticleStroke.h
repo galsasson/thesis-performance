@@ -25,7 +25,7 @@ public:
     void update();
     void draw();
     
-    void applyFlowField(const FlowField& flowField);
+    void applyFlowField(FlowField& flowField);
     
 private:
     float getDistanceToClosestParticle(const ofVec2f& p);
