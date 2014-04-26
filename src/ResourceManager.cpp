@@ -35,3 +35,13 @@ ofColor ResourceManager::getBackgroundColor()
         return ofColor(0, 0, 0, 255);
     }
 }
+
+ofColor ResourceManager::getParticleColor()
+{
+    if (Params::colorMode == 0) {
+        return ofColor(230, 230, 230);
+    }
+    else {
+        return ofColor(50, 50, 50);
+    }
+}

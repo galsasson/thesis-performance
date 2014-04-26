@@ -38,8 +38,8 @@ public:
     void mouseMoved(int x, int y);
     void keyPressed(int key);
     
-    void releaseAllParticles(float val);
-    void releaseOneParticle(float val);
+    void releaseAllParticles();
+    void releaseAllStrokes();
     
     // parameters
     int nStrokes;

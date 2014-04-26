@@ -83,11 +83,13 @@ void SmoothLine::rebuildMesh()
     
     for (int i=0; i<points.size()-1; i++)
     {
-        Particle a = *points[i];
-        Particle b = *points[i+1];
+        float aMass = points[i]->mass;
+        float bMass = points[i+1]->mass;
+        ofVec2f a = *points[i] + ofVec2f(ofRandom(-Params::lineNoise.x, Params::lineNoise.x), ofRandom(-Params::lineNoise.y, Params::lineNoise.y));
+        ofVec2f b = *points[i+1] + ofVec2f(ofRandom(-Params::lineNoise.x, Params::lineNoise.x), ofRandom(-Params::lineNoise.y, Params::lineNoise.y));
         
-		ofVec2f ea = (ofVec2f)(b - a).normalize() * a.mass;
-        ofVec2f eb = (ofVec2f)(b - a).normalize() * b.mass;
+		ofVec2f ea = (ofVec2f)(b - a).normalize() * aMass;
+        ofVec2f eb = (ofVec2f)(b - a).normalize() * bMass;
         
 		ofVec2f NA = ofVec2f(-ea.y, ea.x);
 		ofVec2f NB = ofVec2f(-eb.y, eb.x);
@@ -98,14 +100,14 @@ void SmoothLine::rebuildMesh()
         ofVec2f SW = -NA - ea;
         ofVec2f SE = -NB + eb;
         
-		mesh.addVertex(a + SW);
-		mesh.addVertex(a + NW);
-		mesh.addVertex(a + SA);
-		mesh.addVertex(a + NA);
-		mesh.addVertex(b + SB);
-		mesh.addVertex(b + NB);
-		mesh.addVertex(b + SE);
-		mesh.addVertex(b + NE);
+        mesh.addVertex(a + SW);
+        mesh.addVertex(a + NW);
+        mesh.addVertex(a + SA);
+        mesh.addVertex(a + NA);
+        mesh.addVertex(b + SB);
+        mesh.addVertex(b + NB);
+        mesh.addVertex(b + SE);
+        mesh.addVertex(b + NE);
         
 //        mesh.addColor(a.getColor());
 //        mesh.addColor(a.getColor());

@@ -40,11 +40,14 @@ public:
     static ofVec2f particleGravity;
     static float particleFlowfieldForce;
     
+    static ofVec2f lineNoise;
+    
     static float globalReleaseAmount;
     
-    static ofColor springStrokeColor;
+    static ofFloatColor surfaceColor;
     
     static float colorMode;
+    static float randomParticleColors;
 };
 
 #endif /* defined(__performance__Params__) */

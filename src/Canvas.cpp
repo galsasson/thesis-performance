@@ -88,7 +88,7 @@ void Canvas::draw()
     
     ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     // draw filled surfaces
-    ofSetColor(150, 20, 20, 50);
+    ofSetColor(Params::surfaceColor);
     ofFill();
     for (int i=0; i<surfaceStrokes.size(); i++)
     {
@@ -97,6 +97,15 @@ void Canvas::draw()
     if (currentSurfaceStroke) {
         currentSurfaceStroke->drawSurface();
     }
+    
+    for (int i=0; i<particleStrokes.size(); i++)
+    {
+        particleStrokes[i]->draw();
+    }
+    if (currentParticleStroke) {
+        currentParticleStroke->draw();
+    }
+
 //    ofDisableBlendMode();
 
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
@@ -127,13 +136,6 @@ void Canvas::draw()
 
 //    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
     // draw PARTICLE strokes
-    for (int i=0; i<particleStrokes.size(); i++)
-    {
-        particleStrokes[i]->draw();
-    }
-    if (currentParticleStroke) {
-        currentParticleStroke->draw();
-    }
 //    ofDisableBlendMode();
     
 //    ofEnableBlendMode(OF_BLENDMODE_ADD);
@@ -350,7 +352,7 @@ void Canvas::keyPressed(int key)
         setStroke(key);
     }
     else if (key == 'r') {
-        releaseAllParticles(1);
+        releaseAllParticles();
     }
     else if (key == 'f') {
         bShowFlowfield = !bShowFlowfield;
@@ -360,18 +362,7 @@ void Canvas::keyPressed(int key)
         clear();
     }
     else if (key == 'd') {
-        for (int i=0; i<springStrokes.size(); i++)
-        {
-            springStrokes[i]->releaseAnchors();
-        }
-        for (int i=0; i<surfaceStrokes.size(); i++)
-        {
-            surfaceStrokes[i]->releaseAnchors();
-        }
-        for (int i=0; i<particleStrokes.size(); i++)
-        {
-            particleStrokes[i]->releaseAllParticles();
-        }
+        releaseAllStrokes();
     }
     else if (key == 'z') {
         for (int i=0; i<springStrokes.size(); i++)
@@ -384,15 +375,23 @@ void Canvas::keyPressed(int key)
     }
 }
 
-void Canvas::releaseAllParticles(float val)
+void Canvas::releaseAllParticles()
 {
-    if (val == 0) {
-        return;
-    }
-    
     for (int i=0; i<particleStrokes.size(); i++)
     {
         particleStrokes[i]->releaseAllParticles();
+    }
+}
+
+void Canvas::releaseAllStrokes()
+{
+    for (int i=0; i<springStrokes.size(); i++)
+    {
+        springStrokes[i]->releaseAnchors();
+    }
+    for (int i=0; i<surfaceStrokes.size(); i++)
+    {
+        surfaceStrokes[i]->releaseAnchors();
     }
 }
 

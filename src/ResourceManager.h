@@ -27,6 +27,7 @@ public:
     ofImage scatImg;
     ofColor getBackgroundColor();
     ofColor getStrokeColor();
+    ofColor getParticleColor();
 
 private:
     ResourceManager();

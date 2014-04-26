@@ -27,6 +27,9 @@ void ParticleStroke::addPoint(const ofVec2f &p)
     float mass = 1;
     if (!points.empty()) {
         float radFromLast = getDistanceToClosestParticle(p) * 0.8;
+        if (radFromLast < 0) {
+            return;
+        }
         mass = Particle::getMassFromRadius(radFromLast);
         if (mass > 2) {
             mass = 2;
@@ -39,7 +42,7 @@ void ParticleStroke::addPoint(const ofVec2f &p)
     Particle *newP = new Particle(p, mass);
     newP->stickiness = ofRandom(100);
 //    newP->locked = true;
-    newP->setColor(Params::springStrokeColor);
+//    newP->setColor(Params::springStrokeColor);
     points.push_back(newP);
 }
 

@@ -48,10 +48,12 @@ void testApp::setup(){
     control.addInput("Particle temporal velocity", &Params::particleTemporalVelocity);
     control.addInput("Particle gravity", &Params::particleGravity);
     control.addInput("Particle flowfield force", &Params::particleFlowfieldForce);
-    
     control.addInput("Global release", &Params::globalReleaseAmount);
+    control.addInput("Line noise", &Params::lineNoise);
     
     control.addInput("Color mode", &Params::colorMode);
+    control.addInput("Surface color", &Params::surfaceColor);
+    control.addInput("Random particle colos", &Params::randomParticleColors);
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
     

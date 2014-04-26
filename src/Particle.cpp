@@ -82,7 +82,15 @@ void Particle::draw()
     ofTranslate(x, y);
     
 //    ofSetColor(getColor());
-    ofSetColor(ResourceManager::getInstance().getStrokeColor());
+    if (Params::randomParticleColors > 0) {
+        if (ofGetFrameNum() % (int)Params::randomParticleColors == 0) {
+            tempColor = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+        }
+        ofSetColor(tempColor);
+    }
+    else {
+        ofSetColor(ResourceManager::getInstance().getParticleColor());
+    }
     ofEllipse(0, 0, getSize(), getSize());
     
     ofPopMatrix();

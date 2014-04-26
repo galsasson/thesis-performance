@@ -11,7 +11,7 @@
 SpringStroke::SpringStroke()
 {
     lockDistance = 2;
-    color = Params::springStrokeColor;
+    color = ResourceManager::getInstance().getStrokeColor();
     line = new SmoothLine();
 }
 
@@ -93,13 +93,12 @@ void SpringStroke::update()
 
 void SpringStroke::draw()
 {
-//    ofSetColor(color);
     line->draw();
 
-    for (int i=0; i<paintDrops.size(); i++)
-    {
-        paintDrops[i]->draw();
-    }
+//    for (int i=0; i<paintDrops.size(); i++)
+//    {
+//        paintDrops[i]->draw();
+//    }
 }
 
 void SpringStroke::drawSurface()

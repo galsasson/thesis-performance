@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "Params.h"
 #include "Particle.h"
 #include "ResourceManager.h"
 
