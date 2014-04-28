@@ -70,6 +70,14 @@ void Canvas::update()
         particleStrokes[i]->applyFlowField(flowField);
         particleStrokes[i]->update();
     }
+    
+    for (int i=0; i<repeatableStrokes.size(); i++)
+    {
+        repeatableStrokes[i]->update();
+    }
+    if (currentRepeatableStroke) {
+        currentRepeatableStroke->update();
+    }
 //    if (currentParticleStroke) {
 //        currentParticleStroke->applyFlowField(flowField);
 //        currentParticleStroke->update();
@@ -96,6 +104,11 @@ void Canvas::draw()
     }
     if (currentSurfaceStroke) {
         currentSurfaceStroke->drawSurface();
+    }
+    
+    // draw particles
+    if (Params::colorMode == 1) {
+        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     }
     
     for (int i=0; i<particleStrokes.size(); i++)

@@ -130,8 +130,8 @@ void FlowField::addRepulsion(const ofVec2f &p, float rad, float strength)
 {
     int minX = max((int)((p.x-rad) / squareSize.x), 0);
     int minY = max((int)((p.y-rad) / squareSize.y), 0);
-    int maxX = min((int)((p.x+rad+1) / squareSize.x), nWidth-1);
-    int maxY = min((int)((p.y+rad+1) / squareSize.y), nHeight-1);
+    int maxX = min((int)((p.x+rad) / squareSize.x)+1, nWidth-1);
+    int maxY = min((int)((p.y+rad) / squareSize.y)+1, nHeight-1);
     
     for (int x=minX; x<maxX; x++)
     {

@@ -84,7 +84,7 @@ void Particle::draw()
 //    ofSetColor(getColor());
     if (Params::randomParticleColors > 0) {
         if (ofGetFrameNum() % (int)Params::randomParticleColors == 0) {
-            tempColor = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+            tempColor = ofColor(ofRandom(100), ofRandom(100), ofRandom(100));
         }
         ofSetColor(tempColor);
     }

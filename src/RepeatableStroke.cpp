@@ -42,7 +42,8 @@ void RepeatableStroke::addPoint(float x, float y)
 
 void RepeatableStroke::update()
 {
-    
+    line.update();
+    line.rebuildMesh();
 }
 
 void RepeatableStroke::draw()
