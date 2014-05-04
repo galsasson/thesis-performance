@@ -139,7 +139,7 @@ float ParticleStroke::getDistanceToClosestParticle(const ofVec2f &p)
         }
     }
     
-    return minLength;
+    return minLength*1.4;
 }
 
 void ParticleStroke::rebuildVbo()
