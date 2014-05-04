@@ -41,3 +41,25 @@ ofFloatColor Params::surfaceColor(0.8f, 0.07f, 0.07f);
 
 float Params::colorMode = 0;
 float Params::randomParticleColors = 0;
+
+
+
+
+
+
+
+//################### Drop Emitter #
+//################### Drop Emitter #
+
+float Params::emissionSpeed = 50;
+float Params::emissionRadius = 4;
+float Params::dropSize = 5;
+float Params::dropSizeVariation = 5;
+float Params::dropLife = -8;
+ofFloatColor Params::dropColor(0.38, 0.5, 0.46, 0.74);
+
+float Params::maxInitialForce = 0.6;
+float Params::frictionCoeff = 0.9;
+
+ofVec2f Params::gravity(0, -0.05);
+ofVec2f Params::tempForce(0, 0);

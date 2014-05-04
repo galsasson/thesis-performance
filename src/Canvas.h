@@ -17,6 +17,7 @@
 #include "ParticleStroke.h"
 #include "RepeatableStroke.h"
 #include "SpringStroke.h"
+#include "DropEmitter.h"
 
 class Canvas
 {
@@ -77,8 +78,8 @@ private:
     vector<SpringStroke*> surfaceStrokes;
     SpringStroke* currentSurfaceStroke;
     
-//    SpringStroke* currentStroke;
-//    TurtleStroke* currentTurtleStroke;
+    vector<DropEmitter*> emitters;
+    
     ofVec2f noiseTime;
     
     ofVec2f blade;

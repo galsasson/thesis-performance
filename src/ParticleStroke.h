@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "ofMain.h"
+#include "ResourceManager.h"
 #include "Params.h"
 #include "FlowField.h"
 #include "Particle.h"
@@ -33,10 +34,13 @@ public:
     vector<Particle*>& getParticles() { return points; }
     
 private:
+    void rebuildVbo();
     float getDistanceToClosestParticle(const ofVec2f& p);
     
     vector<Particle*> points;
     float t;
+    
+    ofVbo vbo;
     
 };
 

@@ -32,12 +32,16 @@ public:
     void dropColor(const ofColor& c);
     void releaseAnchors();
     
+    void setupParticleEmitters();
+    
     vector<Particle*>& getPoints() { return line->getPoints(); }
     ofVec2f getLastPoint();
     
     int getIntersection(const ofVec2f& p, const ofVec2f& q);
     SpringStroke* cutStroke(int index);
-    
+
+    bool bEmitter;
+
 private:
     bool isIntersects(const ofVec2f& p, const ofVec2f& p2,
                      const ofVec2f& q, const ofVec2f& q2);
@@ -48,6 +52,7 @@ private:
     vector<Spring*> springs;
     
     vector<PaintDrop*> paintDrops;
+    
     
     ofColor color;
 };

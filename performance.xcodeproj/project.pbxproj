@@ -15,6 +15,8 @@
 		25B82D545F5A0A46E64EB5FE /* ofxControleaseOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCD347B9EB111FB4300BA14C /* ofxControleaseOutput.cpp */; };
 		2A0B2740190739E000A8CC67 /* PaintDrop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B273E190739E000A8CC67 /* PaintDrop.cpp */; };
 		2A0B27461908AA3F00A8CC67 /* FlowFieldForce.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A0B27441908AA3F00A8CC67 /* FlowFieldForce.cpp */; };
+		2A0DC4E71915A9D200DA98AB /* RainDrop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DC4E51915A9D200DA98AB /* RainDrop.cpp */; };
+		2A0DC4EA1915A9EC00DA98AB /* DropEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A0DC4E81915A9EC00DA98AB /* DropEmitter.cpp */; };
 		2A1B6C281900D9E30043948A /* FlowField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C261900D9E30043948A /* FlowField.cpp */; };
 		2A1B6C2B1900E5190043948A /* Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C291900E5190043948A /* Particle.cpp */; };
 		2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C2D1900EA950043948A /* ParticleStroke.cpp */; };
@@ -127,6 +129,10 @@
 		2A0B27431908976D00A8CC67 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
 		2A0B27441908AA3F00A8CC67 /* FlowFieldForce.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlowFieldForce.cpp; sourceTree = "<group>"; };
 		2A0B27451908AA3F00A8CC67 /* FlowFieldForce.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowFieldForce.h; sourceTree = "<group>"; };
+		2A0DC4E51915A9D200DA98AB /* RainDrop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RainDrop.cpp; sourceTree = "<group>"; };
+		2A0DC4E61915A9D200DA98AB /* RainDrop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RainDrop.h; sourceTree = "<group>"; };
+		2A0DC4E81915A9EC00DA98AB /* DropEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DropEmitter.cpp; sourceTree = "<group>"; };
+		2A0DC4E91915A9EC00DA98AB /* DropEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropEmitter.h; sourceTree = "<group>"; };
 		2A1B6C261900D9E30043948A /* FlowField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FlowField.cpp; sourceTree = "<group>"; };
 		2A1B6C271900D9E30043948A /* FlowField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlowField.h; sourceTree = "<group>"; };
 		2A1B6C291900E5190043948A /* Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Particle.cpp; sourceTree = "<group>"; };
@@ -299,6 +305,17 @@
 				1FE0C62E4826F1BA329988F4 /* ofxUDPManager.h */,
 			);
 			name = src;
+			sourceTree = "<group>";
+		};
+		2A0DC4E41915A9BF00DA98AB /* DropEmitter */ = {
+			isa = PBXGroup;
+			children = (
+				2A0DC4E81915A9EC00DA98AB /* DropEmitter.cpp */,
+				2A0DC4E91915A9EC00DA98AB /* DropEmitter.h */,
+				2A0DC4E51915A9D200DA98AB /* RainDrop.cpp */,
+				2A0DC4E61915A9D200DA98AB /* RainDrop.h */,
+			);
+			name = DropEmitter;
 			sourceTree = "<group>";
 		};
 		2A1B6C3D1905ACF60043948A /* Strokes */ = {
@@ -548,6 +565,7 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2A0DC4E41915A9BF00DA98AB /* DropEmitter */,
 				2A0B27431908976D00A8CC67 /* Utilities.h */,
 				2A1B6C3D1905ACF60043948A /* Strokes */,
 				2A1B6C371904EE630043948A /* ResourceManager.cpp */,
@@ -700,6 +718,7 @@
 				2ACD87B818FADAB9005E62E8 /* TurtleStep.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* testApp.cpp in Sources */,
+				2A0DC4EA1915A9EC00DA98AB /* DropEmitter.cpp in Sources */,
 				143C0D00D23936BD4C90A277 /* ofxBaseGui.cpp in Sources */,
 				2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */,
 				3EA11A0C57A5A88F2719803E /* ofxButton.cpp in Sources */,
@@ -727,6 +746,7 @@
 				39BDE2CB7E7B59E4D01FD739 /* UdpSocket.cpp in Sources */,
 				F5A7861860AA09A069B8A860 /* NetworkingUtilsWin.cpp in Sources */,
 				D478E3E6B7DFFBBD73231AED /* UdpSocketWin.cpp in Sources */,
+				2A0DC4E71915A9D200DA98AB /* RainDrop.cpp in Sources */,
 				01D94B5BFA0F748576EED744 /* OscOutboundPacketStream.cpp in Sources */,
 				2A1B6C401905C0EA0043948A /* Spring.cpp in Sources */,
 				2A1B6C2F1900EA950043948A /* ParticleStroke.cpp in Sources */,

@@ -48,6 +48,23 @@ public:
     
     static float colorMode;
     static float randomParticleColors;
+    
+    
+    //################### Drop Emitter #
+    //################### Drop Emitter #
+
+    static float emissionSpeed;
+    static float emissionRadius;
+    static float dropSize;
+    static float dropSizeVariation;
+    static float dropLife;
+    static ofFloatColor dropColor;
+    static float maxInitialForce;
+    static float frictionCoeff;
+    
+    static ofVec2f gravity;
+    static ofVec2f tempForce;
+
 };
 
 #endif /* defined(__performance__Params__) */

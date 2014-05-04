@@ -55,6 +55,18 @@ void testApp::setup(){
     control.addInput("Surface color", &Params::surfaceColor);
     control.addInput("Random particle colos", &Params::randomParticleColors);
     
+    
+    //## DROP EMITTER ##
+    control.addInput("ParticleEmitter emission rate", &Params::emissionSpeed);
+    control.addInput("ParticleEmitter radius", &Params::emissionRadius);
+    control.addInput("Particle life", &Params::dropLife);
+    control.addInput("Particle Size", &Params::dropSize);
+    control.addInput("Particle color", &Params::dropColor);
+    control.addInput("Friction Coeff", &Params::frictionCoeff);
+    control.addInput("Max Initial Vel", &Params::maxInitialForce);
+    control.addInput("Gravity", &Params::gravity);
+    
+    
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
     
     cout<<"Window size = "<<ofGetWindowWidth()<<"x"<<ofGetWindowHeight()<<endl;

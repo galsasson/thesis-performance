@@ -46,7 +46,7 @@ void Canvas::update()
     noiseTime.y += noiseRate/10;
     
 //    handleControlMessages();
-
+    
     // update spring strokes and flow field
     flowField.reset();
     for (int i=0; i<springStrokes.size(); i++)
@@ -78,6 +78,11 @@ void Canvas::update()
     if (currentRepeatableStroke) {
         currentRepeatableStroke->update();
     }
+    
+    for (int i=0; i<emitters.size(); i++)
+    {
+        emitters[i]->update();
+    }
 //    if (currentParticleStroke) {
 //        currentParticleStroke->applyFlowField(flowField);
 //        currentParticleStroke->update();
@@ -88,14 +93,40 @@ void Canvas::update()
 
 void Canvas::draw()
 {
-//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+//    ofEnableAlphaBlending();
+    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(ResourceManager::getInstance().getBackgroundColor());
+//    if (Params::colorMode == 0)
+//    {
+//        ofEnableBlendMode(OF_BLENDMODE_ADD);
+//    }
+//    else {
+//        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+//    }
+//    ofSetColor(50, 50, 50);
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
-//    ofDisableBlendMode();
+    ofDisableBlendMode();
+
+    if (Params::colorMode == 0)
+    {
+        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+    }
+    else {
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
+    }
+
     
-    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-    // draw filled surfaces
+    // Draw normal strokes (#1)
+    for (int i=0; i<strokes.size(); i++)
+    {
+        strokes[i]->draw();
+    }
+    if (currentStroke) {
+        currentStroke->draw();
+    }
+    
+    // Draw surface strokes (#2)
     ofSetColor(Params::surfaceColor);
     ofFill();
     for (int i=0; i<surfaceStrokes.size(); i++)
@@ -105,12 +136,8 @@ void Canvas::draw()
     if (currentSurfaceStroke) {
         currentSurfaceStroke->drawSurface();
     }
-    
-    // draw particles
-    if (Params::colorMode == 1) {
-        ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    }
-    
+
+    // Draw particle strokes (#3)
     for (int i=0; i<particleStrokes.size(); i++)
     {
         particleStrokes[i]->draw();
@@ -118,19 +145,8 @@ void Canvas::draw()
     if (currentParticleStroke) {
         currentParticleStroke->draw();
     }
-
-//    ofDisableBlendMode();
-
-    ofEnableBlendMode(OF_BLENDMODE_ALPHA);
-    ofSetColor(255);
-    ofNoFill();
-    for (int i=0; i<strokes.size(); i++)
-    {
-        strokes[i]->draw();
-    }
-    if (currentStroke) {
-        currentStroke->draw();
-    }
+    
+    // Draw repeatable strokes (#4)
     for (int i=0; i<repeatableStrokes.size(); i++)
     {
         repeatableStrokes[i]->draw();
@@ -138,6 +154,8 @@ void Canvas::draw()
     if (currentRepeatableStroke) {
         currentRepeatableStroke->draw();
     }
+
+    // Draw spring strokes (#5)
     for (int i=0; i<springStrokes.size(); i++)
     {
         springStrokes[i]->draw();
@@ -145,29 +163,32 @@ void Canvas::draw()
     if (currentSpringStroke) {
         currentSpringStroke->draw();
     }
-//    ofDisableBlendMode();
-
-//    ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-    // draw PARTICLE strokes
-//    ofDisableBlendMode();
     
-//    ofEnableBlendMode(OF_BLENDMODE_ADD);
+    // Draw particle emitters (#7)
+    for (int i=0; i<emitters.size(); i++)
+    {
+        emitters[i]->draw();
+    }
+    
+    // Draw flow field ('f')
     if (bShowFlowfield) {
         flowField.draw();
     }
+
     
     // draw cursor
     ofSetColor(ResourceManager::getInstance().getStrokeColor());
     ofNoFill();
-    if (strokeType < 5) {
-        ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
-    }
-    else {
+    if (strokeType == 5) {
         ofLine(ofGetMouseX()-7, ofGetMouseY()-7, ofGetMouseX()+7, ofGetMouseY()+7);
         ofLine(ofGetMouseX()+7, ofGetMouseY()-7, ofGetMouseX()-7, ofGetMouseY()+7);
         ofLine(bladePrev, blade);
     }
-//    ofDisableBlendMode();
+    else {
+        ofEllipse(ofGetMouseX(), ofGetMouseY(), 15, 15);
+    }
+    
+    ofDisableBlendMode();
 
 }
 
@@ -220,6 +241,11 @@ void Canvas::clear()
         delete springStrokes[i];
     }
     springStrokes.clear();
+    for (int i=0; i<emitters.size(); i++)
+    {
+        delete emitters[i];
+    }
+    emitters.clear();
     
     if (currentSurfaceStroke) {
         delete currentSurfaceStroke;
@@ -275,6 +301,11 @@ void Canvas::mousePressed(int x, int y, int button)
         // this is the blade that cuts
         blade = bladePrev = ofVec2f(x, y);
     }
+    else if (strokeType == 6) {
+        DropEmitter *de = new DropEmitter();
+        de->setup(ofVec2f(x, y));
+        emitters.push_back(de);
+    }
 }
 
 void Canvas::mouseDragged(int x, int y, int button)
@@ -292,7 +323,7 @@ void Canvas::mouseDragged(int x, int y, int button)
     }
     else if (strokeType == 2) {
         if (currentParticleStroke) {
-            for (int i=0; i<3; i++) {
+            for (int i=0; i<10; i++) {
                 currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
             }
         }
@@ -312,6 +343,11 @@ void Canvas::mouseDragged(int x, int y, int button)
         bladePrev = blade;
         blade = ofVec2f(x, y);
         doCut(bladePrev, blade);
+    }
+    else if (strokeType == 6) {
+        DropEmitter *de = new DropEmitter();
+        de->setup(ofVec2f(x, y));
+        emitters.push_back(de);
     }
 }
 
@@ -361,7 +397,7 @@ void Canvas::mouseMoved(int x, int y)
 void Canvas::keyPressed(int key)
 {
     if (key >= '1' &&
-        key <= '6') {
+        key <= '7') {
         setStroke(key);
     }
     else if (key == 'r') {
@@ -385,6 +421,13 @@ void Canvas::keyPressed(int key)
     }
     else if (key == 'a') {
         Params::colorMode = (Params::colorMode)?0:1;
+    }
+    else if (key == 'p') {
+        // make spring strokes emit particles
+        for (int i=0; i<springStrokes.size(); i++)
+        {
+            springStrokes[i]->setupParticleEmitters();
+        }
     }
 }
 

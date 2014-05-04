@@ -95,10 +95,13 @@ void SpringStroke::draw()
 {
     line->draw();
 
-//    for (int i=0; i<paintDrops.size(); i++)
-//    {
-//        paintDrops[i]->draw();
-//    }
+    if (bEmitter) {
+        vector<Particle*> particles = line->getPoints();
+        for (int i=0; i<particles.size(); i++)
+        {
+            particles[i]->drawEmitter();
+        }
+    }
 }
 
 void SpringStroke::drawSurface()
@@ -124,6 +127,21 @@ void SpringStroke::releaseAnchors()
     {
         pars[i]->stickiness = 0;
     }
+}
+
+void SpringStroke::setupParticleEmitters()
+{
+    if (bEmitter) {
+        // already have an emitter
+        return;
+    }
+    
+    vector<Particle*> pars = line->getPoints();
+    for (int i=0; i<pars.size(); i++)
+    {
+        pars[i]->setupEmitter();
+    }
+    bEmitter = true;
 }
 
 ofVec2f SpringStroke::getLastPoint()
@@ -153,7 +171,7 @@ SpringStroke* SpringStroke::cutStroke(int index)
 {
     vector<Particle*> pars = line->getPoints();
     if (index >= pars.size()) {
-        cout<<"error: index out of bounds is cutStroke"<<endl;
+        cout<<"error: index out of bounds in cutStroke"<<endl;
         return NULL;
     }
     
@@ -170,6 +188,9 @@ SpringStroke* SpringStroke::cutStroke(int index)
     // delete the spring that connected the two strokes
     delete springs[index-1];
     springs.erase(springs.begin()+(index-1), springs.end());
+    
+    // set emitter
+    newStroke->bEmitter = bEmitter;
     
     return newStroke;
 }

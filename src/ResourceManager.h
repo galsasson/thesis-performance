@@ -23,6 +23,8 @@ public:
         return instance;
     }
 
+    ofTexture particleTex;
+    ofShader particleShader;
     ofImage circleImg;
     ofImage scatImg;
     ofColor getBackgroundColor();

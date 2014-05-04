@@ -23,18 +23,42 @@ Particle::Particle(const ofVec2f& p, float m) : ofVec2f(p), mass(m)
     setup();
 }
 
+Particle::~Particle()
+{
+    if (emitter != NULL) {
+        delete emitter;
+    }
+}
+
 void Particle::setup()
 {
     vel = ofVec2f();
     acc = ofVec2f();
     stickiness = 0;
-    materialColor = ofColor(50);
-    tempColor = ofColor(50);
-    tempColorIntensity = 0;
     t = ofRandom(1000);
     
     mSize = (mass-1)*30;
     mRadius = mSize/2;
+    
+    bHasEmitter = false;
+    emitter = NULL;
+}
+
+void Particle::setupEmitter()
+{
+    emitter = new DropEmitter();
+    emitter->setup(ofVec2f(x, y));
+    emitter->follow(this);
+    bHasEmitter = true;
+}
+
+void Particle::removeEmitter()
+{
+    if (emitter) {
+        delete emitter;
+        emitter = NULL;
+    }
+    bHasEmitter = false;
 }
 
 void Particle::applyForce(const ofVec2f& force)
@@ -50,12 +74,7 @@ void Particle::applyGravity(const ofVec2f& gravity)
 void Particle::update()
 {
     t += 0.1;
-    
-    // color
-    if (tempColorIntensity>0) {
-        tempColorIntensity -= ofNoise(t)*0.1;
-    }
-    
+
     // movement
     if (stickiness > 0) {
         return;
@@ -74,26 +93,28 @@ void Particle::update()
     vel *= Params::particleFrictionCoeff;
     
     acc *= 0;
+    
+    if (bHasEmitter) {
+        emitter->update();
+    }
 }
 
 void Particle::draw()
 {
     ofPushMatrix();
     ofTranslate(x, y);
-    
-//    ofSetColor(getColor());
-    if (Params::randomParticleColors > 0) {
-        if (ofGetFrameNum() % (int)Params::randomParticleColors == 0) {
-            tempColor = ofColor(ofRandom(100), ofRandom(100), ofRandom(100));
-        }
-        ofSetColor(tempColor);
-    }
-    else {
-        ofSetColor(ResourceManager::getInstance().getParticleColor());
-    }
+
+    ofSetColor(getColor(), 255);
+
     ofEllipse(0, 0, getSize(), getSize());
     
     ofPopMatrix();
+}
+
+void Particle::drawEmitter() {
+    if (bHasEmitter) {
+        emitter->draw();
+    }
 }
 
 void Particle::checkBounds()
@@ -114,6 +135,20 @@ void Particle::checkBounds()
     else if (x < 0) {
         vel.x *= -0.8 + ofRandom(0.2);
         x = 0;
+    }
+}
+
+ofFloatColor Particle::getColor()
+{
+    // color
+    if (Params::randomParticleColors > 0) {
+        if (ofGetFrameNum() % (int)Params::randomParticleColors == 0) {
+            color = ofFloatColor(ofRandom(0.35), ofRandom(0.35), ofRandom(0.35));
+        }
+        return color;
+    }
+    else {
+        return ResourceManager::getInstance().getParticleColor();
     }
 }
 

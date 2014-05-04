@@ -34,7 +34,7 @@ void SmoothLine::addPoint(float x, float y)
     }
     
     Particle* newPar = new Particle(x, y, w);
-    newPar->setColor(ofColor(50));
+//    newPar->setColor(ofColor(50));
     points.push_back(newPar);
     rebuildMesh();
 }

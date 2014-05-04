@@ -20,6 +20,8 @@ ParticleStroke::~ParticleStroke()
         delete points[i];
     }
     points.clear();
+    
+    vbo.clear();
 }
 
 void ParticleStroke::addPoint(const ofVec2f &p)
@@ -44,10 +46,20 @@ void ParticleStroke::addPoint(const ofVec2f &p)
 //    newP->locked = true;
 //    newP->setColor(Params::springStrokeColor);
     points.push_back(newP);
+    
+    rebuildVbo();
 }
 
 void ParticleStroke::update()
 {
+    
+    vector<ofVec3f> vertices;
+    vertices.reserve(points.size());
+    vector<ofVec3f> sizes;
+    sizes.reserve(points.size());
+    vector<ofFloatColor> colors;
+    colors.reserve(points.size());
+
     for (int i=0; i<points.size(); i++)
     {
         if (points[i]->stickiness > 0)
@@ -57,18 +69,35 @@ void ParticleStroke::update()
         points[i]->applyGravity(Params::particleGravity);
         points[i]->update();
         points[i]->checkBounds();
+        
+        vertices.push_back(*points[i]);
+        sizes.push_back(ofVec3f(points[i]->mSize, 0, 0));
+        if (Params::colorMode == 0) {
+            colors.push_back(points[i]->getColor());
+        }
+        else {
+            colors.push_back(points[i]->getColor() + ofFloatColor(0.35, 0.35, 0.35));
+        }
     }
+    
+    vbo.setVertexData(&vertices[0], vertices.size(), GL_DYNAMIC_DRAW);
+    vbo.setNormalData(&sizes[0], sizes.size(), GL_DYNAMIC_DRAW);
+    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
     
     t+=0.1;
 }
 
 void ParticleStroke::draw()
 {
-    ofFill();
-    for (int i=0; i<points.size(); i++)
-    {
-        points[i]->draw();
-    }
+    glDepthMask(GL_FALSE);
+    ofEnablePointSprites();
+    ResourceManager::getInstance().particleShader.begin();
+    ResourceManager::getInstance().particleTex.bind();
+    vbo.draw(GL_POINTS, 0, (int)points.size());
+    ResourceManager::getInstance().particleTex.unbind();
+    ResourceManager::getInstance().particleShader.end();
+    
+    ofDisablePointSprites();
 }
 
 void ParticleStroke::applyFlowField(FlowField &flowField)
@@ -113,3 +142,28 @@ float ParticleStroke::getDistanceToClosestParticle(const ofVec2f &p)
     return minLength;
 }
 
+void ParticleStroke::rebuildVbo()
+{
+    vector<ofVec3f> vertices;
+    vertices.reserve(points.size());
+    vector<ofVec3f> sizes;
+    sizes.reserve(points.size());
+    vector<ofFloatColor> colors;
+    colors.reserve(points.size());
+    
+    for (int i=0; i<points.size(); i++)
+    {
+        vertices.push_back(*points[i]);
+        sizes.push_back(ofVec3f(points[i]->mSize, 0, 0));
+        if (Params::colorMode == 0) {
+            colors.push_back(points[i]->getColor());
+        }
+        else {
+            colors.push_back(points[i]->getColor() + ofFloatColor(0.35, 0.35, 0.35));
+        }
+    }
+    
+    vbo.setVertexData(&vertices[0], vertices.size(), GL_DYNAMIC_DRAW);
+    vbo.setNormalData(&sizes[0], sizes.size(), GL_DYNAMIC_DRAW);
+    vbo.setColorData(&colors[0], colors.size(), GL_DYNAMIC_DRAW);
+}

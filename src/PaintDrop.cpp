@@ -58,13 +58,13 @@ void PaintDrop::update()
         }
         
         set(*sp + (*tp-*sp)*(linePos-si));
-        sp->setTempColor(color);
+//        sp->setTempColor(color);
         size += (sp->mass*2-size)*0.5;
     }
     else if (state == 2) {
         // follow the tip
         set(*followParticle);
-        followParticle->setTempColor(color);
+//        followParticle->setTempColor(color);
         size += (followParticle->mass*2-size)*0.5;
     }
     
