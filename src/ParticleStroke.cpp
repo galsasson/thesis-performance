@@ -24,8 +24,11 @@ ParticleStroke::~ParticleStroke()
     vbo.clear();
 }
 
+#define CIRCLE_PACKING
+
 void ParticleStroke::addPoint(const ofVec2f &p)
 {
+#ifdef CIRCLE_PACKING
     float mass = 1;
     if (!points.empty()) {
         float radFromLast = getDistanceToClosestParticle(p) * 0.8;
@@ -40,6 +43,9 @@ void ParticleStroke::addPoint(const ofVec2f &p)
     else {
         mass = ofRandom(1)+1;
     }
+#else
+    float mass = ofRandom(1)+0.5;
+#endif
     
     Particle *newP = new Particle(p, mass);
     newP->stickiness = ofRandom(100);
@@ -131,7 +137,12 @@ float ParticleStroke::getDistanceToClosestParticle(const ofVec2f &p)
 {
     float minLength = 10000;
     
-    for (int i=0; i<points.size(); i++)
+    int start = points.size()-50;
+    if (start<0) {
+        start = 0;
+    }
+    
+    for (int i=start; i<points.size(); i++)
     {
         float l = (p-*points[i]).length() - points[i]->getRadius();
         if (l < minLength) {

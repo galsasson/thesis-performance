@@ -42,6 +42,8 @@ public:
     void releaseAllParticles();
     void releaseAllStrokes();
     
+    void undo();
+    
     // parameters
     int nStrokes;
     int strokeControlIndex;
@@ -53,12 +55,14 @@ public:
     float xFrequency;
     float xAmplitude;
     
+    int strokeType;
+
 private:
     
     void handleControlMessages();
     float prevRandomRelease = 0;
     
-    
+    vector<int> history;
     
     ofVec2f size;
     void setStroke(int key) { strokeType = key-'1'; }
@@ -89,7 +93,6 @@ private:
     
     FlowField flowField;
     
-    int strokeType;
     bool bShowFlowfield;
     
     ofVec2f getPointWithNoise(ofVec2f *p, int index = 0);

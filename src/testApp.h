@@ -8,6 +8,7 @@
 #include "Params.h"
 #include "Canvas.h"
 #include "FlowField.h"
+#include "ToolBox.h"
 
 class testApp : public ofBaseApp{
 
@@ -31,4 +32,7 @@ class testApp : public ofBaseApp{
     
     Canvas canvas;
     FlowField flowField;
+    ToolBox toolBox;
+    
+    int counter;
 };

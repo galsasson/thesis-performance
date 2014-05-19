@@ -25,6 +25,7 @@
 		2A1B6C391904EE630043948A /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C371904EE630043948A /* ResourceManager.cpp */; };
 		2A1B6C3C1905A2220043948A /* SpringStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C3A1905A2220043948A /* SpringStroke.cpp */; };
 		2A1B6C401905C0EA0043948A /* Spring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2A1B6C3E1905C0EA0043948A /* Spring.cpp */; };
+		2AC078851929CDE500A1CFC4 /* ToolBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2AC078831929CDE500A1CFC4 /* ToolBox.cpp */; };
 		2ACD87AF18FA0A38005E62E8 /* Stroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */; };
 		2ACD87B218FA0CD8005E62E8 /* Canvas.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */; };
 		2ACD87B518FADA57005E62E8 /* TurtleStroke.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD87B318FADA57005E62E8 /* TurtleStroke.cpp */; };
@@ -149,6 +150,8 @@
 		2A1B6C3B1905A2220043948A /* SpringStroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpringStroke.h; sourceTree = "<group>"; };
 		2A1B6C3E1905C0EA0043948A /* Spring.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Spring.cpp; sourceTree = "<group>"; };
 		2A1B6C3F1905C0EA0043948A /* Spring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Spring.h; sourceTree = "<group>"; };
+		2AC078831929CDE500A1CFC4 /* ToolBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ToolBox.cpp; sourceTree = "<group>"; };
+		2AC078841929CDE500A1CFC4 /* ToolBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolBox.h; sourceTree = "<group>"; };
 		2ACD87AD18FA0A38005E62E8 /* Stroke.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Stroke.cpp; sourceTree = "<group>"; };
 		2ACD87AE18FA0A38005E62E8 /* Stroke.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stroke.h; sourceTree = "<group>"; };
 		2ACD87B018FA0CD8005E62E8 /* Canvas.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Canvas.cpp; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 				2A0B273F190739E000A8CC67 /* PaintDrop.h */,
 				2A0B27441908AA3F00A8CC67 /* FlowFieldForce.cpp */,
 				2A0B27451908AA3F00A8CC67 /* FlowFieldForce.h */,
+				2AC078831929CDE500A1CFC4 /* ToolBox.cpp */,
+				2AC078841929CDE500A1CFC4 /* ToolBox.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -726,6 +731,7 @@
 				2A1B6C2B1900E5190043948A /* Particle.cpp in Sources */,
 				D128FC3EC38B26CCC8AF9E7F /* ofxLabel.cpp in Sources */,
 				24FB6A33237FFE9E1CD4628B /* ofxPanel.cpp in Sources */,
+				2AC078851929CDE500A1CFC4 /* ToolBox.cpp in Sources */,
 				34D2AB0D0EB4C1885401B7AA /* ofxSlider.cpp in Sources */,
 				C4670E37B448A50D0F29A070 /* ofxSliderGroup.cpp in Sources */,
 				72042C32CDAE79A759E58D42 /* ofxToggle.cpp in Sources */,

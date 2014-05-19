@@ -75,6 +75,10 @@ void Particle::update()
 {
     t += 0.1;
 
+    if (bHasEmitter) {
+        emitter->update();
+    }
+
     // movement
     if (stickiness > 0) {
         return;
@@ -93,10 +97,6 @@ void Particle::update()
     vel *= Params::particleFrictionCoeff;
     
     acc *= 0;
-    
-    if (bHasEmitter) {
-        emitter->update();
-    }
 }
 
 void Particle::draw()

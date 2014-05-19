@@ -7,7 +7,7 @@ void testApp::setup(){
     ofSeedRandom();
     ofSetFrameRate(60);
 //    ofSetVerticalSync(false);
-//    CGDisplayHideCursor(NULL);
+    CGDisplayHideCursor(NULL);
     
 //    ofEnableSmoothing();
     ofSetBackgroundAuto(false);
@@ -69,7 +69,10 @@ void testApp::setup(){
     
     canvas.setup(ofGetWindowWidth(), ofGetWindowHeight());
     
+    toolBox.setup(ofVec2f(0, 0));
+    
     cout<<"Window size = "<<ofGetWindowWidth()<<"x"<<ofGetWindowHeight()<<endl;
+    counter = 0;
 }
 
 //--------------------------------------------------------------
@@ -78,13 +81,22 @@ void testApp::update(){
 }
 
 //--------------------------------------------------------------
-void testApp::draw(){
-//    ofClear(0);
+void testApp::draw()
+{
     canvas.draw();
     
-    stringstream ss;
-    ss << ofGetFrameRate();
-    ofDrawBitmapString(ss.str(), 0, 10);
+    if (Params::colorMode == 0) {
+        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
+    }
+    else {
+        ofEnableBlendMode(OF_BLENDMODE_ADD);
+    }
+    toolBox.draw();
+    ofDisableBlendMode();
+
+//    stringstream ss;
+//    ss << ofGetFrameRate();
+//    ofDrawBitmapString(ss.str(), 0, 10);
 }
 
 //--------------------------------------------------------------
@@ -110,7 +122,22 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    canvas.mousePressed(x, y, button);
+    if (toolBox.contains(ofVec2f(x, y))) {
+        int pressed = toolBox.getButton(ofVec2f(x, y));
+        if (pressed <= 5) {
+            toolBox.currentTool = pressed;
+            canvas.strokeType = pressed;
+        }
+        else if (pressed == 6) {
+            canvas.releaseAllStrokes();
+        }
+        else if (pressed == 7) {
+            canvas.releaseAllParticles();
+        }
+    }
+    else {
+        canvas.mousePressed(x, y, button);
+    }
 }
 
 //--------------------------------------------------------------

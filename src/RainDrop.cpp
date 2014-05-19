@@ -15,7 +15,7 @@ RainDrop::RainDrop()
 
 void RainDrop::setup(const ofVec2f &p)
 {
-    life = Params::dropLife + ofRandom(30);
+    life = Params::dropLife - ofRandom(30);
     color = Params::dropColor;
     origAlpha = Params::dropColor.a;
     

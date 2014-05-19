@@ -49,14 +49,13 @@ float Params::randomParticleColors = 0;
 
 
 //################### Drop Emitter #
-//################### Drop Emitter #
 
 float Params::emissionSpeed = 50;
 float Params::emissionRadius = 4;
-float Params::dropSize = 5;
-float Params::dropSizeVariation = 5;
-float Params::dropLife = -8;
-ofFloatColor Params::dropColor(0.38, 0.5, 0.46, 0.74);
+float Params::dropSize = 10;
+float Params::dropSizeVariation = 30;
+float Params::dropLife = 30;
+ofFloatColor Params::dropColor(0.5, 0.5, 0.5, 0.14);
 
 float Params::maxInitialForce = 0.6;
 float Params::frictionCoeff = 0.9;

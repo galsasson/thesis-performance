@@ -25,7 +25,7 @@ Canvas::Canvas()
     strokeType = 0;
     bShowFlowfield = false;
     
-    RepeatableStroke::initTransformations();    
+    RepeatableStroke::initTransformations();
 }
 
 Canvas::~Canvas()
@@ -93,17 +93,8 @@ void Canvas::update()
 
 void Canvas::draw()
 {
-//    ofEnableAlphaBlending();
     ofEnableBlendMode(OF_BLENDMODE_ALPHA);
     ofSetColor(ResourceManager::getInstance().getBackgroundColor());
-//    if (Params::colorMode == 0)
-//    {
-//        ofEnableBlendMode(OF_BLENDMODE_ADD);
-//    }
-//    else {
-//        ofEnableBlendMode(OF_BLENDMODE_SUBTRACT);
-//    }
-//    ofSetColor(50, 50, 50);
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     ofDisableBlendMode();
@@ -115,7 +106,6 @@ void Canvas::draw()
     else {
         ofEnableBlendMode(OF_BLENDMODE_ADD);
     }
-
     
     // Draw normal strokes (#1)
     for (int i=0; i<strokes.size(); i++)
@@ -204,6 +194,7 @@ void Canvas::doCut(const ofVec2f &p, const ofVec2f &q)
         // do the cut
         SpringStroke *newStroke = springStrokes[i]->cutStroke(index);
         springStrokes.push_back(newStroke);
+        history.push_back(4);
     }
 }
 
@@ -275,16 +266,16 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke->setLockDistance(50);
         currentSpringStroke->addPoint(x, y);
     }
-    else if (strokeType == 1) {
+    else if (strokeType == 4) {
         currentSurfaceStroke = new SpringStroke();
         currentSurfaceStroke->setLockDistance(50);
         currentSurfaceStroke->addPoint(x, y);
     }
-    else if (strokeType == 2) {
+    else if (strokeType == 3) {
         currentParticleStroke = new ParticleStroke();
         currentParticleStroke->addPoint(ofVec2f(x, y));
     }
-    else if (strokeType == 3) {
+    else if (strokeType == 2) {
         if (repeatableStrokes.size() == 0) {
             repeatableAnchor = ofVec2f(x, y);
         }
@@ -293,7 +284,7 @@ void Canvas::mousePressed(int x, int y, int button)
         currentRepeatableStroke->setAnchor(repeatableAnchor.x, repeatableAnchor.y);
         currentRepeatableStroke->addPoint(x, y);
     }
-    else if (strokeType == 4) {
+    else if (strokeType == 1) {
         currentSpringStroke = new SpringStroke();
         currentSpringStroke->addPoint(x, y);
     }
@@ -305,6 +296,7 @@ void Canvas::mousePressed(int x, int y, int button)
         DropEmitter *de = new DropEmitter();
         de->setup(ofVec2f(x, y));
         emitters.push_back(de);
+        history.push_back(6);
     }
 }
 
@@ -316,24 +308,24 @@ void Canvas::mouseDragged(int x, int y, int button)
             currentSpringStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 1) {
+    else if (strokeType == 4) {
         if (currentSurfaceStroke) {
             currentSurfaceStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 2) {
+    else if (strokeType == 3) {
         if (currentParticleStroke) {
             for (int i=0; i<10; i++) {
                 currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
             }
         }
     }
-    else if (strokeType == 3) {
+    else if (strokeType == 2) {
         if (currentRepeatableStroke) {
             currentRepeatableStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 4) {
+    else if (strokeType == 1) {
         if (currentSpringStroke) {
             currentSpringStroke->addPoint(x, y);
         }
@@ -348,6 +340,7 @@ void Canvas::mouseDragged(int x, int y, int button)
         DropEmitter *de = new DropEmitter();
         de->setup(ofVec2f(x, y));
         emitters.push_back(de);
+        history.push_back(6);
     }
 }
 
@@ -358,30 +351,35 @@ void Canvas::mouseReleased(int x, int y, int button)
         if (currentSpringStroke) {
             springStrokes.push_back(currentSpringStroke);
             currentSpringStroke = NULL;
-        }
-    }
-    else if (strokeType == 1) {
-        if (currentSurfaceStroke) {
-            surfaceStrokes.push_back(currentSurfaceStroke);
-            currentSurfaceStroke = NULL;
-        }
-    }
-    else if (strokeType == 2) {
-        if (currentParticleStroke) {
-            particleStrokes.push_back(currentParticleStroke);
-            currentParticleStroke = NULL;
-        }
-    }
-    else if (strokeType == 3) {
-        if (currentRepeatableStroke) {
-            repeatableStrokes.push_back(currentRepeatableStroke);
-            currentRepeatableStroke = NULL;
+            history.push_back(4);
         }
     }
     else if (strokeType == 4) {
+        if (currentSurfaceStroke) {
+            surfaceStrokes.push_back(currentSurfaceStroke);
+            currentSurfaceStroke = NULL;
+            history.push_back(1);
+        }
+    }
+    else if (strokeType == 3) {
+        if (currentParticleStroke) {
+            particleStrokes.push_back(currentParticleStroke);
+            currentParticleStroke = NULL;
+            history.push_back(2);
+        }
+    }
+    else if (strokeType == 2) {
+        if (currentRepeatableStroke) {
+            repeatableStrokes.push_back(currentRepeatableStroke);
+            currentRepeatableStroke = NULL;
+            history.push_back(3);
+        }
+    }
+    else if (strokeType == 1) {
         if (currentSpringStroke) {
             springStrokes.push_back(currentSpringStroke);
             currentSpringStroke = NULL;
+            history.push_back(4);
         }
     }
 }
@@ -414,10 +412,11 @@ void Canvas::keyPressed(int key)
         releaseAllStrokes();
     }
     else if (key == 'z') {
-        for (int i=0; i<springStrokes.size(); i++)
-        {
-            springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
-        }
+        undo();
+//        for (int i=0; i<springStrokes.size(); i++)
+//        {
+//            springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
+//        }
     }
     else if (key == 'a') {
         Params::colorMode = (Params::colorMode)?0:1;
@@ -427,6 +426,10 @@ void Canvas::keyPressed(int key)
         for (int i=0; i<springStrokes.size(); i++)
         {
             springStrokes[i]->setupParticleEmitters();
+        }
+        for (int i=0; i<strokes.size(); i++)
+        {
+            strokes[i]->setupParticleEmitters();
         }
     }
 }
@@ -449,6 +452,42 @@ void Canvas::releaseAllStrokes()
     {
         surfaceStrokes[i]->releaseAnchors();
     }
+}
+
+void Canvas::undo()
+{
+    if (history.empty()) {
+        return;
+    }
+    
+    int lastStroke = history[history.size()-1];
+    switch (lastStroke)
+    {
+        case 1:
+            delete surfaceStrokes[surfaceStrokes.size()-1];
+            surfaceStrokes.pop_back();
+            break;
+        case 2:
+            delete particleStrokes[particleStrokes.size()-1];
+            particleStrokes.pop_back();
+            break;
+        case 3:
+            delete repeatableStrokes[repeatableStrokes.size()-1];
+            repeatableStrokes.pop_back();
+            break;
+        case 4:
+            delete springStrokes[springStrokes.size()-1];
+            springStrokes.pop_back();
+            break;
+        case 6:
+            delete emitters[emitters.size()-1];
+            emitters.pop_back();
+            break;
+        default:
+            break;
+    }
+    
+    history.pop_back();
 }
 
 ofVec2f Canvas::getPointWithNoise(ofVec2f *p, int index)
