@@ -37,6 +37,8 @@ void Canvas::setup(float width, float height)
 {
     size = ofVec2f(width, height);
     
+    bgImg.loadImage("bgtexture.jpg");
+    
     flowField.setup(width, height, 300, 300);
 }
 
@@ -98,6 +100,8 @@ void Canvas::draw()
     ofFill();
     ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
     ofDisableBlendMode();
+    
+//    bgImg.draw(0, 0);
 
     if (Params::colorMode == 0)
     {

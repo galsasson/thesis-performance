@@ -35,4 +35,7 @@ class testApp : public ofBaseApp{
     ToolBox toolBox;
     
     int counter;
+    
+//    ofxSyphonServer mainOutputSyphonServer;
+
 };

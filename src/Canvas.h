@@ -67,6 +67,8 @@ private:
     ofVec2f size;
     void setStroke(int key) { strokeType = key-'1'; }
     
+    ofImage bgImg;
+    
     vector<SpringStroke*> strokes;
     SpringStroke* currentStroke;
 //    vector<TurtleStroke*> turtleStrokes;
