@@ -73,6 +73,13 @@ void testApp::setup(){
     
     cout<<"Window size = "<<ofGetWindowWidth()<<"x"<<ofGetWindowHeight()<<endl;
     counter = 0;
+    bDisplayToolbox = false;
+    
+    bUseSyphon = true;
+    if (bUseSyphon) {
+        syphonFbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
+        mainOutputSyphonServer.setName("Sketch Performance");
+    }
 }
 
 //--------------------------------------------------------------
@@ -83,6 +90,10 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw()
 {
+    if (bUseSyphon) {
+        syphonFbo.begin();
+    }
+    
     canvas.draw();
     
     if (Params::colorMode == 0) {
@@ -91,8 +102,19 @@ void testApp::draw()
     else {
         ofEnableBlendMode(OF_BLENDMODE_ADD);
     }
-    toolBox.draw();
+    
+    if (bDisplayToolbox) {
+        toolBox.draw();
+    }
+    
     ofDisableBlendMode();
+
+    if (bUseSyphon) {
+        syphonFbo.end();
+        mainOutputSyphonServer.publishTexture(&syphonFbo.getTextureReference());
+        syphonFbo.draw(0, 0);
+    }
+    
 
 //    stringstream ss;
 //    ss << ofGetFrameRate();
@@ -102,6 +124,19 @@ void testApp::draw()
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
     cout << "key pressed: "<<key<<endl;
+    
+    if (key == 'h') {
+        bDisplayToolbox = !bDisplayToolbox;
+    }
+    if (key == 'e') {
+        if (Params::randomParticleColors == 0) {
+            Params::randomParticleColors = 8;
+        }
+        else {
+            Params::randomParticleColors = 0;
+        }
+    }
+    
     canvas.keyPressed(key);
 }
 

@@ -4,6 +4,7 @@
 
 #include "ofMain.h"
 #include "ofxControlease.h"
+#include "ofxSyphon.h"
 
 #include "Params.h"
 #include "Canvas.h"
@@ -33,9 +34,12 @@ class testApp : public ofBaseApp{
     Canvas canvas;
     FlowField flowField;
     ToolBox toolBox;
+    bool bDisplayToolbox;
     
     int counter;
     
-//    ofxSyphonServer mainOutputSyphonServer;
+    ofFbo syphonFbo;
+    ofxSyphonServer mainOutputSyphonServer;
+    bool bUseSyphon;
 
 };

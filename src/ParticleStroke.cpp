@@ -95,7 +95,7 @@ void ParticleStroke::update()
 
 void ParticleStroke::draw()
 {
-    glDepthMask(GL_FALSE);
+//    glDepthMask(GL_FALSE);
     ofEnablePointSprites();
     ResourceManager::getInstance().particleShader.begin();
     ResourceManager::getInstance().particleTex.bind();

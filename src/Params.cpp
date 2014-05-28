@@ -40,7 +40,7 @@ float Params::globalReleaseAmount = 0;
 ofFloatColor Params::surfaceColor(0.8f, 0.07f, 0.07f);
 
 float Params::colorMode = 0;
-float Params::randomParticleColors = 0;
+float Params::randomParticleColors = 8;
 
 
 
