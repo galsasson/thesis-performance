@@ -37,10 +37,10 @@ ofVec2f Params::lineNoise = ofVec2f(0, 0);
 
 float Params::globalReleaseAmount = 0;
 
-ofFloatColor Params::surfaceColor(0.8f, 0.07f, 0.07f);
+ofFloatColor Params::surfaceColor(0.1f, 0.02f, 0.08f);
 
 float Params::colorMode = 0;
-float Params::randomParticleColors = 8;
+float Params::randomParticleColors = 0;
 
 
 

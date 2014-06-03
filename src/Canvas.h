@@ -56,6 +56,7 @@ public:
     float xAmplitude;
     
     int strokeType;
+    void setStroke(int key) { strokeType = key-'1'; }
 
 private:
     
@@ -65,7 +66,6 @@ private:
     vector<int> history;
     
     ofVec2f size;
-    void setStroke(int key) { strokeType = key-'1'; }
     
     ofImage bgImg;
     

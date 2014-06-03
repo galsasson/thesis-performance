@@ -173,7 +173,7 @@ void Canvas::draw()
     // draw cursor
     ofSetColor(ResourceManager::getInstance().getStrokeColor());
     ofNoFill();
-    if (strokeType == 5) {
+    if (strokeType == 4) {
         ofLine(ofGetMouseX()-7, ofGetMouseY()-7, ofGetMouseX()+7, ofGetMouseY()+7);
         ofLine(ofGetMouseX()+7, ofGetMouseY()-7, ofGetMouseX()-7, ofGetMouseY()+7);
         ofLine(bladePrev, blade);
@@ -270,16 +270,16 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke->setLockDistance(50);
         currentSpringStroke->addPoint(x, y);
     }
-    else if (strokeType == 4) {
+    else if (strokeType == 3) {
         currentSurfaceStroke = new SpringStroke();
         currentSurfaceStroke->setLockDistance(50);
         currentSurfaceStroke->addPoint(x, y);
     }
-    else if (strokeType == 3) {
+    else if (strokeType == 2) {
         currentParticleStroke = new ParticleStroke();
         currentParticleStroke->addPoint(ofVec2f(x, y));
     }
-    else if (strokeType == 2) {
+    else if (strokeType == 5) {
         if (repeatableStrokes.size() == 0) {
             repeatableAnchor = ofVec2f(x, y);
         }
@@ -292,7 +292,7 @@ void Canvas::mousePressed(int x, int y, int button)
         currentSpringStroke = new SpringStroke();
         currentSpringStroke->addPoint(x, y);
     }
-    else if (strokeType == 5) {
+    else if (strokeType == 4) {
         // this is the blade that cuts
         blade = bladePrev = ofVec2f(x, y);
     }
@@ -312,19 +312,19 @@ void Canvas::mouseDragged(int x, int y, int button)
             currentSpringStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 4) {
+    else if (strokeType == 3) {
         if (currentSurfaceStroke) {
             currentSurfaceStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 3) {
+    else if (strokeType == 2) {
         if (currentParticleStroke) {
             for (int i=0; i<10; i++) {
                 currentParticleStroke->addPoint(ofVec2f(x+ofRandom(20)-10, y+ofRandom(20)-10));
             }
         }
     }
-    else if (strokeType == 2) {
+    else if (strokeType == 5) {
         if (currentRepeatableStroke) {
             currentRepeatableStroke->addPoint(x, y);
         }
@@ -334,7 +334,7 @@ void Canvas::mouseDragged(int x, int y, int button)
             currentSpringStroke->addPoint(x, y);
         }
     }
-    else if (strokeType == 5) {
+    else if (strokeType == 4) {
         // blade
         bladePrev = blade;
         blade = ofVec2f(x, y);
@@ -358,21 +358,21 @@ void Canvas::mouseReleased(int x, int y, int button)
             history.push_back(4);
         }
     }
-    else if (strokeType == 4) {
+    else if (strokeType == 3) {
         if (currentSurfaceStroke) {
             surfaceStrokes.push_back(currentSurfaceStroke);
             currentSurfaceStroke = NULL;
             history.push_back(1);
         }
     }
-    else if (strokeType == 3) {
+    else if (strokeType == 2) {
         if (currentParticleStroke) {
             particleStrokes.push_back(currentParticleStroke);
             currentParticleStroke = NULL;
             history.push_back(2);
         }
     }
-    else if (strokeType == 2) {
+    else if (strokeType == 5) {
         if (currentRepeatableStroke) {
             repeatableStrokes.push_back(currentRepeatableStroke);
             currentRepeatableStroke = NULL;
@@ -390,26 +390,21 @@ void Canvas::mouseReleased(int x, int y, int button)
 
 void Canvas::mouseMoved(int x, int y)
 {
-    if (strokeType == 5) {
-        // blade
-        bladePrev = blade;
-    }
+//    if (strokeType == 5) {
+//        // blade
+//        bladePrev = blade;
+//    }
 }
 
 void Canvas::keyPressed(int key)
 {
-    if (key >= '1' &&
-        key <= '7') {
-        setStroke(key);
-    }
-    else if (key == 'r') {
+    if (key == 'r') {
         releaseAllParticles();
     }
     else if (key == 'f') {
         bShowFlowfield = !bShowFlowfield;
     }
     else if (key == 'c') {
-//        ofClear(220);
         clear();
     }
     else if (key == 'd') {
@@ -417,10 +412,6 @@ void Canvas::keyPressed(int key)
     }
     else if (key == 'z') {
         undo();
-//        for (int i=0; i<springStrokes.size(); i++)
-//        {
-//            springStrokes[i]->dropColor(ofColor(180, 0, ofRandom(50)));
-//        }
     }
     else if (key == 'a') {
         Params::colorMode = (Params::colorMode)?0:1;
@@ -434,6 +425,14 @@ void Canvas::keyPressed(int key)
         for (int i=0; i<strokes.size(); i++)
         {
             strokes[i]->setupParticleEmitters();
+        }
+    }
+    else if (key == 'q') {
+        if (Params::randomParticleColors>0) {
+            Params::randomParticleColors = 0;
+        }
+        else {
+            Params::randomParticleColors = 8;
         }
     }
 }

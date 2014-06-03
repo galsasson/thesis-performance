@@ -73,9 +73,9 @@ void testApp::setup(){
     
     cout<<"Window size = "<<ofGetWindowWidth()<<"x"<<ofGetWindowHeight()<<endl;
     counter = 0;
-    bDisplayToolbox = false;
+    bDisplayToolbox = true;
     
-    bUseSyphon = true;
+    bUseSyphon = false;
     if (bUseSyphon) {
         syphonFbo.allocate(ofGetWindowWidth(), ofGetWindowHeight());
         mainOutputSyphonServer.setName("Sketch Performance");
@@ -114,7 +114,7 @@ void testApp::draw()
         mainOutputSyphonServer.publishTexture(&syphonFbo.getTextureReference());
         syphonFbo.draw(0, 0);
     }
-    
+
 
 //    stringstream ss;
 //    ss << ofGetFrameRate();
@@ -125,7 +125,12 @@ void testApp::draw()
 void testApp::keyPressed(int key){
     cout << "key pressed: "<<key<<endl;
     
-    if (key == 'h') {
+    if (key >= '1' &&
+        key <= '7') {
+        toolBox.currentTool = key - '1';
+        canvas.setStroke(key);
+    }
+    else if (key == 'h') {
         bDisplayToolbox = !bDisplayToolbox;
     }
     if (key == 'e') {

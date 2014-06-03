@@ -21,7 +21,7 @@ ToolBox::~ToolBox()
 void ToolBox::setup(ofVec2f p)
 {
     pos = p;
-    size = ofVec2f(400, 50);
+    size = ofVec2f(300, 50);
     currentTool = 0;
     
     lineImg.loadImage("toolbox/tool_line.png");
@@ -42,9 +42,9 @@ void ToolBox::draw()
     
     ofNoFill();
     ofSetColor(255);
-    ofLine(0, 0, 800, 0);
-    ofLine(0, 100, 800, 100);
-    for (int i=0; i<9; i++)
+    ofLine(0, 0, 600, 0);
+    ofLine(0, 100, 600, 100);
+    for (int i=0; i<7; i++)
     {
         ofLine(i*100, 0, i*100, 100);
     }
@@ -55,12 +55,12 @@ void ToolBox::draw()
     
     lineImg.draw(0, 0);
     rubberImg.draw(100, 0);
-    multiImg.draw(200, 0);
-    partImg.draw(300, 0);
-    polyImg.draw(400, 0);
-    cutImg.draw(500, 0);
-    dropLineImg.draw(600, 0);
-    dropPartImg.draw(700, 0);
+    partImg.draw(200, 0);
+    polyImg.draw(300, 0);
+    cutImg.draw(400, 0);
+    multiImg.draw(500, 0);
+//    dropLineImg.draw(600, 0);
+//    dropPartImg.draw(700, 0);
     
     ofPopMatrix();
 }
